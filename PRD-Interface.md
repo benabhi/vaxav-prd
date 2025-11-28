@@ -26,9 +26,160 @@ Los mockups sirven como wireframes funcionales que el equipo de diseño UI/UX ut
 
 ---
 
-### 14.1 Menú Principal
+### 14.1 HUD Persistente (Barra Superior Compacta)
 
-Barra de navegación global siempre visible con acceso a todos los menús principales.
+**Ruta:** Componente global `<x-persistent-hud />` visible en TODAS las páginas
+
+Barra fija en la parte superior mostrando información crítica del piloto sin necesidad de navegar entre menús. Siempre visible, actualizada en tiempo real.
+
+**Mockup Visual:**
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│ 📍 Vaxav III - Órbita  🛡️ Seg: 0.8  ⏱️ Tick: 3:42  ⚙️ Minando... 5/10  │
+│ ❤️ 1500/2000 HP  ⚡ 450/500 Cap  💰 125,450₡  🔔 [3]        [John Doe ▼] │
+└──────────────────────────────────────────────────────────────────────────┘
+```
+
+**Elementos del HUD (de izquierda a derecha):**
+
+**1. 📍 Ubicación Actual**
+- Formato: "Sistema - Ubicación Específica"
+- Ejemplos:
+  - "Vaxav I - Hangar"
+  - "Nova-VII - Belt Asteroide 3"
+  - "Desconocido - Agujero Gusano"
+- Click: Abre mapa del sistema
+- Tooltip: Coordenadas exactas
+
+**2. 🛡️ Seguridad del Sistema** (Color-coded)
+- Verde (1.0): "Seg: 1.0"
+- Amarillo (0.5-0.9): "Seg: 0.7"
+- Naranja (0.1-0.4): "Seg: 0.3"
+- Rojo (0.0): "Seg: 0.0"
+- Tooltip: "Advertencia de Albatross: Respuesta inmediata en sistemas de alta seguridad"
+
+**3. ⏱️ Countdown Próximo Tick**
+- Formato: "Tick: MM:SS"
+- Color dinámico:
+  - Verde: > 2 minutos
+  - Amarillo: 1-2 minutos
+  - Rojo: < 1 minuto
+- Tooltip: "Próximo tick del servidor en X minutos Y segundos"
+
+**4. ⚙️ Acción en Curso**
+- Si idle: "✓ Idle" (verde)
+- Si en acción: "⚙️ [Acción]... X/Y" con barra de progreso
+- Ejemplos:
+  - "⛏️ Minando... 5/10"
+  - "🚀 Viajando... 2/5"
+  - "⚔️ En Combate (Tick 3)"
+  - "🔬 Escaneando... 7/12"
+  - "🔧 Hackeando Terminal... 4/8"
+- Click: Abre detalles de la acción (permite cancelar)
+- Color: Azul (acción normal), Rojo (combate), Verde (completado)
+
+**5. ❤️ HP Total Nave**
+- Formato: "❤️ current/max HP"
+- Color dinámico:
+  - Verde: > 70%
+  - Amarillo: 40-70%
+  - Rojo: < 40%
+- Tooltip: Desglose detallado
+  - "Escudos: 450/500 (90%)"
+  - "Armadura: 800/800 (100%)"
+  - "Estructura: 250/250 (100%)"
+
+**6. ⚡ Capacitor Nave**
+- Formato: "⚡ current/max Cap"
+- Solo visible si la nave tiene módulos activos
+- Color dinámico:
+  - Verde: > 50%
+  - Amarillo: 25-50%
+  - Rojo: < 25%
+- Tooltip: "Capacitor agotándose en X ticks al ritmo actual"
+
+**7. 💰 Créditos Actuales**
+- Formato: "💰 X₡" (con separador de miles)
+- Ejemplos: "125,450₡", "1,234,567₡"
+- Click: Abre billetera
+- Tooltip: Cambio en últimas 24h: "+15,000₡ (+13%)"
+
+**8. 🔔 Notificaciones**
+- Badge numérico: "🔔 [3]" si hay notificaciones pendientes
+- Desaparece cuando no hay notificaciones
+- Click: Abre panel flotante de notificaciones
+- Tipos:
+  - Mensajes de otros pilotos
+  - Alertas de combate ("¡Estás bajo ataque!")
+  - Operaciones completadas
+  - Eventos de sistema
+- Color rojo si hay notificaciones urgentes
+
+**9. [Nombre Piloto ▼]**
+- Dropdown menu con:
+  - Ver Licencia
+  - Habilidades
+  - Configuración
+  - Cerrar Sesión
+- Muestra avatar del piloto (si existe)
+
+**Implementación Técnica:**
+
+**Blade Component:**
+```php
+// resources/views/components/persistent-hud.blade.php
+<x-persistent-hud
+    :pilot="$pilot"
+    :current-location="$location"
+    :tick-remaining="$tick_seconds"
+    :current-action="$action"
+/>
+```
+
+**Alpine.js Reactivity:**
+```javascript
+// Actualización cada 10 segundos
+Alpine.data('persistentHud', () => ({
+    tickRemaining: 180,
+    init() {
+        setInterval(() => {
+            this.tickRemaining--;
+            if (this.tickRemaining <= 0) {
+                this.fetchUpdatedState(); // Poll servidor
+                this.tickRemaining = 600; // Reset a 10 min
+            }
+        }, 1000);
+    }
+}));
+```
+
+**CSS:**
+```css
+.persistent-hud {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(0, 10, 20, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+}
+```
+
+**Responsive (Mobile):**
+En móvil, la barra se colapsa a:
+```
+┌──────────────────────────────────────────┐
+│ 📍 Vaxav III  🛡️ 0.8  ⏱️ 3:42  [≡ Más] │
+└──────────────────────────────────────────┘
+```
+- Click en "[≡ Más]" expande todos los elementos
+
+---
+
+### 14.2 Menú Principal
+
+Barra de navegación global debajo del HUD con acceso a todos los menús principales.
 
 **Estructura del Menú:**
 
@@ -36,7 +187,7 @@ Barra de navegación global siempre visible con acceso a todos los menús princi
 ┌────────────────────────────────────────────────────────────────────────┐
 │ VAXAV    [Licencia] [Registro] [Habilidades] [Nave] [Activos]        │
 │          [Mercado] [Billetera] [Corporación] [Mapa] [Mensajería]      │
-│                                                    [John Doe] [₡ 125K] │
+│          [Exploración]                                                 │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -817,6 +968,502 @@ BANDEJA DE ENTRADA
 - Notificaciones de combate
 - Alertas de mercado (opcional)
 
+### 14.2.11 Exploración
+
+**Ruta:** `/exploration`
+
+Sistema de exploración con Sitios Ancestrales y Mercados Negros Flotantes.
+
+**Vista Principal de Exploración:**
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║ EXPLORACIÓN - SISTEMA VAXAV                                           ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ SCANNER DE ANOMALÍAS: [███████░░░] 70% | 7/10 ticks restantes        ║
+║                                                                       ║
+║ [Escanear Sistema] [Ver Histórico] [Filtrar por Tipo]                ║
+║                                                                       ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ SITIOS ACTIVOS EN SISTEMA (5)                                        ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ 🔮 ??? SITIO ANCESTRAL [Tier 2]                                      ║
+║    • Ubicación: Vaxav III - Órbita Alta                              ║
+║    • Tipo: Desconocido (visita para descubrir)                       ║
+║    • Duración restante: 48 ticks (~8 horas)                          ║
+║    • Seguridad requerida: 0.1 - 1.0                                  ║
+║    [Warpar al Sitio] [Guardar Coordenadas]                           ║
+║                                                                       ║
+║ ──────────────────────────────────────────────────────────────────────║
+║                                                                       ║
+║ 🔮 ??? SITIO ANCESTRAL [Tier 3]                                      ║
+║    • Ubicación: Vaxav II - Belt de Asteroides                        ║
+║    • Tipo: Desconocido (visita para descubrir)                       ║
+║    • Duración restante: 96 ticks (~16 horas)                         ║
+║    • Seguridad requerida: 0.0 - 0.4                                  ║
+║    [Warpar al Sitio] [Guardar Coordenadas]                           ║
+║                                                                       ║
+║ ──────────────────────────────────────────────────────────────────────║
+║                                                                       ║
+║ 💀 MERCADO NEGRO FLOTANTE                                            ║
+║    • Ubicación: Coordenadas Ocultas (Sec 0.2)                        ║
+║    • Duración restante: 72 ticks (~12 horas)                         ║
+║    • ⚠️ ADVERTENCIA: Zona PvP activa                                 ║
+║    • Requiere: Standing +5 con Piratas del Cinturón O 50,000₡        ║
+║    [Warpar al Sitio] [Comprar Información]                           ║
+║                                                                       ║
+║ ──────────────────────────────────────────────────────────────────────║
+║                                                                       ║
+║ ⚔️ SITIO DE COMBATE [Tier 1]                                         ║
+║    • Ubicación: Vaxav I - Luna 2                                     ║
+║    • NPCs: Piratas del Cinturón (3-5)                                ║
+║    • Duración restante: 36 ticks (~6 horas)                          ║
+║    [Warpar al Sitio]                                                 ║
+║                                                                       ║
+║ ──────────────────────────────────────────────────────────────────────║
+║                                                                       ║
+║ ⛽ NEBULOSA DE GAS TEMPORAL                                           ║
+║    • Ubicación: Vaxav III - Órbita Baja                              ║
+║    • Recursos: Plasma Ionizado, Xenón Enriquecido                    ║
+║    • Duración restante: 48 ticks (~8 horas)                          ║
+║    [Warpar al Sitio]                                                 ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+[Escanear Nuevamente] [Compartir con Corp] [Vender Coordenadas]
+```
+
+**Información mostrada:**
+- 🔮 = Sitio Ancestral (tipo desconocido hasta visitar)
+- 💀 = Mercado Negro
+- ⚔️ = Sitio de Combate
+- ⛽ = Nebulosa de Gas
+- 💎 = Belt Rico
+- 🕳️ = Agujero de Gusano
+
+#### 14.2.11.1 Vista de Sitio Ancestral - Tipo 1: Complejo Precursor
+
+**Ruta:** `/exploration/ancestral-site/{id}`
+
+Al llegar al sitio, el tipo se revela:
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║ 🏛️ COMPLEJO PRECURSOR ABANDONADO [Tier 2]                            ║
+║ "Bastión de los Antiguos"                                             ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ Has descubierto un complejo militar de la civilización precursora.   ║
+║ Sus sistemas aún funcionan, pero requieren resolver antiguos puzzles ║
+║ para acceder a las cámaras internas.                                 ║
+║                                                                       ║
+║ PROGRESO: Sala 2 de 5 completada                                     ║
+║ [████░░░░░░] 40%                                                     ║
+║                                                                       ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ SALAS DISPONIBLES:                                                    ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ ✓ SALA 1: Atrio de Entrada                        [COMPLETADA]       ║
+║    Recompensa: 1x Fragmento de Diseño Militar                        ║
+║                                                                       ║
+║ ✓ SALA 2: Terminal de Control                     [COMPLETADA]       ║
+║    Recompensa: 1x Fragmento de Diseño Militar, 5x Artefacto          ║
+║                                                                       ║
+║ 🔓 SALA 3: Cámara de Energía                       [DISPONIBLE]      ║
+║    Puzzle: Redirigir flujo de energía a 3 nodos                      ║
+║    Peligro: Torretas desactivadas (pueden reactivarse)               ║
+║    Requiere: Arqueología Espacial Nivel 2+                           ║
+║    Duración estimada: 12-24 ticks                                    ║
+║    [ENTRAR A SALA]                                                   ║
+║                                                                       ║
+║ 🔒 SALA 4: Laboratorio de Armamento                [BLOQUEADA]       ║
+║    Desbloqueo: Completar Sala 3                                      ║
+║                                                                       ║
+║ 🔒 SALA 5: Cámara del Núcleo                       [BLOQUEADA]       ║
+║    Desbloqueo: Completar Salas 3 y 4                                 ║
+║    Recompensa Final: 1x Chip de Diseño [Militar T2]                 ║
+║                                                                       ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ FRAGMENTOS RECOLECTADOS: 2/5                                         ║
+║                                                                       ║
+║ Al completar el complejo completo, podrás combinar los fragmentos    ║
+║ en un Chip de Diseño que desbloquea un blueprint aleatorio Militar.  ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+[Entrar Sala 3] [Salir del Complejo] [Ver Inventario] [Abandonar Sitio]
+```
+
+#### 14.2.11.2 Vista Dentro de Sala (Puzzle)
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║ SALA 3: CÁMARA DE ENERGÍA                                            ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ Una sala circular con 3 terminales y conductos de energía en las     ║
+║ paredes. Los glifos antiguos indican que debes redirigir el flujo.   ║
+║                                                                       ║
+║ OBJETIVO: Activar los 3 nodos en el orden correcto                   ║
+║                                                                       ║
+║      [Terminal A]          [Terminal B]          [Terminal C]        ║
+║         ⚪ OFF                 ⚪ OFF                 ⚪ OFF            ║
+║                                                                       ║
+║ Pista (Glifos): "El fuego precede al agua, el agua a la tierra"      ║
+║                                                                       ║
+║ ⚠️ Advertencia: Activar en orden incorrecto puede reactivar torretas ║
+║                                                                       ║
+║ Intentos restantes: 2/3                                              ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+[Activar Terminal A] [Activar Terminal B] [Activar Terminal C]
+[Analizar Glifos (req. Arqueología 3+)] [Salir de Sala]
+```
+
+**Mecánica del Puzzle:**
+- El jugador debe activar terminales en orden correcto
+- Pistas visuales/textuales disponibles
+- Skill alta en Arqueología puede dar hints adicionales
+- Fallos activan peligros (torretas, radiación)
+- Éxito otorga fragmento + posibles bonus
+
+#### 14.2.11.3 Vista de Sitio Ancestral - Tipo 2: Derelicto Generacional
+
+**Ruta:** `/exploration/ancestral-site/{id}`
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║ 🚢 DERELICTO GENERACIONAL                                            ║
+║ "NSS Esperanza Eterna"                                               ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ Nave colonial gigante abandonada hace 300 años. Sus sistemas están   ║
+║ sellados y requieren hackeo para acceder a los datos almacenados.    ║
+║                                                                       ║
+║ PROGRESO: 2/4 secciones hackeadas                                    ║
+║ [█████░░░░░] 50%                                                     ║
+║                                                                       ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ SECCIONES DISPONIBLES:                                               ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ ✓ PUENTE DE MANDO                                  [HACKEADO]        ║
+║    Recompensa: 1x Núcleo de Datos [Cifrado], Logs de Navegación     ║
+║                                                                       ║
+║ ✓ SALA DE MOTORES                                  [HACKEADO]        ║
+║    Recompensa: 1x Núcleo de Datos [Cifrado], Componentes T2         ║
+║                                                                       ║
+║ 🔓 BODEGAS DE CARGA                                 [DISPONIBLE]     ║
+║    Terminal: Nivel 3 (Difícil)                                       ║
+║    Requiere: Hackeo Nivel 3+                                         ║
+║    Peligro: Drones de Seguridad (inactivos, 15% chance reactivar)   ║
+║    Duración: 18-36 ticks                                             ║
+║    [HACKEAR TERMINAL]                                                ║
+║                                                                       ║
+║ 🔒 CRIOCÁMARAS                                      [BLOQUEADA]      ║
+║    Desbloqueo: Hackear Bodegas primero                               ║
+║    Recompensa potencial: Núcleos de Datos de alta calidad           ║
+║                                                                       ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ NÚCLEOS RECOLECTADOS: 2                                              ║
+║                                                                       ║
+║ Los Núcleos de Datos pueden:                                         ║
+║ • Venderse en mercado (otros pilotos especulan sobre contenido)     ║
+║ • Descifrarse en Laboratorio (12 ticks) para obtener blueprint       ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+[Hackear Bodegas] [Salir del Derelicto] [Ver Núcleos] [Abandonar Sitio]
+```
+
+#### 14.2.11.4 Vista de Hackeo de Terminal
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║ HACKEO: TERMINAL DE BODEGAS                                          ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ Conectando a sistema de seguridad...                                 ║
+║                                                                       ║
+║ NIVEL DE SEGURIDAD: 3 (Difícil)                                      ║
+║                                                                       ║
+║ PROGRESO DE HACKEO:                                                  ║
+║ [████████░░] 80% | 4/8 ticks completados                             ║
+║                                                                       ║
+║ Tu skill: Hackeo Nivel 4 (+20% velocidad)                            ║
+║                                                                       ║
+║ ⚠️ ALERTA: Drones de seguridad detectados. 15% chance de activación  ║
+║                                                                       ║
+║ OPCIONES:                                                            ║
+║ • [Continuar Hackeo] - 4 ticks restantes                             ║
+║ • [Bypass de Seguridad] - Requiere Hackeo 5, instantáneo             ║
+║ • [Abortar] - Salir sin recompensa                                   ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+[Continuar] [Bypass (No disponible)] [Abortar]
+```
+
+#### 14.2.11.5 Vista de Sitio Ancestral - Tipo 3: Laboratorio de Investigación
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║ 🔬 LABORATORIO DE INVESTIGACIÓN PERDIDO                              ║
+║ "Instalación Prometheus-7"                                           ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ Estación de investigación experimental controlada por IA corrupta.   ║
+║ Debes negociar o convencer a la IA para acceder a los prototipos.    ║
+║                                                                       ║
+║ ESTADO DE IA: 😐 Neutral (Standing: 0/100)                           ║
+║                                                                       ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ DIÁLOGO CON IA "PROMETHEUS"                                          ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ 🤖 PROMETHEUS:                                                        ║
+║ "Intruso detectado. Identificación requerida. Los protocolos de      ║
+║  seguridad exigen eliminación de personal no autorizado."            ║
+║                                                                       ║
+║ TUS OPCIONES:                                                        ║
+║                                                                       ║
+║ 1. [Diplomacia] "Vengo en paz, solo busco conocimiento"             ║
+║    Req: Carisma 3+ | Chance éxito: 60%                               ║
+║                                                                       ║
+║ 2. [Engaño] "Soy el Dr. Chen, investigador autorizado código 7742"  ║
+║    Req: Persuasión 4+ | Chance éxito: 40% (alto riesgo)             ║
+║                                                                       ║
+║ 3. [Hackeo] Intentar tomar control de la IA                          ║
+║    Req: Hackeo 5+ | Si fallas, IA ataca con torretas                ║
+║                                                                       ║
+║ 4. [Ciencias] "Analicemos juntos estos datos, podemos colaborar"    ║
+║    Req: Ciencias 3+ | Chance éxito: 75% (mejor opción)              ║
+║                                                                       ║
+║ 5. [Combate] Destruir el núcleo de IA                                ║
+║    Destruye prototipos pero puedes saquear componentes               ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+[Selecciona opción] [Escanear Laboratorio] [Salir]
+```
+
+#### 14.2.11.6 Vista de Minijuego Científico
+
+Si la IA acepta colaborar:
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║ EXPERIMENTO: CALIBRACIÓN DE REACTOR                                  ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ 🤖 PROMETHEUS:                                                        ║
+║ "Interesante. Demuestra tu competencia calibrando este reactor."    ║
+║                                                                       ║
+║ OBJETIVO: Mantener temperatura entre 800-1000°K durante 6 ticks      ║
+║                                                                       ║
+║ TEMPERATURA ACTUAL: 950°K  ✓ ÓPTIMO                                  ║
+║ [████████████████░░] 850°K ─────────── 1000°K                        ║
+║                                                                       ║
+║ TICK: 3/6 completados                                                ║
+║                                                                       ║
+║ CONTROLES:                                                           ║
+║ [Enfriar (-50°K)] [Calentar (+50°K)] [Mantener]                     ║
+║                                                                       ║
+║ Bonus por Ciencias Nivel 4: +15% margen de error                     ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+Éxito: Otorga Prototipo Experimental T3
+Fallo: IA se molesta, necesitas más intentos o combate
+```
+
+#### 14.2.11.7 Vista de Sitio Ancestral - Tipo 4: Campo de Escombros Alienígena
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║ 👽 CAMPO DE ESCOMBROS ALIENÍGENA                                     ║
+║ "Zona Xenotecnológica Delta-9"                                       ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ Restos de tecnología de origen no-humano. Fragmentos esparcidos      ║
+║ pueden ser escaneados y recolectados para análisis posterior.        ║
+║                                                                       ║
+║ FRAGMENTOS RECOLECTADOS: 18                                          ║
+║ PROBABILIDAD DESCIFRAR: 70% (16-30 fragmentos = 70%)                 ║
+║                                                                       ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ OBJETOS DETECTADOS:                                                  ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ 🔍 Fragmento Xeno #1 - Componente Desconocido                        ║
+║    Distancia: 2,500m | Scan: 6 ticks | Recolección: 2 ticks         ║
+║    [ESCANEAR] [RECOLECTAR CON TRACTOR BEAM]                          ║
+║                                                                       ║
+║ 🔍 Fragmento Xeno #2 - Placa con Inscripciones                       ║
+║    Distancia: 5,000m | Scan: 6 ticks | Recolección: 2 ticks         ║
+║    [ESCANEAR] [RECOLECTAR CON TRACTOR BEAM]                          ║
+║                                                                       ║
+║ 🔍 Fragmento Xeno #3 - Núcleo de Energía Alien                       ║
+║    Distancia: 8,500m | Scan: 12 ticks (raro) | Recolección: 4 ticks ║
+║    ⚠️ Radiación alienígena detectada (-5 HP/tick)                    ║
+║    [ESCANEAR] [RECOLECTAR CON TRACTOR BEAM]                          ║
+║                                                                       ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ ACCIONES DISPONIBLES:                                                ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ • [ANALIZAR FRAGMENTOS] - 6 ticks, chance 70% de éxito              ║
+║   Éxito: Obtienes 1x Esquema Xenotecnología [aleatorio]             ║
+║   Fallo: Pierdes 5 fragmentos en el proceso                          ║
+║                                                                       ║
+║ • [RECOLECTAR MÁS] - Buscar más fragmentos (aumenta probabilidad)   ║
+║                                                                       ║
+║ • [VENDER FRAGMENTOS] - Los fragmentos son commodities vendibles    ║
+║   Precio mercado: ~2,000₡/fragmento                                  ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+[Analizar Fragmentos] [Continuar Recolectando] [Salir del Sitio]
+```
+
+#### 14.2.11.8 Vista de Mercado Negro Flotante
+
+**Ruta:** `/black-market/{id}`
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║ ⚠️ MERCADO NEGRO FLOTANTE ⚠️                                          ║
+║ "Estación Sombra-7"                                                  ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ 🚨 ADVERTENCIA: ZONA PvP ACTIVA                                      ║
+║ Otros pilotos pueden atacarte aquí sin consecuencias de Albatross.  ║
+║                                                                       ║
+║ Pilotos detectados en área: 3                                        ║
+║                                                                       ║
+║ Standing con Piratas del Cinturón: +15 (Neutral) ✓ ACCESO PERMITIDO ║
+║                                                                       ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ SERVICIOS DISPONIBLES:                                               ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ 1. 🛒 MERCADO NEGRO                                                  ║
+║    Items prohibidos y modificaciones ilegales                        ║
+║    [VER TIENDA]                                                      ║
+║                                                                       ║
+║ 2. 📜 CONTRATOS ILEGALES                                             ║
+║    Misiones de alto riesgo con grandes recompensas                   ║
+║    • Sabotaje de Estación Confederación: 150,000₡ (-25 standing)    ║
+║    • Asesinato de "Marcus Steel": 250,000₡                           ║
+║    • Contrabando de Drogas Sintéticas: 80,000₡                       ║
+║    [VER CONTRATOS]                                                   ║
+║                                                                       ║
+║ 3. 🔧 MODIFICACIONES ILEGALES DE NAVES                               ║
+║    Modificaciones prohibidas por la Confederación                    ║
+║    [VER MODIFICACIONES]                                              ║
+║                                                                       ║
+║ 4. 💬 INFORMACIÓN DEL MERCADO                                        ║
+║    Rumores, coordenadas de sitios, intel de jugadores                ║
+║    [VER INFORMACIÓN]                                                 ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+[Entrar a Mercado] [Salir Inmediatamente] [Escanear Naves Cercanas]
+```
+
+**Vista de Tienda del Mercado Negro:**
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║ 🛒 MERCADO NEGRO - ITEMS ILEGALES                                    ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ ⚠️ ADVERTENCIA: Portar estos items en espacio de alta seguridad      ║
+║    puede resultar en confiscación y standing negativo.               ║
+║                                                                       ║
+╠═════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ 🔴 MÓDULO OVERCLOCKED T2 - LÁSER                    75,000₡          ║
+║    Bonus: +50% damage | Debuff: -50% durabilidad                     ║
+║    Descripción: Láser modificado ilegalmente. Altísimo daño pero     ║
+║    se degrada rápidamente.                                           ║
+║    [COMPRAR]                                                         ║
+║                                                                       ║
+║ 🔴 MUNICIÓN PROHIBIDA - AOE EXPLOSIVA                25,000₡          ║
+║    Damage AOE 500m (daña aliados también)                            ║
+║    Descripción: Prohibida por tratados galácticos. Explosión masiva.║
+║    [COMPRAR]                                                         ║
+║                                                                       ║
+║ 🔴 DROGA SINTÉTICA: "FOCO EXTREMO"                  15,000₡          ║
+║    Buff: +25% todas las skills por 12 ticks                          ║
+║    Debuff posterior: -15% skills por 24 ticks, -30 moral             ║
+║    Descripción: Estimulante neural ilegal. Efectos potentes.         ║
+║    [COMPRAR]                                                         ║
+║                                                                       ║
+║ 🔴 CHIP DE DISEÑO ROBADO - CRUCERO T2               500,000₡         ║
+║    Desbloquea: Blueprint "Crucero de Ataque Mk-II"                   ║
+║    Descripción: Robado de Sindicato Técnico. Trazeable.             ║
+║    [COMPRAR]                                                         ║
+║                                                                       ║
+║ 🔴 TRANSPONDER FALSO                                 80,000₡          ║
+║    Cambia tu identidad por 48 ticks                                  ║
+║    Descripción: Apareces como otro piloto en radares.                ║
+║    [COMPRAR]                                                         ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+Balance: 125,450₡ | [Volver] [Ver Modificaciones de Naves]
+```
+
+**Vista de Modificaciones Ilegales:**
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║ 🔧 MODIFICACIONES ILEGALES DE NAVES                                  ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ ⚠️ ADVERTENCIA CRÍTICA:                                              ║
+║ Estas modificaciones son PERMANENTES y FLAGGEAN tu nave como ilegal. ║
+║ Albatross atacará en sistemas de alta seguridad (0.5+).              ║
+║                                                                       ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║ 🚫 ELIMINAR TRANSPONDER                             200,000₡         ║
+║    Efecto: Tu nave NO aparece en radares (stealth permanente)        ║
+║    Consecuencia: Flagged como criminal en sec 0.5+                   ║
+║    Reversible: NO                                                    ║
+║    [INSTALAR] [MÁS INFO]                                             ║
+║                                                                       ║
+║ ⚡ AMPLIFICADOR ILEGAL DE PG/CPU                     350,000₡         ║
+║    Efecto: +25% Powergrid y CPU total                                ║
+║    Consecuencia: Nave ilegal, Albatross ataca en sec 0.5+           ║
+║    Reversible: SÍ (costo 100,000₡)                                   ║
+║    [INSTALAR] [MÁS INFO]                                             ║
+║                                                                       ║
+║ 🕳️ REACTOR BLACK HOLE                               1,000,000₡        ║
+║    Efecto: Capacitor infinito (nunca se agota)                       ║
+║    Consecuencia: 5% chance de explosión cada tick en combate         ║
+║    Reversible: SÍ (costo 250,000₡)                                   ║
+║    [INSTALAR] [MÁS INFO]                                             ║
+║                                                                       ║
+║ 🎯 SISTEMA DE PUNTERÍA ILEGAL                       450,000₡         ║
+║    Efecto: +40% tracking, +25% optimal range                         ║
+║    Consecuencia: Nave ilegal permanentemente                         ║
+║    Reversible: NO                                                    ║
+║    [INSTALAR] [MÁS INFO]                                             ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+Nave actual: Excavador MK-I "La Fortuna"
+[Volver] [Ver Items] [Ver Contratos Ilegales]
+```
+
+---
+
 ### 14.3 Menús Adicionales y Secundarios
 
 ### 14.3.1 Contratos
@@ -1496,6 +2143,261 @@ URLs RESTful y descriptivas.
 
 /missions
 /missions/{mission_id}
+
+/exploration                            # Vista de exploración
+/exploration/sites                      # Sitios temporales detectados
+/exploration/bookmarks                  # Bookmarks guardados
+/exploration/scan-planet/{planet_id}    # Escanear planeta específico
+
+/fitting                                # Fitting planner
+/fitting/planner                        # Planificador interactivo
+/fitting/saved                          # Fits guardados
+/fitting/saved/{fit_id}                 # Ver/cargar fit guardado
+
+/businesses                             # Vista de comercios de jugadores
+/businesses/my                          # Mis comercios
+/businesses/browse                      # Explorar comercios en estación
+/businesses/{business_id}               # Vista de comercio específico
+/businesses/{business_id}/manage        # Panel de gestión (solo dueño)
+```
+
+### 15.5.1 New Views - Exploration
+
+#### Planetary Scanner View
+
+**Ruta:** `/exploration/scan-planet/{planet_id}`
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│ SCANNER PLANETARIO - Vaxav III                                   │
+├──────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  TIPO: Planeta Rocoso                                            │
+│  GRAVEDAD: 0.9G                                                  │
+│  ATMÓSFERA: Tenue                                                │
+│  TEMPERATURA: Extrema                                            │
+│                                                                   │
+│  ESTADO EXPLORACIÓN: ████████░░ 0% (No escaneado)                │
+│  PRIMER DESCUBRIDOR: [Desconocido]                               │
+│                                                                   │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │ ESCANEO REQUERIDO:                                        │   │
+│  │                                                           │   │
+│  │ • Módulo: Scanner Planetario T1 ✓ Equipado              │   │
+│  │ • Skill: Escaneo Planetario Nivel 1 ✓ Tienes nivel 2    │   │
+│  │ • Tiempo: 5 ticks (50 minutos)                           │   │
+│  │ • Costo Capacitor: 100 GJ por tick                       │   │
+│  │                                                           │   │
+│  │ NIVEL EXPLORACIÓN ESTIMADO: 25-40 (Medio)               │   │
+│  │                                                           │   │
+│  │ [INICIAR ESCANEO]                                         │   │
+│  └──────────────────────────────────────────────────────────┘   │
+│                                                                   │
+│  RECURSOS DETECTADOS (requiere escaneo completo):               │
+│  • Tier 1: ???                                                   │
+│  • Tier 2: ???                                                   │
+│                                                                   │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+#### Exploration Sites Map
+
+**Ruta:** `/exploration/sites`
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│ SITIOS DE EXPLORACIÓN DETECTADOS                                │
+├─────────────┬────────┬──────────┬──────────┬─────────┬──────────┤
+│ Nombre      │ Tipo   │ Tier     │ Sistema  │ Expira  │ Acciones │
+├─────────────┼────────┼──────────┼──────────┼─────────┼──────────┤
+│ Wreck-4729  │ Relic  │ T2 ★★    │ Vaxav    │ 24h     │ [Warp]   │
+│ Combat-1822 │ Combat │ T1 ★     │ Vaxav    │ 18h     │ [Warp]   │
+│ Gas-Cloud-A │ Gas    │ T3 ★★★   │ Nova-VII │ 6h      │ [Warp]   │
+├─────────────┴────────┴──────────┴──────────┴─────────┴──────────┤
+│ [Escanear Nuevos Sitios] [Ver Bookmarks]                        │
+└──────────────────────────────────────────────────────────────────┘
+
+LEYENDA:
+  Combat Sites: Naves NPC hostiles, loot de combate
+  Relic Sites: Estructuras antiguas, blueprints raros
+  Gas Sites: Nebulosas temporales, gases T3-T4
+  Data Sites: Servidores abandonados, datos de exploración
+```
+
+### 15.5.2 New Views - Fitting Planner
+
+**Ruta:** `/fitting/planner`
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│ PLANIFICADOR DE EQUIPAMIENTO                                          │
+├────────────────────────────────────────────────────────────────────────┤
+│                                                                        │
+│ NAVE SELECCIONADA: Excavador MK-I (Fragata T1)                       │
+│                                                                        │
+│ ┌──────────────────────────────────────────────────────────────────┐ │
+│ │ RECURSOS DE FITTING:                                             │ │
+│ │                                                                   │ │
+│ │ Powergrid:  ████████████░░░░░░░░ 35/50 MW  [70%] ✓ OK          │ │
+│ │ CPU:        ██████████████████░░ 180/200 TF [90%] ✓ OK          │ │
+│ │ Capacitor:  500 GJ total | Regen: 25 GJ/tick                    │ │
+│ │             Tiempo agotamiento: ~20 ticks con todo activo       │ │
+│ └──────────────────────────────────────────────────────────────────┘ │
+│                                                                        │
+│ SLOTS OFENSIVOS (1/1):                                                │
+│ ┌────────────────────────────────────────────────────────────────┐   │
+│ │ [1] Cañón Automático Ligero T1                                 │   │
+│ │     8 PG | 15 CPU | 20 cap/disparo | 25 DPS                    │   │
+│ └────────────────────────────────────────────────────────────────┘   │
+│                                                                        │
+│ SLOTS DEFENSIVOS (2/2):                                               │
+│ ┌────────────────────────────────────────────────────────────────┐   │
+│ │ [1] Generador de Escudos Pequeño T1                            │   │
+│ │     8 PG | 15 CPU | +400 HP escudos                            │   │
+│ │ [2] Placa de Armadura Mediana T1                               │   │
+│ │     10 PG | 18 CPU | +700 HP armadura                          │   │
+│ └────────────────────────────────────────────────────────────────┘   │
+│                                                                        │
+│ SLOTS UTILIDAD (2/3):                                                 │
+│ ┌────────────────────────────────────────────────────────────────┐   │
+│ │ [1] Láser de Minería Básico T1                                 │   │
+│ │     10 PG | 20 CPU | 30 cap/ciclo | -1 tick minería            │   │
+│ │ [2] Expansor de Carga I                                        │   │
+│ │     3 PG | 10 CPU | +500 m³                                    │   │
+│ │ [3] [VACÍO - Arrastrar módulo aquí]                            │   │
+│ └────────────────────────────────────────────────────────────────┘   │
+│                                                                        │
+│ ┌──────────────────────────────────────────────────────────────────┐ │
+│ │ ESTADÍSTICAS TOTALES:                                            │ │
+│ │                                                                   │ │
+│ │ • HP Total: 1,700 (400 escudos + 700 armadura + 600 estructura) │ │
+│ │ • DPS Total: 25                                                  │ │
+│ │ • Carga Total: 5,500 m³ (5,000 base + 500 módulo)               │ │
+│ │ • Velocidad: 15 u/tick (base)                                    │ │
+│ │                                                                   │ │
+│ │ ⚠️ ADVERTENCIAS:                                                 │ │
+│ │ • Capacitor se agotará en ~16 ticks si usas todo simultáneo     │ │
+│ │ • CPU al 90% - considera Amplificador de CPU                    │ │
+│ └──────────────────────────────────────────────────────────────────┘ │
+│                                                                        │
+│ [GUARDAR FIT] [APLICAR A NAVE] [SIMULAR COMBATE] [COMPARTIR]         │
+│                                                                        │
+│ ┌──────────────────────────────────────────────────────────────────┐ │
+│ │ BIBLIOTECA DE MÓDULOS: [Filtrar por tipo ▼] [Buscar...]        │ │
+│ │                                                                   │ │
+│ │ ⚔️ ARMAS:                                                         │ │
+│ │   • Cañón Automático Ligero T1   8PG 15CPU ✓ Tienes skill      │ │
+│ │   • Láser de Pulso T1           10PG 20CPU ✗ Requiere skill 1  │ │
+│ │   • Cañón de Riel T2            15PG 25CPU ✗ Requiere skill 3  │ │
+│ │                                                                   │ │
+│ │ 🛡️ DEFENSIVOS:                                                    │ │
+│ │   • Generador Escudos Peq T1     8PG 15CPU ✓                    │ │
+│ │   • Generador Escudos Med T1    15PG 25CPU ✓                    │ │
+│ │                                                                   │ │
+│ └──────────────────────────────────────────────────────────────────┘ │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+### 15.5.3 New Views - Player Businesses
+
+#### Browse Player Businesses
+
+**Ruta:** `/businesses/browse`
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│ COMERCIOS DE JUGADORES - Vaxav I - Luna 1 - Puerto Génesis         │
+├──────────────────────────────────────────────────────────────────────┤
+│ ZONA COMERCIAL: Nivel 3 (Capacidad: 15 espacios, Ocupados: 8)      │
+├─────────────────┬──────────────┬──────────┬────────────┬────────────┤
+│ Nombre          │ Tipo         │ Dueño    │ Reputación │ Acciones   │
+├─────────────────┼──────────────┼──────────┼────────────┼────────────┤
+│ Iron Gym        │ 🏋️ Gimnasio  │ John Doe │ ★★★★☆ 85%  │ [Visitar]  │
+│ The Last Bar    │ 🍺 Taberna   │ Jane Fox │ ★★★★★ 95%  │ [Visitar]  │
+│ Quick Fix       │ 🔧 Taller    │ Bob Lee  │ ★★★☆☆ 70%  │ [Visitar]  │
+│ Star Diner      │ 🍽️ Restaurant│ Ana Cruz │ ★★★★☆ 88%  │ [Visitar]  │
+│ Tech Emporium   │ 🏪 Tienda    │ Zara Kim │ ★★★★☆ 82%  │ [Visitar]  │
+├─────────────────┴──────────────┴──────────┴────────────┴────────────┤
+│ [ALQUILAR ESPACIO] Costo: 5,000₡/tick                               │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+#### Player Business Detail View
+
+**Ruta:** `/businesses/{business_id}`
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│ ⭐ IRON GYM - Gimnasio de Élite                                     │
+│ Dueño: John Doe | Reputación: ★★★★☆ 85% | 🟢 ABIERTO               │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│ "El mejor gimnasio de Vaxav. Entrena tu cuerpo, forja tu destino." │
+│                                                                      │
+│ ┌──────────────────────────────────────────────────────────────────┐│
+│ │ SERVICIOS DISPONIBLES:                                           ││
+│ │                                                                   ││
+│ │ • SESIÓN BÁSICA                          500₡                    ││
+│ │   Buff: +5% exp física por 12 ticks (2 horas)                   ││
+│ │   [COMPRAR]                                                      ││
+│ │                                                                   ││
+│ │ • SESIÓN PREMIUM                        2,000₡                   ││
+│ │   Buff: +10% exp física + combate por 24 ticks (4 horas)        ││
+│ │   [COMPRAR]                                                      ││
+│ │                                                                   ││
+│ │ • ENTRENAMIENTO ÉLITE                   5,000₡                   ││
+│ │   Buff: +15% exp todas las skills por 36 ticks (6 horas)        ││
+│ │   [COMPRAR]                                                      ││
+│ └──────────────────────────────────────────────────────────────────┘│
+│                                                                      │
+│ RESEÑAS RECIENTES:                                                   │
+│ ─────────────────────────────────────────────────────────────────   │
+│ ★★★★★ "Excelente servicio, volveré" - Ana Cruz (hace 2 horas)      │
+│ ★★★★☆ "Buenos buffs pero un poco caro" - Bob Lee (hace 1 día)      │
+│ ★★★★★ "El mejor gimnasio del sistema" - Jane Fox (hace 3 días)     │
+│                                                                      │
+│ [DEJAR RESEÑA] [REPORTAR NEGOCIO]                                   │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+#### Business Management Panel (Owner Only)
+
+**Ruta:** `/businesses/{business_id}/manage`
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│ GESTIÓN - IRON GYM                                                   │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│ ESTADÍSTICAS:                                                        │
+│ • Clientes Totales: 247                                              │
+│ • Ingresos Totales: 387,500₡                                         │
+│ • Reputación: 85% (★★★★☆)                                           │
+│ • Alquiler Pendiente: 10,000₡ (2 ticks)                             │
+│                                                                      │
+│ ESTADO: 🟢 ABIERTO                                                   │
+│ [Cerrar Temporalmente] [Cambiar Horario]                            │
+│                                                                      │
+│ ┌──────────────────────────────────────────────────────────────────┐│
+│ │ GESTIÓN DE SERVICIOS:                                            ││
+│ │                                                                   ││
+│ │ • Sesión Básica          500₡  [Editar Precio] [Desactivar]     ││
+│ │ • Sesión Premium       2,000₡  [Editar Precio] [Desactivar]     ││
+│ │ • Entrenamiento Élite  5,000₡  [Editar Precio] [Desactivar]     ││
+│ │                                                                   ││
+│ │ [AÑADIR NUEVO SERVICIO]                                           ││
+│ └──────────────────────────────────────────────────────────────────┘││
+│                                                                      │
+│ ┌──────────────────────────────────────────────────────────────────┐││
+│ │ ÚLTIMAS TRANSACCIONES:                                           ││
+│ │                                                                   ││
+│ │ 2025-11-28 14:30 - Ana Cruz compró "Sesión Premium" - 2,000₡    ││
+│ │ 2025-11-28 12:15 - Bob Lee compró "Sesión Básica" - 500₡        ││
+│ │ 2025-11-28 10:45 - Jane Fox compró "Entrenamiento Élite" - 5K₡  ││
+│ └──────────────────────────────────────────────────────────────────┘││
+│                                                                      │
+│ [VER INFORME COMPLETO] [PAGAR ALQUILER] [CERRAR NEGOCIO]            │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
 ### 15.6 Bibliotecas y Herramientas UI Recomendadas

@@ -76,6 +76,131 @@ exp_requerida_nivel = base_exp × multiplicador_habilidad × nivel
 - **Liderazgo** (x5): Bonos a corporación
 - **Investigación** (x4): Blueprints mejorados
 
+**Skills de Extracción Especializada:**
+
+- **Extracción Criogénica** (x3): Permite extraer recursos de cinturones de hielo
+  - Nivel 1: Acceso a extracción de hielo básico, +10% eficiencia
+  - Nivel 2: +20% eficiencia, reduce ticks de extracción 10%
+  - Nivel 3: +30% eficiencia, acceso a hielo raro
+  - Nivel 4: +40% eficiencia, reduce ticks de extracción 20%
+  - Nivel 5: +50% eficiencia, acceso a hielo exótico (Antimateria, Materia Oscura)
+  - Dependencia: Minería Nivel 2
+  - Cómo se entrena: Extraer recursos de cinturones de hielo
+
+- **Recolección de Gas** (x3): Permite recolectar gases de nebulosas
+  - Nivel 1: Acceso a recolección de gas básico, +10% eficiencia
+  - Nivel 2: +20% eficiencia, reduce ticks de recolección 10%
+  - Nivel 3: +30% eficiencia, acceso a gases raros
+  - Nivel 4: +40% eficiencia, reduce ticks de recolección 20%
+  - Nivel 5: +50% eficiencia, acceso a gases exóticos (Antimateria, Materia Oscura)
+  - Dependencia: Ninguna
+  - Cómo se entrena: Recolectar gases en nebulosas
+
+**Skills de Exploración:**
+
+- **Escaneo Planetario** (x2): Permite escanear planetas para descubrir recursos
+  - Nivel 1: Escaneo básico, nivel exploración 1-20
+  - Nivel 2: Escaneo mejorado, nivel exploración 21-40
+  - Nivel 3: Escaneo avanzado, nivel exploración 41-60
+  - Nivel 4: Escaneo experto, nivel exploración 61-80
+  - Nivel 5: Escaneo maestro, nivel exploración 81-100, detecta anomalías
+  - Dependencia: Ninguna
+  - Cómo se entrena: Escanear planetas
+
+- **Exploración** (x3): Mejora descubrimiento de sitios temporales y anomalías
+  - Nivel 1: +10% probabilidad descubrir sitios, acceso a sitios T1
+  - Nivel 2: +20% probabilidad, acceso a sitios T2
+  - Nivel 3: +30% probabilidad, acceso a sitios T3, reduce ticks de exploración 15%
+  - Nivel 4: +40% probabilidad, reduce ticks de exploración 30%
+  - Nivel 5: +50% probabilidad, desbloquea sitios legendarios
+  - Dependencia: Ninguna
+  - Cómo se entrena: Explorar sistemas, descubrir sitios temporales
+
+- **Arqueología Espacial** (x4): Permite excavar sitios arqueológicos y descifrar artefactos
+  - Nivel 1: Acceso a sitios arqueológicos T1, +10% éxito excavación
+  - Nivel 2: Acceso a sitios T2, +20% éxito excavación
+  - Nivel 3: Acceso a sitios T3, +30% éxito excavación, reduce ticks 15%
+  - Nivel 4: +40% éxito excavación, reduce ticks 30%, desbloquea descifrado avanzado
+  - Nivel 5: +50% éxito excavación, acceso a artefactos legendarios
+  - Dependencia: Exploración Nivel 2
+  - Cómo se entrena: Excavar sitios arqueológicos, descifrar artefactos
+
+- **Bioprospección** (x2): Permite extraer recursos orgánicos de planetas
+  - Nivel 1: Acceso a extracción orgánica básica (Biomasa, Agua)
+  - Nivel 2: +15% eficiencia, acceso a Proteínas y Algas
+  - Nivel 3: +30% eficiencia, acceso a Nanobots
+  - Nivel 4: +45% eficiencia, acceso a Cristales Vivos
+  - Nivel 5: +60% eficiencia, acceso a Esporas y Genoma Alienígena
+  - Dependencia: Ninguna
+  - Cómo se entrena: Extraer recursos orgánicos de planetas Vitales y Oceánicos
+
+- **Hackeo** (x3): Permite acceder a terminales y sistemas cerrados en Derelictos y Laboratorios
+  - Nivel 1: Hackeo básico de terminales, acceso a Derelictos T1
+  - Nivel 2: Hackeo mejorado, reduce ticks de hackeo 15%, acceso a terminales de seguridad media
+  - Nivel 3: Hackeo avanzado, acceso a Derelictos T2-T3, reduce ticks 30%
+  - Nivel 4: Bypass de seguridad, puede desactivar drones guardianes, +20% chance éxito hackeo
+  - Nivel 5: Maestro hacker, puede hackear IA corrupta de Laboratorios, bypass instantáneo de seguridad
+  - Dependencia: Exploración Nivel 2
+  - Cómo se entrena: Hackear terminales en Derelictos Generacionales, completar misiones de infiltración
+
+- **Ciencias** (x4): Conocimiento científico para experimentos complejos en Laboratorios
+  - Nivel 1: Ciencias básicas, puede leer documentos científicos, +5% éxito en experimentos
+  - Nivel 2: Acceso a experimentos básicos en Laboratorios Perdidos T1, +15% éxito
+  - Nivel 3: Experimentos avanzados, +25% éxito en minijuegos científicos, +15% margen de error
+  - Nivel 4: Puede crear Prototipos T3, acceso a Laboratorios T3, +35% éxito en experimentos
+  - Nivel 5: Científico experto, puede modificar prototipos experimentales, +50% éxito, desbloquea experimentos legendarios
+  - Dependencia: Investigación Nivel 2
+  - Cómo se entrena: Completar experimentos en Laboratorios Perdidos, investigar en estaciones
+
+- **Análisis Xenotecnológico** (x3): Estudio de tecnología alienígena en Campos de Escombros
+  - Nivel 1: Identifica fragmentos Xeno básicos, +10% probabilidad descifrar esquemas
+  - Nivel 2: Análisis mejorado, +25% probabilidad descifrar, reduce ticks análisis 20%
+  - Nivel 3: Análisis avanzado, +50% probabilidad descifrar, reduce ticks análisis 40%
+  - Nivel 4: Puede combinar fragmentos para crear esquemas híbridos, +65% probabilidad
+  - Nivel 5: Maestro xenotecnólogo, puede reverse engineer tecnología alien completa, +80% probabilidad
+  - Dependencia: Arqueología Espacial Nivel 3
+  - Cómo se entrena: Analizar fragmentos Xeno, completar Campos de Escombros Alienígenas
+
+**Skills de Combate Avanzado:**
+
+- **Sigilo** (x3): Reduce la firma de la nave, dificulta detección por enemigos
+  - Nivel 1: -10% firma de nave, +5% probabilidad evadir escaneos
+  - Nivel 2: -20% firma, +10% evadir escaneos
+  - Nivel 3: -30% firma, +15% evadir escaneos, reduce tiempo aparición en radar 20%
+  - Nivel 4: -40% firma, +20% evadir escaneos, reduce tiempo aparición en radar 40%
+  - Nivel 5: -50% firma, +25% evadir escaneos, desbloquea módulos de camuflaje avanzado
+  - Dependencia: Ninguna
+  - Cómo se entrena: Usar módulos de sigilo, evadir detección enemiga
+
+**Skills de Negocios de Jugadores:**
+
+- **Gestión Comercial** (x4): Permite operar comercios de jugadores en estaciones
+  - Nivel 1: Permite alquilar espacio comercial, abrir Tienda o Gimnasio
+  - Nivel 2: Reduce costos operativos 10%, aumenta capacidad clientes 20%
+  - Nivel 3: Desbloquea Taberna y Restaurante, reduce costos operativos 20%
+  - Nivel 4: Aumenta capacidad clientes 40%, reduce costos operativos 30%
+  - Nivel 5: Desbloquea Taller de Reparación, reduce costos operativos 50%, bonos VIP
+  - Dependencia: Comercio Nivel 2
+  - Cómo se entrena: Operar comercios, atender clientes, gestionar inventario
+
+- **Cocina** (x3): Permite preparar comidas de calidad en restaurantes
+  - Nivel 1: Recetas básicas, +5% satisfacción clientes
+  - Nivel 2: Recetas mejoradas, +15% satisfacción, +10% precio cobrable
+  - Nivel 3: Recetas avanzadas, +25% satisfacción, +20% precio cobrable
+  - Nivel 4: Recetas expertas, +35% satisfacción, buffs de comida duran 20% más
+  - Nivel 5: Recetas maestras, +50% satisfacción, desbloquea comidas exóticas con buffs únicos
+  - Dependencia: Ninguna
+  - Cómo se entrena: Preparar comidas en restaurantes, servir clientes
+
+- **Reparación de Naves** (x3): Permite reparar naves de otros jugadores en talleres
+  - Nivel 1: Reparaciones básicas T1, +10% velocidad reparación
+  - Nivel 2: Reparaciones T1-T2, +20% velocidad reparación
+  - Nivel 3: Reparaciones T1-T3, +30% velocidad reparación, reduce coste materiales 15%
+  - Nivel 4: +40% velocidad reparación, reduce coste materiales 30%
+  - Nivel 5: +50% velocidad reparación, puede reparar módulos dañados sin reemplazar
+  - Dependencia: Ingeniería Nivel 2
+  - Cómo se entrena: Reparar naves de clientes en taller
+
 **Skills Sociales:**
 
 - **Sociabilidad** (x2): Aumenta límite de interacciones sociales diarias

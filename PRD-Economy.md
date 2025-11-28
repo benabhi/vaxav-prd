@@ -30,87 +30,382 @@
 
 ### 9.2 Recursos
 
-### 9.2.1 Minerales en Crudo (Raw Ores)
+VAXAV utiliza un sistema de recursos único organizado en **3 categorías de extracción** con **4 tiers de rareza** cada una.
 
-Extraídos de asteroides.
+### 9.2.1 Categorías de Recursos
+
+**Categoría 1: Metálicos**
+- **Fuentes:** Asteroides (belts) y planetas rocosos/volcánicos
+- **Uso Principal:** Construcción de naves, módulos, estructuras
+- **Habilidad:** Minería de Asteroides (x2)
+
+**Categoría 2: Gaseosos y Volátiles**
+- **Fuentes:** Nebulosas de gas y planetas jovianos/helados
+- **Uso Principal:** Combustibles, municiones, armas de energía
+- **Habilidades:** Recolección de Gas (x3), Extracción Criogénica (x3)
+
+**Categoría 3: Orgánicos y Exóticos**
+- **Fuentes:** Planetas vitales, oceánicos
+- **Uso Principal:** Consumibles, tecnología biológica, items especiales
+- **Habilidad:** Bioprospección (x2)
+
+### 9.2.2 Recursos Metálicos
 
 **Tier 1 (Comunes):**
-- **Tritanio:** Básico, muy común
-- **Pirita:** Común
-- **Mexalón:** Común
+- **Ferrita** - Metal estructural básico para cascos T1 y estructuras
+- **Cobre Estelar** - Alta conductividad para electrónica y componentes
+- **Silicatos** - Cristales básicos para vidrio, lentes y paneles
 
 **Tier 2 (Poco Comunes):**
-- **Isógeno:** Poco común
-- **Noxcio:** Poco común
+- **Titanita** - Aleación ligera y resistente para armaduras T2
+- **Magnetita Pura** - Genera campos magnéticos para escudos y motores
 
 **Tier 3 (Raros):**
-- **Megacita:** Raro
-- **Zydrina:** Raro
+- **Duralinio Espacial** - Super aleación para naves T2-T3 y módulos avanzados
+- **Cristales de Zafiro** - Óptica avanzada para armas láser T3 y sensores
 
 **Tier 4 (Muy Raros):**
-- **Morfita:** Muy raro
-- **Arkonor:** Muy raro, alto valor
+- **Adamantita** - Material casi indestructible para naves T3 y armaduras exóticas
+- **Neutronium** - Materia ultra-densa para reactores capitales y armas devastadoras
 
-### 9.2.2 Minerales Refinados
+**Fuentes de Extracción:**
+- Belts de Asteroides (comunes, ricos, densos, exóticos)
+- Planetas Rocosos (T1-T2 principalmente)
+- Planetas Volcánicos (T2-T3 principalmente)
+- Planetas Fragmentados (mezcla caótica, T4 muy raro)
 
-Resultado de refinar minerales en crudo.
+### 9.2.3 Recursos Gaseosos y Volátiles
 
-- Los minerales crudos se refinan en estaciones con Sala de Ingeniería (ver [PRD-Universe.md](./PRD-Universe.md#6.2.7-sala-de-ingeniería))
-- Ratio de refinamiento depende de habilidades
-- Se obtienen minerales purificados usados en fabricación
+**Tier 1 (Comunes):**
+- **Hidrógeno Comprimido** - Combustible básico para propulsión y energía
+- **Helio Líquido** - Refrigerante para sistemas de enfriamiento
+
+**Tier 2 (Poco Comunes):**
+- **Deuterio** - Combustible avanzado para reactores de fusión
+- **Nitrógeno Criogénico** - Propelente para torpedos y munición
+
+**Tier 3 (Raros):**
+- **Plasma Ionizado** - Energía contenida para armas de plasma y escudos avanzados
+- **Xenón Enriquecido** - Propulsor de alta eficiencia para motores T3
+
+**Tier 4 (Muy Raros):**
+- **Antimateria** - Energía explosiva para armas T3 y bombas
+- **Materia Oscura** - Experimental para tecnología exótica
+
+**Fuentes de Extracción:**
+- Nebulosas de Gas (H2, Deuterio, Iónica, Antimateria)
+- Ice Belts (Agua, Nitrógeno, Xenón)
+- Planetas Jovianos (Hidrógeno, Helio, Deuterio)
+- Planetas Helados (Agua, Nitrógeno, Xenón)
+
+### 9.2.4 Recursos Orgánicos y Exóticos
+
+**Tier 1 (Comunes):**
+- **Biomasa** - Materia orgánica para alimentos y compost
+- **Agua Destilada** - Soporte vital, consumible y coolant
+
+**Tier 2 (Poco Comunes):**
+- **Proteínas Sintéticas** - Nutrición avanzada para buffs y raciones
+- **Algas Bioluminiscentes** - Energía biológica para baterías orgánicas
+
+**Tier 3 (Raros):**
+- **Nanobots Orgánicos** - Tecnología bio para reparación automática
+- **Cristales Vivos** - Computación orgánica para IA y sistemas avanzados
+
+**Tier 4 (Muy Raros):**
+- **Esporas Regenerativas** - Curación avanzada para módulos de auto-reparación T3
+- **Genoma Alienígena** - Muestras únicas para investigación y tecnología exótica
+
+**Fuentes de Extracción:**
+- Planetas Vitales (Biomasa, Proteínas, Nanobots, Cristales Vivos, Esporas)
+- Planetas Oceánicos (Agua, Biomasa, Proteínas, Algas)
+- Planetas Fragmentados (mezcla caótica, extremadamente raro)
+
+### 9.2.5 Refinamiento y Procesamiento
+
+Los recursos crudos se refinan en estaciones con Sala de Ingeniería (ver [PRD-Universe.md](./PRD-Universe.md#6.2.7-sala-de-ingeniería)).
+
+**Ratio de refinamiento:** Depende de habilidades y nivel de instalación.
+
+**Fórmula:**
+```
+output_refinado = input_crudo × eficiencia_refinamiento
+
+eficiencia_refinamiento = base_eficiencia × (1 + skill_refinamiento × 0.05) × (1 + station_bonus)
+
+base_eficiencia: 0.75 (75%)
+skill_refinamiento: nivel 0-5
+station_bonus: 0% a 25% según nivel de Sala de Ingeniería
+```
 
 **Ejemplo:**
-
 ```
-100 unidades de Tritanio Crudo
-→ Refinamiento (85% eficiencia)
-→ 85 unidades de Tritanio Puro
+100 unidades de Ferrita Cruda
+Skill Refinamiento Nivel 3: +15%
+Estación Nivel 2: +10%
+→ Eficiencia = 0.75 × 1.15 × 1.10 = 0.94875 (94.8%)
+→ 94.8 unidades de Ferrita Refinada
 ```
 
-### 9.2.3 Componentes
+### 9.2.6 Componentes Intermedios
 
-Creados combinando minerales refinados.
+Creados combinando recursos refinados. Necesarios para fabricación avanzada.
 
 **Ejemplos:**
-- **Circuitos Electrónicos:** Tritanio + Pirita
-- **Superconductores:** Isógeno + Megacita
-- **Nano-Ensambladores:** Morfita + Zydrina
 
-### 9.2.4 Otros Recursos
+**Electrónica:**
+- **Circuitos Básicos:** Cobre Estelar + Silicatos
+- **Procesadores Avanzados:** Cristales de Zafiro + Cobre Estelar
+- **Chips Cuánticos:** Cristales Vivos + Cristales de Zafiro
 
-- **Combustible:** Para viajes largos
-- **Municiones:** Consumibles de combate
-- **Drones:** Consumibles/semi-permanentes
-- **Blueprints (BPO/BPC):** Planos de fabricación
+**Estructurales:**
+- **Placas de Blindaje:** Ferrita + Titanita
+- **Armadura Reforzada:** Duralinio + Adamantita
+- **Aleaciones Exóticas:** Neutronium + Duralinio
+
+**Energéticos:**
+- **Celdas de Combustible:** Hidrógeno + Helio
+- **Reactores de Fusión:** Deuterio + Magnetita
+- **Núcleos de Antimateria:** Antimateria + Materia Oscura
+
+**Biológicos:**
+- **Raciones de Supervivencia:** Biomasa + Proteínas
+- **Medkits Avanzados:** Esporas Regenerativas + Nanobots
+- **Sueros de Buff:** Algas + Proteínas
+
+### 9.2.7 Datos de Exploración
+
+Nuevo tipo de recurso comercializable obtenido al explorar planetas y sitios desconocidos.
+
+**Tipos:**
+- **Datos de Exploración Planetaria:** Información sobre recursos de un planeta
+  - Básicos (33% exploración): 1-2 recursos principales
+  - Avanzados (66% exploración): Todos los recursos + abundancia
+  - Completos (100% exploración): Composición exacta + anomalías
+
+- **Coordenadas de Sitios Temporales:** Ubicación de anomalías espaciales
+  - Belt de Asteroides Temporal
+  - Nebulosa de Gas Temporal
+  - Sitio de Combate
+  - Ruina Espacial
+  - Agujero de Gusano
+
+**Metadata (JSON):**
+```json
+{
+  "type": "exploration_data",
+  "subtype": "planetary_scan",
+  "planet_id": 42,
+  "planet_name": "Vaxav VII",
+  "exploration_level": 66,
+  "resources": {
+    "ferrita": "abundante",
+    "adamantita": "trazas"
+  },
+  "anomalies": 2,
+  "discovered_by": "pilot_name",
+  "scan_date": "2025-11-28"
+}
+```
+
+**Mecánica de Venta:**
+- Al vender a NPC o jugador, el vendedor **PIERDE** la información
+- El comprador puede instalar los datos en su base de conocimiento (consume el item)
+- Precio base NPC: `tier_planeta × 1000₡ × (exploration_level / 33) × rarity_multiplier`
+- Jugadores pueden especular revendiendo datos valiosos
+
+**Precios de Referencia:**
+- Datos Básicos planeta Rocoso: ~2,000₡
+- Datos Avanzados planeta Volcánico: ~8,000₡
+- Datos Completos planeta Fragmentado (primer descubridor): ~150,000₡
+
+### 9.2.8 Chips de Diseño (Blueprints)
+
+Los Chips de Diseño son items que desbloquean blueprints en la Consola de Fabricación (reemplazan el sistema tradicional BPO/BPC).
+
+**Características:**
+- Item comercializable en mercado
+- Uso único (consume el item al desbloquear blueprint)
+- Obtenidos como loot de NPCs, recompensas de misiones, o investigación
+- Valor según complejidad del blueprint desbloqueado
+
+**Ejemplos:**
+- **Chip: Fragata Minera T1** - Desbloquea construcción de "Excavador MK-I"
+- **Chip: Láser de Minería T2** - Desbloquea fabricación de láseres avanzados
+- **Chip: Escudo Adaptativo T3** - Desbloquea módulo exótico de escudo
+
+**Precio Base:**
+- T1: 10,000 - 50,000₡
+- T2: 100,000 - 500,000₡
+- T3: 1,000,000 - 5,000,000₡
+
+### 9.2.9 Items de Exploración Ancestral
+
+Nuevos items obtenidos en Sitios Ancestrales con mecánicas únicas de blueprint unlock.
+
+**Chip de Diseño (Categorizado):**
+- **Descripción:** Item que desbloquea blueprint inmediato al consumir
+- **Categorías:** Militar, Industrial, Tecnológico
+- **Fuente:** Completar Complejos Precursores (combinar 5 Fragmentos de Diseño)
+- **Mecánica:** Uso único, blueprint aleatorio de la categoría
+- **Precio Base:**
+  - T1: 50,000 - 200,000₡
+  - T2: 250,000 - 1,000,000₡
+  - T3: 1,500,000 - 5,000,000₡
+- **Ejemplos:**
+  - "Chip de Diseño [Militar T2]" → Blueprint aleatorio de arma/defensa T2
+  - "Chip de Diseño [Industrial T3]" → Blueprint de nave minera/carguero T3
+
+**Núcleo de Datos (Cifrado):**
+- **Descripción:** Item vendible que contiene blueprint cifrado (desconocido hasta descifrar)
+- **Fuente:** Hackear terminales en Derelictos Generacionales
+- **Mecánica:**
+  - Puede venderse SIN descifrar (mercado especulativo)
+  - Puede descifrarse en Laboratorio de estación (12 ticks) para revelar blueprint aleatorio
+  - Tier determina calidad del blueprint (T1-T3)
+- **Precio de Mercado Jugadores:** 100,000 - 5,000,000₡ (especulación)
+- **Precios NPC (compra):**
+  - T1: 75,000₡
+  - T2: 400,000₡
+  - T3: 2,000,000₡
+- **Economía:** Los jugadores pueden especular comprando núcleos sin descifrar y revenderlos
+
+**Prototipo Experimental:**
+- **Descripción:** Blueprint T3 único con stats ligeramente variables (RNG de stats)
+- **Fuente:** Completar experimentos exitosos en Laboratorios de Investigación Perdidos
+- **Mecánica:** Cada prototipo es ligeramente diferente (±5-10% stats aleatorios)
+- **Precio Base:** 1,000,000 - 10,000,000₡
+- **Ejemplos:**
+  - "Prototipo Experimental: Escudo Adaptativo" (Regen +12%, Cap -3%)
+  - "Prototipo Experimental: Láser Cuántico" (Damage +8%, Tracking -5%)
+- **Rareza:** Muy raros, altamente codiciados por coleccionistas y min-maxers
+
+**Esquema Xenotecnología:**
+- **Descripción:** Blueprint de tecnología alienígena con estética y mecánicas únicas
+- **Fuente:** Analizar Fragmentos Xeno en Campos de Escombros Alienígenas (probabilidad 70% con 18 fragmentos)
+- **Mecánica:** Stats exóticos (beneficios únicos no disponibles en tech humana)
+- **Precio Base:** 500,000 - 8,000,000₡
+- **Ejemplos:**
+  - "Esquema Xeno: Propulsor de Materia Oscura" (Warp speed +40%, energy drain +20%)
+  - "Esquema Xeno: Escudo Orgánico" (Regenera 5% HP/tick automáticamente)
+- **Apariencia:** Naves/módulos con diseño alienígena visual
+
+**Fragmento Xeno:**
+- **Descripción:** Commodity vendible, componente para análisis
+- **Fuente:** Recolectar en Campos de Escombros Alienígenas
+- **Precio Mercado:** ~2,000₡/unidad
+- **Uso:**
+  - Vendible como commodity
+  - Acumular 16-30+ para aumentar chance de descifrar Esquema Xenotecnología
+
+**Fragmento de Diseño:**
+- **Descripción:** Componente para crear Chip de Diseño completo
+- **Fuente:** Completar salas individuales en Complejos Precursores
+- **Mecánica:** Combinar 5 fragmentos de misma categoría = 1 Chip de Diseño
+- **Precio Mercado:** ~10,000 - 100,000₡/fragmento (dependiendo de categoría/tier)
+- **No stackeable entre categorías:** Fragmentos Militares ≠ Fragmentos Industriales
+
+**Artefacto Precursor:**
+- **Descripción:** Item decorativo coleccionable
+- **Fuente:** Loot adicional en Complejos Precursores
+- **Precio NPC:** 5,000 - 50,000₡
+- **Uso:** Vender a NPCs o coleccionar (logros)
+
+### 9.2.10 Items Ilegales
+
+Items prohibidos solo disponibles en Mercados Negros Flotantes.
+
+**Módulos Overclocked:**
+- **Descripción:** Módulos modificados ilegalmente con stats extremos pero durabilidad reducida
+- **Stats:** +50% beneficio principal, -50% durabilidad (se rompen más rápido)
+- **Precio:** 75,000 - 500,000₡ (1.5-3x precio normal)
+- **Consecuencia:** Si Albatross escanea tu nave en sec 0.5+, confiscación (-10 standing)
+- **Ejemplos:**
+  - "Láser Overclocked T2" (+50% damage, -50% durabilidad)
+  - "Escudo Overclocked T3" (+50% HP, -50% durabilidad)
+
+**Munición Prohibida:**
+- **Descripción:** Munición AOE que daña objetivos en 500m (incluyendo aliados)
+- **Damage:** 2x damage normal, AOE 500m
+- **Precio:** 25,000₡ por stack de 1000 unidades
+- **Consecuencia:** Uso está prohibido por tratados galácticos, posesión = -5 standing si detectada
+- **Uso:** PvP en null-sec, raids
+
+**Drogas Sintéticas:**
+- **Descripción:** Estimulantes neurales ilegales con buffs potentes y debuffs severos
+- **Efecto:**
+  - Buff: +25% todas las skills por 12 ticks
+  - Debuff posterior: -15% todas las skills por 24 ticks, -30 moral
+- **Precio:** 15,000₡ por dosis
+- **Consecuencia:** Adicción (mecánica futura), detección = -10 standing
+- **Nombres:** "Foco Extremo", "Adrenalina Sintética", "Neuro-Boost"
+
+**Chips de Diseño Robados:**
+- **Descripción:** Blueprints robados del Sindicato Técnico, más baratos pero traceables
+- **Precio:** 50% precio de Chip normal
+- **Consecuencia:** 10% chance de ser rastreado si fabricas el item (Sindicato Técnico -25 standing)
+- **Riesgo:** Cheaper pero peligroso a largo plazo
+
+**Transponder Falso:**
+- **Descripción:** Cambia tu identidad en radares por 48 ticks
+- **Precio:** 80,000₡
+- **Efecto:** Apareces como otro piloto aleatorio durante 48 ticks
+- **Uso:** Evadir enemigos, infiltración
+- **Consecuencia:** Si Albatross detecta (15% chance/scan), flagged como criminal permanente
+
+**Modificaciones Ilegales de Naves** (ver PRD-ShipsAndCombat.md para detalles):
+- Eliminar Transponder: 200,000₡
+- Amplificador PG/CPU Ilegal: 350,000₡
+- Reactor Black Hole: 1,000,000₡
+- Sistema Puntería Ilegal: 450,000₡
+
+### 9.2.11 Otros Recursos
+
+- **Combustible Preparado:** Hidrógeno procesado para viajes largos
+- **Municiones Legales:** Consumibles de combate (proyectiles, torpedos, cargas)
+- **Drones de Combate:** Semi-permanentes, recuperables
+- **Consumibles de Buff:** Comida, bebidas, stimulantes legales (ver Comercios de Jugadores)
 
 ### 9.3 Cadena de Producción
 
 **Flujo completo controlado por jugadores:**
 
 ```
-1. Minería
-   └─> Minerales Crudos
+1. EXTRACCIÓN
+   ├─> Minería de Asteroides → Metálicos (Ferrita, Cobre, Titanita...)
+   ├─> Recolección de Gas → Gaseosos (Hidrógeno, Deuterio, Plasma...)
+   ├─> Extracción Criogénica → Volátiles (Agua, Nitrógeno, Xenón...)
+   └─> Bioprospección → Orgánicos (Biomasa, Proteínas, Nanobots...)
 
-2. Refinamiento
-   └─> Minerales Refinados
+2. REFINAMIENTO
+   └─> Recursos Refinados (en Sala de Ingeniería)
 
-3. Fabricación de Componentes
-   └─> Componentes
+3. FABRICACIÓN DE COMPONENTES
+   ├─> Electrónica (Circuitos, Procesadores, Chips)
+   ├─> Estructurales (Placas, Armaduras, Aleaciones)
+   ├─> Energéticos (Celdas, Reactores, Núcleos)
+   └─> Biológicos (Raciones, Medkits, Sueros)
 
-4. Fabricación de Módulos
-   └─> Módulos de Nave
+4. FABRICACIÓN DE MÓDULOS
+   └─> Módulos de Nave T1/T2/T3 (en Sala de Ingeniería)
 
-5. Construcción de Naves
-   └─> Naves
+5. CONSTRUCCIÓN DE NAVES
+   └─> Naves T1/T2/T3 (en Astillero)
 
-6. Mercado
-   └─> Venta a otros jugadores
+6. MERCADO
+   └─> Venta a jugadores o NPCs
 ```
 
-**Blueprints (BPO/BPC):**
-- **BPO (Original):** Infinitos usos, caro
-- **BPC (Copia):** Usos limitados, más barato
-- Se pueden investigar para mejorar eficiencia
+**Sistema de Blueprints Unificado:**
+- **NO existen items BPO/BPC individuales**
+- Los blueprints se gestionan desde la **Consola de Fabricación** (módulo de estación)
+- Todos los blueprints están visibles pero bloqueados por defecto
+- Se desbloquean mediante:
+  1. Pago directo en Créditos (10,000₡ a 5,000,000₡ según complejidad)
+  2. Consumir un **Chip de Diseño** (item obtenido como loot o recompensa)
+  3. Investigación en Laboratorio (tiempo + recursos)
+- Una vez desbloqueado, el blueprint es permanente para ese piloto
+- Los **Chips de Diseño** sí son comercializables en el mercado
 
 ### 9.4 Mercado de Habilidades
 
@@ -331,6 +626,229 @@ Agrupación de múltiples corporaciones.
 - Declaración de guerra: 144 ticks (~24h) de cooldown
 - Duración mínima: 1008 ticks (~7 días)
 - Costo: Escala según tamaño
+
+---
+
+## 12. Comercios de Jugadores
+
+### 12.1 Concepto
+
+Los pilotos pueden alquilar espacios comerciales en estaciones para ofrecer servicios a otros jugadores, creando una economía paralela player-owned.
+
+**Módulo de Estación Requerido:** "Zona Comercial"
+- Debe ser construido por la corporación dueña de la estación
+- Ofrece espacios alquilables para diferentes tipos de negocios
+
+### 12.2 Tipos de Comercios
+
+**Espacios Disponibles:**
+1. Gimnasio
+2. Taberna/Bar
+3. Tienda General
+4. Restaurante
+5. Taller de Reparaciones
+6. Casino (futuro)
+7. Salón de Entretenimiento (futuro)
+
+### 12.3 Mecánica de Alquiler
+
+**Proceso:**
+1. Piloto visita "Zona Comercial" de estación
+2. Ve espacios disponibles y precios de renta
+3. Paga primer mes de renta + depósito
+4. Configura su negocio (nombre, precios, inventario)
+5. Abre al público
+
+**Costos:**
+- **Renta mensual:** 50,000₡ a 500,000₡ según tipo y ubicación de estación
+- **Depósito:** 2x renta mensual (reembolsable al cerrar)
+- **Impuesto por transacción:** 5-10% va a la corporación dueña de estación
+
+**Duración:**
+- Mes = 144 ticks × 30 = 4,320 ticks (~30 días reales si tick = 10 min)
+- Renovación automática si hay fondos
+- Si no se paga renta, comercio se cierra tras 72 ticks de gracia
+
+### 12.4 Tipos de Comercios Detallados
+
+### 12.4.1 Gimnasio
+
+**Servicio:** Entrenar atributos físicos temporalmente
+
+**Requiere del Dueño:**
+- Skill "Gestión Comercial" (x4) nivel 1+
+- Stock de "Equipo de Gimnasio" (item comprable o fabricable)
+
+**Configuración:**
+- **Precio por sesión:** Variable (ej: 500₡ - 5,000₡)
+- **Duración del buff:** 12-72 ticks según equipo usado
+- **Buff otorgado:** +5% a +15% experiencia física/combate
+
+**Mecánica:**
+1. Cliente paga y selecciona rutina
+2. Consume 1 uso del equipo (dueño debe reponer stock)
+3. Cliente recibe buff temporal
+4. Integra con sistema de atributos de PRD-SocialSystem.md
+
+### 12.4.2 Taberna/Bar
+
+**Servicio:** Vender comida y bebida con buffs
+
+**Requiere del Dueño:**
+- Skill "Gestión Comercial" (x4) nivel 1+
+- Stock de items tipo 'food' y 'drink'
+
+**Configuración:**
+- **Menú:** Lista de items con precios (markup sobre costo base)
+- **Precio sugerido:** 150% a 300% del costo base
+
+**Buffs típicos:**
+- **Comida:** +10 a +30 nutrición, +5 a +15 moral
+- **Bebidas alcohólicas:** +20 moral, -5 a -10 energía (temporal)
+- **Comidas Premium:** +buffs de skills (ej: +10% exp minería 24 ticks)
+
+**Ejemplo de Menú:**
+```
+╔═══════════════════════════════════════════════╗
+║ TABERNA "EL VACÍO ALEGRE"                    ║
+╠═══════════════════════════════════════════════╣
+║ 🍖 Bistec Espacial        1,500₡  (+25 nutr) ║
+║ 🍺 Cerveza Estelar          750₡  (+15 moral)║
+║ 🍷 Vino de Nebulosa       2,500₡  (+20 moral)║
+║ 🍲 Sopa Regenerativa      3,000₡  (+30 nutr) ║
+╚═══════════════════════════════════════════════╝
+```
+
+### 12.4.3 Tienda General
+
+**Servicio:** Vender items que el dueño fabrica, compra o recolecta
+
+**Requiere del Dueño:**
+- Skill "Gestión Comercial" (x4) nivel 1+
+- Inventario de items para vender
+
+**Configuración:**
+- **Precios fijos:** Dueño establece precio por item
+- **Stock visible:** Clientes ven cantidad disponible
+- **Categorías:** Recursos, módulos, municiones, consumibles
+
+**Ventaja vs Mercado:**
+- No hay órdenes de compra/venta, solo venta directa
+- Precios más estables
+- Ideal para comercio de conveniencia (estación remota)
+- Dueño puede especializarse (ej: "Tienda de Municiones")
+
+**Ejemplo:**
+```
+╔═══════════════════════════════════════════════╗
+║ TIENDA "ARSENAL DEL MINERO"                  ║
+╠═══════════════════════════════════════════════╣
+║ Láser de Minería T1       25,000₡  [Stock: 5]║
+║ Ferrita Refinada (x100)    1,200₡  [Stock:50]║
+║ Cobre Estelar (x100)       1,500₡  [Stock:30]║
+║ Expansor de Carga T1      15,000₡  [Stock: 2]║
+╚═══════════════════════════════════════════════╝
+```
+
+### 12.4.4 Restaurante
+
+**Servicio:** Similar a Taberna pero especializado en comida premium con buffs potentes
+
+**Requiere del Dueño:**
+- Skill "Gestión Comercial" (x4) nivel 2+
+- Skill "Cocina" (x3) - nueva skill específica
+- Stock de ingredientes premium
+
+**Configuración:**
+- **Recetas especiales:** Combinan múltiples ingredientes
+- **Buffs superiores:** +15% a +25% exp, duración 48-144 ticks
+- **Precio premium:** 5,000₡ a 50,000₡ por plato
+
+**Ejemplo:**
+```
+╔═══════════════════════════════════════════════╗
+║ RESTAURANTE "ESTRELLA MICHELIN"              ║
+╠═══════════════════════════════════════════════╣
+║ 🍽️ Filete de Genoma        50,000₡           ║
+║    (+25% exp todas skills por 72 ticks)      ║
+║ 🥗 Ensalada de Esporas     25,000₡           ║
+║    (+50 nutr, regenera 10 energía/tick x12)  ║
+║ 🍰 Pastel de Materia Oscura 100,000₡         ║
+║    (+30% exp + 20 moral por 144 ticks)       ║
+╚═══════════════════════════════════════════════╝
+```
+
+### 12.4.5 Taller de Reparaciones
+
+**Servicio:** Reparar naves con descuento vs hangar NPC
+
+**Requiere del Dueño:**
+- Skill "Gestión Comercial" (x4) nivel 2+
+- Skill "Reparación de Naves" (x3) nivel 3+
+- Stock de materiales de reparación
+
+**Configuración:**
+- **Descuento:** 10% a 30% más barato que hangar NPC
+- **Tiempo:** Igual o ligeramente más lento
+- **Especialización:** Puede especializarse en tipo de nave (ej: "Taller de Fragatas")
+
+**Ventaja del Dueño:**
+- Gana créditos + exp en Reparación
+- Puede usar sus propios recursos refinados (más barato)
+
+### 12.5 Habilidades Necesarias
+
+**Skill: Gestión Comercial (x4)**
+- Nivel 1: Puede abrir Gimnasio, Taberna, Tienda
+- Nivel 2: Puede abrir Restaurante, Taller
+- Nivel 3: -15% costos operativos, +10% max precio markup
+- Nivel 4: -25% costos, +20% markup, 2 comercios simultáneos
+- Nivel 5: -35% costos, +30% markup, 3 comercios, acceso a Casino
+
+**Skill: Negociación (x3)**
+- Bonifica precios de compra de inventario para reventa
+- Nivel 1-5: -5% a -25% en compras a NPCs
+
+**Skill: Cocina (x3)** (nueva)
+- Desbloquea recetas especiales para Restaurante
+- Nivel 1-5: Desbloquea recetas progresivamente mejores
+
+### 12.6 Economía de Comercios
+
+**Inversión Inicial Típica:**
+- Gimnasio: ~200,000₡ (renta 3 meses + equipo inicial)
+- Taberna: ~150,000₡ (renta 2 meses + stock comida)
+- Tienda: ~500,000₡ (renta 2 meses + inventario grande)
+- Restaurante: ~1,000,000₡ (renta 3 meses + ingredientes premium)
+
+**ROI Estimado:**
+- Gimnasio bien ubicado: 20-30 clientes/semana × 2,000₡ = ~50,000₡/semana
+- Taberna popular: 50-100 ventas/semana × 1,000₡ avg = ~75,000₡/semana
+- Tienda especializada: Márgenes 30-50%, volumen variable
+- Restaurante premium: Pocos clientes pero alto margen
+
+**Factores de Éxito:**
+- **Ubicación:** Estaciones con mucho tráfico = más clientes
+- **Precios competitivos:** Demasiado caro = sin ventas
+- **Reputación:** Clientes satisfechos recomiendan
+- **Marketing:** Anuncios en chat, mensajes directos
+- **Stock:** Nunca quedarse sin inventario
+
+### 12.7 Integración con Otros Sistemas
+
+**Con Sistema Social (PRD-SocialSystem.md):**
+- Gimnasios otorgan buffs que afectan atributos sociales
+- Tabernas son lugares de encuentro social
+- Clientes pueden dejar reviews/ratings (futuro)
+
+**Con Sistema de Estaciones (PRD-Universe.md):**
+- Zona Comercial es módulo de estación nivel 1-5
+- Más espacios alquilables según nivel del módulo
+
+**Con Economía General:**
+- Alternativa al mercado tradicional
+- Crea empleos "pasivos" para jugadores
+- Fomenta especialización (chef, comerciante, mecánico)
 
 ---
 
