@@ -76,6 +76,41 @@ exp_requerida_nivel = base_exp × multiplicador_habilidad × nivel
 - **Liderazgo** (x5): Bonos a corporación
 - **Investigación** (x4): Blueprints mejorados
 
+**Skills Sociales:**
+
+- **Sociabilidad** (x2): Aumenta límite de interacciones sociales diarias
+  - Nivel 0: 3 interacciones/día (base sin skill inyectada)
+  - Nivel 1: 5 interacciones/día
+  - Nivel 2: 7 interacciones/día
+  - Nivel 3: 10 interacciones/día
+  - Nivel 4: 13 interacciones/día
+  - Nivel 5: 15 interacciones/día
+  - Cómo se entrena: Realizar interacciones sociales exitosas
+
+- **Carisma** (x3): Aumenta ganancia de relación por interacción
+  - Nivel 1: +10% ganancia de relación
+  - Nivel 2: +20% ganancia de relación
+  - Nivel 3: +30% ganancia de relación
+  - Nivel 4: +40% ganancia de relación
+  - Nivel 5: +50% ganancia de relación
+  - Cómo se entrena: Realizar interacciones sociales exitosas
+
+- **Seducción** (x4): Mejora interacciones románticas y desbloquea acciones especiales
+  - Nivel 1: Desbloquea acción "Coquetear", +5% éxito romance
+  - Nivel 2: +15% éxito romance, desbloquea "Seducir"
+  - Nivel 3: +25% éxito romance, desbloquea "Declararse"
+  - Nivel 4: +35% éxito romance, reduce cooldown interacciones románticas 20%
+  - Nivel 5: +50% éxito romance, desbloquea "Proponer Matrimonio/Unión"
+  - Cómo se entrena: Realizar interacciones románticas exitosas
+
+- **Diplomacia** (x5): Mejora relaciones con corporaciones, facciones y gestión de conflictos
+  - Nivel 1: +5% ganancia standing facciones, -5% pérdida relación por conflictos
+  - Nivel 2: +10% ganancia standing, desbloquea "Mediar Conflicto" entre pilotos
+  - Nivel 3: +15% ganancia standing, reduce penalización relación por traiciones 25%
+  - Nivel 4: +20% ganancia standing, desbloquea "Negociar Tregua" entre corporaciones
+  - Nivel 5: +25% ganancia standing, desbloquea "Formar Alianza" (diplomacia nivel 5 requerido)
+  - Cómo se entrena: Realizar acciones diplomáticas, gestionar corporación, mediar conflictos
+
 **Ganancia de Experiencia:**
 - Al completar acciones exitosamente
 - Habilidad principal: 100% experiencia
@@ -247,6 +282,51 @@ Sistema extensible que define el punto de partida del jugador.
      - 2x Expansor de Carga
      - 1x Escudo Básico
    - Créditos iniciales: 60,000
+
+**Paso 2.5: Definición de Personalidad**
+
+El piloto tiene 4 atributos de personalidad que afectan interacciones sociales y eventos del juego.
+
+**Atributos de Personalidad (cada uno: 1-10):**
+
+1. **Carisma/Sociabilidad (1-10)**
+   - Afecta: Éxito de interacciones sociales, velocidad de ganancia de relación
+   - Alto (8-10): +15% ganancia de relación, +10% éxito en interacciones
+   - Medio (4-7): Sin modificadores
+   - Bajo (1-3): -10% ganancia de relación, +5% costos de interacciones pagas
+
+2. **Temperamento (1-10)**
+   - Afecta: Reacción a eventos (pérdidas, victorias), ganancia/pérdida de moral y estrés
+   - Alto (Flemático 8-10): -20% ganancia de moral, -30% pérdida de moral, -15% acumulación estrés
+   - Medio (Equilibrado 4-7): Sin modificadores
+   - Bajo (Colérico 1-3): +20% ganancia de moral, +30% pérdida de moral, +15% acumulación estrés
+
+3. **Ambición/Codicia (1-10)**
+   - Afecta: Comercio, economía vs relaciones sociales
+   - Alto (8-10): +5% ganancias comercio, -10% ganancia de relación (percibido como codicioso)
+   - Medio (4-7): Sin modificadores
+   - Bajo (1-3): -5% ganancias comercio, +10% ganancia de relación (percibido como generoso)
+
+4. **Valentía/Cautela (1-10)**
+   - Afecta: Combate, exploración, estrés espacial
+   - Alto (Valiente 8-10): +5% daño combate, +20% estrés en combate (más temerario)
+   - Medio (Calculado 4-7): Sin modificadores
+   - Bajo (Cauteloso 1-3): -5% daño combate, -20% estrés en combate (más prudente)
+
+**Sistema de Asignación:**
+- El jugador tiene **20 puntos totales** para distribuir entre los 4 atributos
+- Mínimo 1 por atributo, máximo 10
+- Sistema de sliders en la UI de creación
+- Ejemplos de distribuciones:
+  - Carismático: Carisma 10, Temperamento 5, Ambición 2, Valentía 3 = 20
+  - Mercader Ambicioso: Carisma 3, Temperamento 7, Ambición 8, Valentía 2 = 20
+  - Guerrero Temerario: Carisma 2, Temperamento 4, Ambición 2, Valentía 12 (ERROR: máx 10)
+
+**Balance Anti-Minmaxing:**
+- Los modificadores son sutiles (±5% a ±20% máximo)
+- No hay combinación "óptima" universal
+- Cada estilo de juego (social, comercial, combate) se beneficia de diferentes distribuciones
+- Los atributos son **permanentes** (no se pueden cambiar después de creación)
 
 **Paso 3: Selección de Facción de Origen**
 Define relaciones iniciales y ubicación de inicio.

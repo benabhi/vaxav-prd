@@ -1,7 +1,7 @@
 # Sistema Social y Estado del Piloto
 
 **Parte del:** PRD - Vaxav
-**Versión:** 1.5
+**Versión:** 1.6
 **Fecha:** 2025-11-28
 **Estado:** Documento Vivo - En Desarrollo
 
@@ -36,6 +36,7 @@ Combina fatiga física y mental del piloto.
 - Pilotaje: -1 energía por tick
 - Fabricación: -2 energía por tick
 - Navegación simple: -1 energía cada 10 ticks
+- **Interacciones sociales:** -3 energía por interacción típica
 
 **Cómo se recupera:**
 - **Descansar en Habitáculos:** +20 energía por tick (requiere estar en estación)
@@ -44,9 +45,10 @@ Combina fatiga física y mental del piloto.
 - **Pasivo (offline):** +1 energía cada 2 ticks (equivalente a +3 energía/hora con tick de 10 min)
 
 **Mecánica anti-grinding:**
-- Si la energía llega a 0, el piloto queda "inconsciente" y se teletransporta a la última estación
-- Cooldown de 6 ticks (~1 hora con tick de 10 min) antes de poder volver a jugar
-- Penalización: -10% energía máxima por 144 ticks (~24h) (recuperable descansando)
+- Si la energía llega a 0, el piloto queda "inconsciente" y no puede realizar ninguna acción hasta recuperar energía
+- Puede descansar en la nave pero la recuperación es lenta: +5 energía por tick (menos eficiente que descansar en habitáculos)
+- Es necesario ir a una estación o usar otros métodos más efectivos para recuperarse rápidamente
+- Penalización temporal: -10% energía máxima por 144 ticks (~24h) (recuperable descansando en habitáculos)
 
 ### 13.1.2 Nutrición (0-100)
 
@@ -95,15 +97,30 @@ Estado anímico y psicológico del piloto.
 - Perder dinero en mercado: -5 moral
 - Estar solo (sin interacciones sociales) por 432+ ticks (~3 días): -2 moral cada 144 ticks (cada día)
 - Trabajar demasiado (energía <30 por mucho tiempo): -1 moral cada 6 ticks (~1 hora)
+- **Ruptura romántica:** -50 moral (solo al momento de ruptura)
+- **Rechazo en interacción social (fallo crítico):** -5 moral
+- **Relación importante deteriorándose (>75 y sin interacción 5+ días):** -3 moral por día
 
 **Cómo se recupera:**
-- **Socializar con otros pilotos:** +5 moral (máx 1 vez cada 144 ticks / ~1 día por piloto)
+- **Interacciones sociales exitosas:**
+  - Charlar: +2 moral
+  - Conocerse Mejor: +5 moral
+  - Invitar Bebidas: +8 moral
+  - Compartir Secreto: +10 moral
+  - Interacciones románticas: +10 a +20 moral según nivel
+- **Tener relaciones activas:**
+  - Amigo (51-75): +1 moral cada 144 ticks (~1 día) por amigo (máx 5 amigos)
+  - Amigo Cercano (76-90): +2 moral cada 144 ticks por amigo cercano (máx 3)
+  - Mejor Amigo (91-100): +3 moral cada 144 ticks por mejor amigo (máx 1)
+  - Romance activo (71-85): +5 moral cada 144 ticks
+  - Pareja (86-95): +8 moral cada 144 ticks
+  - Unidos (96-100): +25 moral permanente (no por tick, es modificador constante)
 - **Completar misiones exitosamente:** +3 moral
 - **Ganar combates PvP:** +10 moral
 - **Ganar dinero en mercado:** +2 moral por transacción exitosa
 - **Actividades recreativas en Habitáculos:** +5 moral (1 vez cada 144 ticks / ~1 día)
 - **Estar en corporación activa:** +2 moral cada 144 ticks (~1 día) pasivo
-- **Tener amigos (relaciones >50):** +1 moral cada 144 ticks (~1 día) por amigo (máx 5 amigos)
+- **Cita Romántica (actividad especial):** +15 moral (disponible si romance >70)
 
 ### 13.1.4 Estrés Espacial (0-100)
 
@@ -133,89 +150,357 @@ Presión psicológica de estar en el espacio. **Menor es mejor**.
 - **Viajar en flota con amigos:** -2 estrés cada 6 ticks (~1 hora) (en lugar de +1 solo)
 - **Tiempo offline:** -3 estrés cada 6 ticks (~1 hora) desconectado
 
-### 13.2 Sistema de Relaciones Sociales
+### 13.2 Sistema de Relaciones Sociales (Mejorado - Inspirado en Popmundo)
 
-Inspirado en Popmundo, los pilotos pueden formar relaciones con otros jugadores y NPCs.
+Los pilotos pueden formar relaciones complejas con otros jugadores y NPCs mediante interacciones directas.
 
-### 13.2.1 Niveles de Relación (0-100)
+#### 13.2.1 Tipos de Relación
 
-**Escala:**
+**Cada relación tiene:**
+- **Tipo:** Amistad o Romance
+- **Valor:** 0-100 (nivel de cercanía)
+- **Estado:** Icono y etiqueta visual
+- **Última Interacción:** Timestamp para calcular deterioro
+
+**Tipos de Relación:**
+
+1. **Amistad (por defecto)**
+   - Se forma automáticamente al primera interacción
+   - Progresa: Desconocido (0-10) → Conocido (11-25) → Camarada (26-50) → Amigo (51-75) → Amigo Cercano (76-90) → Mejor Amigo (91-100)
+
+2. **Romance**
+   - Requiere acción "Coquetear" exitosa (disponible si relación >50)
+   - Cambia tipo de amistad → romance
+   - Progresa: Atracción (50-60) → Coqueteo (61-70) → Novios (71-85) → Pareja (86-95) → Unión/Matrimonio (96-100)
+   - **Solo puede haber 1 relación romántica activa** (nivel >70) a la vez
+   - Si intentas iniciar romance con otra persona teniendo pareja: -30 relación con pareja actual, riesgo de "ruptura"
+
+#### 13.2.2 Visualización de Barra de Relación
+
+**Inspirado en Popmundo - Sistema de Fases con Iconos:**
 
 ```
-0-10:    Desconocido
-11-25:   Conocido
-26-50:   Camarada
-51-75:   Amigo
-76-90:   Amigo cercano
-91-100:  Mejor amigo / Hermano de batalla
+┌─────────────────────────────────────────────────────────┐
+│ MARCUS STEEL                              ⚫ Online      │
+├─────────────────────────────────────────────────────────┤
+│ Tipo: Amistad                                           │
+│ 😐 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ❤️         │
+│     ████████████████████████████░░░░░░░░░░░░  76/100    │
+│ Estado: Amigo Cercano                                   │
+│ Última interacción: Hace 6 horas                        │
+├─────────────────────────────────────────────────────────┤
+│ Acciones disponibles: 4/5 interacciones hoy            │
+│ [Charlar] [Conocerse Mejor] [Invitar Bebidas]          │
+│ [Regalar Item] [Coquetear 🔒]                           │
+└─────────────────────────────────────────────────────────┘
 ```
 
-**Beneficios por nivel:**
+**Colores de Barra por Fase (Amistad):**
+- 0-10: Gris (Desconocido) 😐
+- 11-25: Azul claro (Conocido) 👋
+- 26-50: Azul (Camarada) 🤝
+- 51-75: Verde (Amigo) 😊
+- 76-90: Dorado (Amigo Cercano) 🌟
+- 91-100: Rojo/Rosa (Mejor Amigo) ❤️
+
+**Colores de Barra por Fase (Romance):**
+- 50-60: Púrpura claro (Atracción) 😳
+- 61-70: Púrpura (Coqueteo) 💜
+- 71-85: Magenta (Novios) 💕
+- 86-95: Rosa intenso (Pareja) 💖
+- 96-100: Rojo pasión (Unión) 💗
+
+#### 13.2.3 Acciones Sociales Directas
+
+**Al hacer click en perfil de piloto, se abren acciones:**
+
+**Acciones Base (disponibles para todos):**
+
+1. **Charlar**
+   - Costo: 1 interacción diaria, -3 energía
+   - Efecto base: +3 relación
+   - Cooldown: 6 ticks (~1 hora) con la misma persona
+   - Exp ganada: +5 Sociabilidad, +3 Carisma
+
+2. **Regalar Item**
+   - Costo: 1 interacción, -3 energía, + item del inventario
+   - Efecto: +1 relación por cada 1000₡ de valor del item
+   - Cooldown: 12 ticks (~2 horas) con la misma persona
+   - Exp ganada: +8 Carisma
+
+**Acciones Desbloqueables por Nivel de Relación:**
+
+3. **Conocerse Mejor** (requiere relación >25)
+   - Costo: 2 interacciones diarias, -5 energía
+   - Efecto base: +8 relación
+   - Cooldown: 12 ticks (~2 horas)
+   - Exp ganada: +10 Sociabilidad, +8 Carisma
+
+4. **Invitar a Bebidas** (requiere relación >25, estar en misma estación)
+   - Costo: 1 interacción, -3 energía, 500₡
+   - Efecto base: +12 relación, +5 moral (ambos)
+   - Cooldown: 24 ticks (~4 horas)
+   - Exp ganada: +12 Carisma
+
+5. **Compartir Secreto** (requiere relación >50)
+   - Costo: 2 interacciones, -5 energía
+   - Efecto base: +15 relación
+   - Riesgo: Si relación <60, puede fallar y -5 relación
+   - Cooldown: 72 ticks (~12 horas)
+   - Exp ganada: +15 Carisma
+
+**Acciones Románticas (requieren Seducción skill):**
+
+6. **Coquetear** (requiere relación >50, Seducción Nivel 1+)
+   - Costo: 1 interacción, -4 energía
+   - Efecto: Intento de cambiar tipo amistad → romance
+   - Éxito basado en: Carisma propio, Seducción, personalidad objetivo
+   - Éxito: Cambia a romance (valor 50), +10 moral propio
+   - Fallo: -10 relación, +10 estrés, relación no cambia tipo
+   - Cooldown: 144 ticks (~24 horas) si falla
+   - Exp ganada: +20 Seducción (éxito), +5 (fallo)
+
+7. **Seducir** (requiere romance activo, Seducción Nivel 2+)
+   - Costo: 2 interacciones, -6 energía
+   - Efecto base: +10 relación romántica
+   - Cooldown: 12 ticks (~2 horas)
+   - Exp ganada: +15 Seducción
+
+8. **Declararse** (requiere romance >70, Seducción Nivel 3+)
+   - Costo: 3 interacciones, -8 energía
+   - Efecto: Propuesta formal de noviazgo
+   - Éxito: +20 relación, ambos obtienen título "Novios"
+   - Fallo: -15 relación, +20 estrés
+   - Cooldown: 288 ticks (~48 horas) si falla
+   - Exp ganada: +30 Seducción
+
+9. **Proponer Unión** (requiere romance >90, Seducción Nivel 5)
+   - Costo: 5 interacciones, -10 energía, 50,000₡ (anillo/símbolo)
+   - Efecto: Propuesta de unión permanente (matrimonio espacial)
+   - Éxito: Estado "Unidos", bonos especiales permanentes
+   - Fallo: -25 relación, +30 estrés, posible ruptura
+   - Cooldown: Solo se puede intentar 1 vez cada 1440 ticks (~10 días)
+   - Exp ganada: +50 Seducción
+
+**Acciones Diplomáticas (requieren Diplomacia skill):**
+
+10. **Mediar Conflicto** (requiere Diplomacia Nivel 2+)
+    - Costo: 3 interacciones, -8 energía
+    - Efecto: Intento de resolver conflicto entre dos pilotos con relación negativa
+    - Éxito: +10 relación entre ambos, +5 relación contigo (de ambos)
+    - Cooldown: 144 ticks (~24 horas)
+    - Exp ganada: +25 Diplomacia
+
+#### 13.2.4 Sistema de Compatibilidad de Personalidades
+
+**Cada interacción tiene probabilidad de éxito/efectividad basada en compatibilidad:**
+
+**Cálculo de Compatibilidad:**
 
 ```
-Conocido (11+):
+compatibilidad_base = 50%
+
+Modificadores por Personalidad:
+
+Carisma:
+  - Propio alto (8-10): +15%
+  - Propio bajo (1-3): -10%
+
+Temperamento (ambos):
+  - Ambos flemáticos (8-10): +10% (se llevan tranquilos)
+  - Ambos coléricos (1-3): -15% (chocan)
+  - Uno flemático, otro colérico: -5% (diferencia moderada)
+  - Ambos equilibrados: +0%
+
+Ambición (diferencia):
+  - Diferencia <3: +5% (valores similares)
+  - Diferencia 3-6: +0%
+  - Diferencia >6: -10% (muy diferentes)
+
+Valentía (depende de acción):
+  - Ambos valientes y acción es "Compartir Secreto": +10%
+  - Ambos cautelosos: -5% en acciones arriesgadas
+
+Skill del ejecutor:
+  - Carisma Nivel 1: +10%
+  - Carisma Nivel 2: +20%
+  - Carisma Nivel 3: +30%
+  - Carisma Nivel 4: +40%
+  - Carisma Nivel 5: +50%
+
+  - Seducción (acciones románticas) igual sistema
+
+compatibilidad_final = compatibilidad_base + todos_modificadores
+```
+
+**Resultado de Interacción:**
+
+- Si compatibilidad_final ≥ 70%: Éxito total → ganancia base de relación
+- Si 40-69%: Éxito parcial → 50% ganancia de relación
+- Si 20-39%: Fallo → +0 relación, energía consumida igual
+- Si <20%: Fallo crítico → -5 relación, +5 estrés (ambos)
+
+**Ejemplo:**
+
+```
+Marcus (Carisma 8, Temperamento 3, Ambición 7, Valentía 9)
+intenta "Charlar" con
+Jane (Carisma 5, Temperamento 8, Ambición 2, Valentía 4)
+
+Cálculo:
+Base: 50%
++ Carisma Marcus alto: +15%
++ Temperamento diferentes (3 vs 8): -5%
++ Ambición diferencia 5: +0%
++ Skill Carisma Marcus Nivel 2: +20%
+= 80% compatibilidad
+
+Resultado: Éxito total → Jane gana +3 relación con Marcus
+```
+
+#### 13.2.5 Deterioro Pasivo de Relaciones
+
+**Todas las relaciones se deterioran si no se mantienen:**
+
+**Sistema de Deterioro:**
+
+- Cada **72 ticks (~12 horas con tick de 10 min)** se ejecuta proceso de deterioro
+- Por cada relación que no ha tenido interacción en últimos 3 días (432 ticks):
+  - Relación 0-50: -1 punto cada 3 días
+  - Relación 51-75: -1 punto cada 2 días
+  - Relación 76-100: -1 punto cada 2 días
+  - Relación romántica (novios/pareja): -2 puntos cada 2 días
+  - Relación "Unidos": -1 punto cada 5 días (más estable)
+
+**Prevención de Deterioro:**
+- Cualquier interacción exitosa resetea el contador de deterioro
+- Estar en la misma estación: -50% velocidad deterioro
+- Trabajar juntos (minería, combate): resetea contador + bonus relación pasivo
+- Estar en la misma corporación: -30% velocidad deterioro
+
+**Notificaciones:**
+- Si relación >50 y lleva 5+ días sin interacción: Notificación "Tu amistad con Marcus se está enfriando..."
+- Si relación romántica sin interacción 3+ días: Notificación urgente "Tu relación con Jane necesita atención!"
+
+#### 13.2.6 Beneficios por Nivel de Relación
+
+**Actualizados con Romance:**
+
+**AMISTAD:**
+
+```
+Desconocido (0-10):
+  - Solo pueden ver perfil público
+
+Conocido (11-25):
   - Puede enviar mensajes privados
   - Aparece en lista de contactos
 
-Camarada (26+):
+Camarada (26-50):
   - +2% eficiencia cuando trabajan juntos
   - Pueden compartir ubicación en tiempo real
   - Descuento 5% en trades entre ustedes
 
-Amigo (51+):
+Amigo (51-75):
   - +5% eficiencia cuando trabajan juntos
   - Pueden compartir hangares corporativos
-  - +5 moral cuando están online simultáneamente
+  - +3 moral cuando están online simultáneamente
   - Descuento 10% en trades
+  - Pueden prestarse naves (hasta T1)
 
-Amigo cercano (76+):
+Amigo Cercano (76-90):
   - +10% eficiencia trabajando juntos
-  - Pueden prestarse naves
+  - Pueden prestarse naves (hasta T2)
   - Notificación cuando el amigo está en peligro
-  - +10 moral cuando están online
+  - +8 moral cuando están online
   - Descuento 15% en trades
+  - Pueden compartir skills temporalmente (1 hora, cooldown 24h)
 
-Mejor amigo (91+):
+Mejor Amigo (91-100):
   - +15% eficiencia trabajando juntos
-  - Compartir skills (buff temporal del skill del amigo)
-  - Respawn prioritario cerca del amigo si muere
+  - Pueden prestarse cualquier nave
+  - Respawn prioritario cerca del amigo si muere (opción)
   - +15 moral cuando están online
   - Descuento 20% en trades
+  - Compartir skills mejorado (3 horas, cooldown 12h)
+  - Acceso total a hangares compartidos
 ```
 
-### 13.2.2 Acciones Sociales
+**ROMANCE:**
 
-**Formas de aumentar relación:**
+```
+Atracción (50-60):
+  - Beneficios = Amigo (51-75)
+  - +5 moral adicional cuando están juntos
 
-1. **Pasar tiempo juntos:**
-    - Minar juntos en la misma ubicación: +2 relación cada 6 ticks (~1 hora)
-    - Combatir en la misma flota: +5 relación/combate
-    - Misiones cooperativas: +10 relación al completar
-    - Simplemente estar en la misma estación: +1 relación cada 6 ticks (~1 hora)
-2. **Socializar:**
-    - Chatear (sistema de chat): +1 relación/cada 10 mensajes
-    - Invitar a bebidas en Habitáculos: +5 relación (cuesta créditos)
-    - Compartir comida: +3 relación
-    - Regalar items: +1 relación por cada 1000₡ de valor
-3. **Ayudarse mutuamente:**
-    - Rescatar al otro en combate: +15 relación
-    - Prestarle créditos: +10 relación
-    - Compartir información valiosa (ubicación de recursos): +8 relación
-    - Reparar su nave: +5 relación
-4. **Eventos especiales:**
-    - Sobrevivir juntos a combate difícil: +20 relación
-    - Completar misión épica juntos: +25 relación
-    - Defender la estación corporativa juntos: +30 relación
+Coqueteo (61-70):
+  - Beneficios = Amigo (51-75)
+  - +8 moral adicional cuando están juntos
+  - Pueden enviarse "Mensajes Románticos" (boost moral +3)
 
-**Formas de disminuir relación:**
-- Atacar al otro: -50 relación
-- Robar del hangar compartido: -30 relación
-- Traicionar en combate: -40 relación
-- No devolver préstamo: -20 relación
-- Insultar en chat: -5 relación
-- Dejar morir en combate pudiendo ayudar: -15 relación
+Novios (71-85):
+  - +12% eficiencia trabajando juntos
+  - +15 moral cuando están juntos online
+  - Descuento 20% en trades entre ustedes
+  - Pueden compartir hangares totalmente
+  - Título visible "Novio/a de [Nombre]"
+  - Acceso a "Cita Romántica" (actividad recreativa especial: -10 estrés ambos, +15 moral ambos, cuesta 2000₡)
 
-### 13.2.3 Sistema de Reputación Personal
+Pareja (86-95):
+  - +15% eficiencia trabajando juntos
+  - +20 moral cuando están juntos online
+  - Descuento 25% en trades
+  - Compartir skills automático (sin cooldown) cuando están en misma ubicación
+  - Notificación inmediata si pareja está en peligro (con opción warp to)
+  - Pueden tener "Hangar Compartido de Pareja" (inventario común)
+
+Unidos/Casados (96-100):
+  - +20% eficiencia trabajando juntos
+  - +25 moral permanente (incluso offline)
+  - Descuento 30% en trades
+  - Compartir skills permanente (siempre activo)
+  - Warp to pareja sin restricción (cooldown 1 hora)
+  - Hangar compartido permanente
+  - Título especial visible "Unidos a [Nombre]" con icono ⚭
+  - Beneficios fiscales: -10% impuestos corporativos si ambos en misma corp
+  - Si uno muere, el otro recibe notificación inmediata + opción venganza (bounty automático)
+  - **Penalización por ruptura:** Si se rompe unión: -50 moral, -30 relación con todos los contactos comunes, +50 estrés (ambos)
+```
+
+**Mecánica de Ruptura:**
+
+- Si relación romántica (>70) baja a <50: Ruptura automática
+- Opciones post-ruptura:
+  - "Intentar Reconciliar" (cuesta 5 interacciones, -15 energía, 50% éxito si Carisma alto)
+  - "Aceptar Ruptura" (cambia a amistad normal, valor 25)
+  - "Cortar Totalmente" (relación → 0, bloqueado mutuo)
+
+#### 13.2.7 Límites y Cooldowns
+
+**Límites Diarios de Interacciones:**
+- Base: 3 interacciones/día (sin Sociabilidad skill)
+- Con Sociabilidad: +2 por nivel (hasta 15 con nivel 5)
+- Se resetean cada 144 ticks (~24 horas con tick de 10 min)
+- Interacciones pasivas (trabajar juntos, estar en misma estación) NO cuentan para límite
+
+**Límites de Relaciones Activas:**
+- Amistades: Sin límite total, pero deterioro hace inviable mantener >15-20
+- Relaciones románticas activas (>70): Máximo 1 a la vez
+- "Unidos": Máximo 1 en toda la vida del piloto (permanente hasta ruptura)
+
+**Costos de Energía:**
+- Charlar: -3 energía
+- Conocerse Mejor: -5 energía
+- Invitar Bebidas: -3 energía
+- Compartir Secreto: -5 energía
+- Coquetear: -4 energía
+- Seducir: -6 energía
+- Declararse: -8 energía
+- Proponer Unión: -10 energía
+
+Esto hace que socializar activamente sea un trade-off con otras actividades (minería, combate, fabricación).
+
+#### 13.2.8 Sistema de Reputación Personal
 
 Además de relaciones individuales, cada piloto tiene una reputación general.
 
@@ -266,6 +551,11 @@ Para recuperar moral, energía y reducir estrés.
     - +10 moral
     - Gratis
     - Cooldown: 72 ticks (~12 horas)
+7. **Cita Romántica (nueva):**
+    - Requiere: Romance activo nivel >70, estar en misma estación
+    - -10 estrés (ambos), +15 moral (ambos)
+    - Costo: 2000₡
+    - Cooldown: 144 ticks (~24 horas)
 
 ### 13.4 Visualización en la Interfaz
 

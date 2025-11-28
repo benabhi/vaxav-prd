@@ -161,7 +161,154 @@ Completadas: 87 | Fallidas: 5 | Ratio éxito: 94.6%
 ╚═══════════════════════════════════════════════════════════╝
 ```
 
-**5. Línea de Tiempo:**
+**Indicador de Notificaciones en GUI:**
+
+El Registro del Capitán es el **sistema central de notificaciones** del juego. En la barra de navegación principal, junto a "Registro" debe aparecer:
+
+```
+[Registro del Capitán (🔔 12)]  ← Badge con número de notificaciones sin leer
+```
+
+- Número en badge rojo indica eventos nuevos sin leer
+- Al hacer hover: tooltip "12 eventos nuevos desde tu última visita"
+- Al entrar al Registro, los eventos se marcan como "leídos"
+- Badge desaparece cuando no hay eventos nuevos
+
+**Vista Unificada "Todos los Eventos":**
+
+```
+╔═══════════════════════════════════════════════════════════════════╗
+║ REGISTRO DEL CAPITÁN - TODOS LOS EVENTOS          [🔔 Sin leer: 5]║
+╠═══════════════════════════════════════════════════════════════════╣
+║ Filtros: [Todos] [Combate] [Viajes] [Misiones] [Logros]         ║
+║          [Economía] [Social] [Habilidades] [Corporación] [Sistema]║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║ 🆕 2025-11-27 14:32  💬 SOCIAL      Charlar con Jane Smith       ║
+║                      Relación +3 (ahora: 79/100 - Amigo Cercano) ║
+║                                                                   ║
+║ 🆕 2025-11-27 14:15  💰 ECONOMÍA    Venta de Tritanio            ║
+║                      +15,000₡ (Balance: 250,450₡)                ║
+║                                                                   ║
+║ 🆕 2025-11-27 13:45  ⚔️ COMBATE     Victoria contra Pirata (NPC) ║
+║                      Botín: 5,000₡ | Exp: +250                   ║
+║                                                                   ║
+║ 🆕 2025-11-27 12:20  📈 HABILIDAD   Nivel subió: Carisma IV      ║
+║                      Nuevo límite interacciones: 11/día          ║
+║                                                                   ║
+║ 🆕 2025-11-27 10:05  ⚠️ SISTEMA     Moral baja detectada         ║
+║                      Moral: 35/100 - Considera descansar         ║
+║                                                                   ║
+║    2025-11-26 18:30  🚀 VIAJE       Vaxav I → Vaxav III          ║
+║                      Completado en 45 ticks                      ║
+║                                                                   ║
+║    2025-11-26 15:15  💼 MISIÓN      "Minar Tritanio" completada  ║
+║                      Recompensa: 15,000₡ | Exp: +180             ║
+║                                                                   ║
+║    2025-11-26 12:00  👥 CORPORACIÓN Nuevo miembro: Sarah Lee     ║
+║                      Bienvenida a Mineros del Vacío!             ║
+║                                                                   ║
+╠═══════════════════════════════════════════════════════════════════╣
+║ Mostrando 8 de 2,847 eventos | [Página 1 de 356]                ║
+║ [Anterior] [1] [2] [3] ... [356] [Siguiente]                    ║
+╚═══════════════════════════════════════════════════════════════════╝
+```
+
+**Categorías de eventos adicionales:**
+
+**5. Historial de Economía:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ HISTORIAL DE ECONOMÍA                                           │
+├──────────────┬──────────────────────────┬───────────┬───────────┤
+│ Fecha        │ Evento                   │ Item/NPC  │ Cambio    │
+├──────────────┼──────────────────────────┼───────────┼───────────┤
+│ 2025-11-27   │ 💰 Venta en mercado      │ Tritanio  │ +15,000₡  │
+│ 2025-11-27   │ 💸 Compra de módulo      │ Láser MK2 │ -25,000₡  │
+│ 2025-11-26   │ 🎁 Regalo recibido       │ Jane Smith│ +5,000₡   │
+│ 2025-11-26   │ 💼 Contrato completado   │ Agente Han│ +35,000₡  │
+│ 2025-11-25   │ ⚠️ Orden expirada        │ Magnetita │ 0₡        │
+│ 2025-11-24   │ 💵 Préstamo recibido     │ Marcus    │ +50,000₡  │
+│ 2025-11-23   │ 📉 Pérdida en mercado    │ Isógeno   │ -8,000₡   │
+└──────────────┴──────────────────────────┴───────────┴───────────┘
+Balance neto (7 días): +62,000₡ | Transacciones: 47
+```
+
+**6. Historial Social:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ HISTORIAL SOCIAL                                                │
+├──────────────┬──────────────────────────┬───────────┬───────────┤
+│ Fecha        │ Evento                   │ Piloto    │ Cambio    │
+├──────────────┼──────────────────────────┼───────────┼───────────┤
+│ 2025-11-27   │ 💬 Charlar               │ Jane Smith│ +3 rel    │
+│ 2025-11-27   │ 🍺 Invitar Bebidas       │ Marcus    │ +12 rel   │
+│ 2025-11-26   │ 💕 Coquetear (éxito)     │ Jane Smith│ +10 rel   │
+│ 2025-11-26   │ 📈 Nivel de amistad      │ Marcus    │ → Amigo   │
+│ 2025-11-25   │ 💔 Ruptura automática    │ Sarah Lee │ -50 moral │
+│ 2025-11-24   │ 🎁 Recibiste regalo      │ Bob       │ +8 rel    │
+│ 2025-11-23   │ ⚠️ Fallo crítico social  │ Tom       │ -5 rel    │
+│ 2025-11-22   │ 💍 Propuesta aceptada    │ Jane Smith│ → Unidos  │
+└──────────────┴──────────────────────────┴───────────┴───────────┘
+Total interacciones: 247 | Éxito: 89% | Relaciones activas: 8
+```
+
+**7. Historial de Habilidades:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ HISTORIAL DE HABILIDADES                                        │
+├──────────────┬──────────────────────────┬───────────────────────┤
+│ Fecha        │ Evento                   │ Habilidad             │
+├──────────────┼──────────────────────────┼───────────────────────┤
+│ 2025-11-27   │ 📈 Nivel subió           │ Carisma III → IV      │
+│ 2025-11-26   │ 💉 Habilidad inyectada   │ Seducción (Nivel 0)   │
+│ 2025-11-25   │ 🔍 Habilidad descubierta │ Diplomacia            │
+│ 2025-11-24   │ 📈 Nivel subió           │ Minería IV → V        │
+│ 2025-11-22   │ 💉 Habilidad inyectada   │ Pilotaje Cruceros     │
+└──────────────┴──────────────────────────┴───────────────────────┘
+Habilidades inyectadas: 12 | Nivel promedio: 3.2
+```
+
+**8. Historial de Corporación:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ HISTORIAL DE CORPORACIÓN                                        │
+├──────────────┬──────────────────────────┬───────────────────────┤
+│ Fecha        │ Evento                   │ Detalles              │
+├──────────────┼──────────────────────────┼───────────────────────┤
+│ 2025-11-27   │ 👥 Nuevo miembro         │ Sarah Lee se unió     │
+│ 2025-11-26   │ 💼 Impuestos pagados     │ 5,000₡ a corp         │
+│ 2025-11-25   │ 🏆 Promoción             │ Rango: Capitán        │
+│ 2025-11-23   │ 📦 Depósito en hangar    │ 500 Tritanio          │
+│ 2025-11-20   │ 🎯 Misión corp asignada  │ "Defender Estación"   │
+│ 2025-11-15   │ 🏢 Unión a corporación   │ Mineros del Vacío     │
+└──────────────┴──────────────────────────┴───────────────────────┘
+Contribución total: 125,000₡ | Misiones corp: 15
+```
+
+**9. Historial de Sistema:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ HISTORIAL DE SISTEMA                                            │
+├──────────────┬──────────────────────────┬───────────────────────┤
+│ Fecha        │ Evento                   │ Detalles              │
+├──────────────┼──────────────────────────┼───────────────────────┤
+│ 2025-11-27   │ ⚡ Energía en 0          │ Inconsciente 6 ticks  │
+│ 2025-11-26   │ ⚠️ Moral baja            │ Moral: 25/100         │
+│ 2025-11-25   │ 🍖 Hambriento            │ Nutrición: 15/100     │
+│ 2025-11-24   │ 💭 Estrés alto           │ Estrés: 85/100        │
+│ 2025-11-23   │ 🔧 Nave reparada         │ Excavador MK-I        │
+│ 2025-11-22   │ 🛡️ Clon actualizado      │ Estación Vaxav Prime  │
+└──────────────┴──────────────────────────┴───────────────────────┘
+Advertencias activas: 2 | Última actualización clon: hace 5 días
+```
+
+**10. Línea de Tiempo (Actualizada con eventos sociales):**
 
 ```
 ═══════════════════════════ LÍNEA DE VIDA ═══════════════════════════
@@ -170,11 +317,24 @@ Completadas: 87 | Fallidas: 5 | Ratio éxito: 94.6%
 ├─ 2025-11-01  🎓 Carrera iniciada: Minero
 ├─ 2025-11-02  ⚔️  Primera muerte
 ├─ 2025-11-05  🏭 Primera fabricación exitosa
+├─ 2025-11-08  👋 Primera amistad formada (Marcus Steel)
 ├─ 2025-11-10  🏢 Unión a corporación "Mineros del Vacío"
+├─ 2025-11-12  💕 Primera relación romántica (Sarah Lee)
 ├─ 2025-11-15  💰 Alcanzado 1M créditos
+├─ 2025-11-18  💔 Ruptura con Sarah Lee
 ├─ 2025-11-20  🚀 Primera nave Crucero adquirida
+├─ 2025-11-22  💍 Unidos con Jane Smith
+├─ 2025-11-25  🌟 Primera amistad nivel "Mejor Amigo" (Marcus)
 └─ 2025-11-27  📍 Ubicación actual
 ```
+
+**Eventos sociales registrados en línea de tiempo:**
+- 👋 Primera amistad (relación >25)
+- 💕 Primera relación romántica
+- 💔 Rupturas importantes
+- 💍 Uniones/Matrimonios
+- 🌟 Hitos de amistad (Mejor Amigo)
+- 🎊 Eventos especiales (ej: sobrevivir combate con amigo)
 
 ### 14.2.3 Habilidades
 
@@ -910,7 +1070,114 @@ OTRAS CLASIFICACIONES:
 [Ver Mi Posición] [Filtrar por Corporación]
 ```
 
-### 14.3.8 Panel de Administración
+### 14.3.8 Vista de Perfil de Piloto (Interacciones Sociales)
+
+**Ruta:** `/pilot/{pilot_id}/profile`
+
+**Acceso:** Click en nombre de piloto desde lista de contactos, chat, o búsqueda
+
+Vista detallada del perfil de otro piloto con opciones de interacciones sociales directas.
+
+**Layout:**
+
+```
+╔═══════════════════════════════════════════════════════════╗
+║ PERFIL DE PILOTO                                    [✕]   ║
+╠═══════════════════════════════════════════════════════════╣
+║                                                           ║
+║  [Avatar/Foto]     MARCUS STEEL                          ║
+║                    Minero Veterano • Confederación Vaxav  ║
+║                    ⚫ Online (Estación Vaxav Prime)       ║
+║                                                           ║
+╠═══════════════════════════════════════════════════════════╣
+║ RELACIÓN CONTIGO                                          ║
+║ ┌───────────────────────────────────────────────────────┐ ║
+║ │ Tipo: Amistad                                         │ ║
+║ │ 😐 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ❤️       │ ║
+║ │     ████████████████████████████░░░░░░░░░░░░  76/100  │ ║
+║ │ Estado: Amigo Cercano 🌟                              │ ║
+║ │ Última interacción: Hace 6 horas                      │ ║
+║ └───────────────────────────────────────────────────────┘ ║
+║                                                           ║
+║ COMPATIBILIDAD                                            ║
+║ ┌───────────────────────────────────────────────────────┐ ║
+║ │ Personalidad compatible: 78%                          │ ║
+║ │ • Carisma: Alto (buen conversador)                    │ ║
+║ │ • Temperamento: Colérico (puede ser volátil)          │ ║
+║ │ • Ambición: Alta (similar a ti)                       │ ║
+║ └───────────────────────────────────────────────────────┘ ║
+║                                                           ║
+║ ACCIONES DISPONIBLES                                      ║
+║ ┌───────────────────────────────────────────────────────┐ ║
+║ │ Interacciones disponibles hoy: 4/5                    │ ║
+║ │                                                       │ ║
+║ │ [💬 Charlar]          [🤝 Conocerse Mejor]            │ ║
+║ │ -3 energía, +3 rel    -5 energía, +8 rel              │ ║
+║ │                                                       │ ║
+║ │ [🍺 Invitar Bebidas]  [🎁 Regalar Item]               │ ║
+║ │ -3 energía, 500₡      -3 energía, item                │ ║
+║ │                                                       │ ║
+║ │ [🤫 Compartir Secreto] [💕 Coquetear] 🔒              │ ║
+║ │ -5 energía, +15 rel    Requiere relación >50         │ ║
+║ └───────────────────────────────────────────────────────┘ ║
+║                                                           ║
+║ ESTADÍSTICAS                                              ║
+║ ┌───────────────────────────────────────────────────────┐ ║
+║ │ • Reputación: Honorable (78/100)                      │ ║
+║ │ • Corporación: Vaxav Mining Corp [VMC]                │ ║
+║ │ • Rango: Capitán                                      │ ║
+║ │ • Skills principales: Minería V, Refinamiento IV      │ ║
+║ │ • Combates ganados: 24 | Perdidos: 8                  │ ║
+║ │ • Contratos completados: 156                          │ ║
+║ └───────────────────────────────────────────────────────┘ ║
+║                                                           ║
+║ [Ver Historial] [Enviar Mensaje] [Bloquear]              ║
+╚═══════════════════════════════════════════════════════════╝
+```
+
+**Elementos Clave de la UI:**
+
+1. **Barra de Relación Visual:**
+   - Gradiente de color según fase (gris → azul → verde → dorado → rojo para amistad)
+   - Colores diferentes para romance (púrpura → magenta → rosa)
+   - Iconos en extremos: 😐 (desconocido) ... ❤️ (mejor amigo) o 💗 (unidos)
+   - Valor numérico (76/100)
+   - Etiqueta de estado con emoji ("Amigo Cercano 🌟")
+
+2. **Indicador de Compatibilidad:**
+   - Porcentaje calculado en tiempo real basado en personalidades
+   - Breakdown de personalidad del otro piloto (visible si relación >25)
+   - Ayuda al jugador a decidir qué interacciones tienen más probabilidad de éxito
+   - Solo muestra rasgos visibles según nivel de relación
+
+3. **Botones de Acción Social:**
+   - Muestran costos claramente (-X energía, -X₡, +X rel esperado)
+   - Grises/bloqueados si no cumplen requisitos
+   - Tooltip explica por qué está bloqueado (ej: "Requiere Seducción Nivel 1")
+   - Animación de éxito/fallo al ejecutar interacción
+   - Cooldowns visibles ("Disponible en 30 minutos")
+
+4. **Contador de Interacciones:**
+   - "4/5 interacciones disponibles hoy"
+   - Se actualiza en tiempo real tras cada acción
+   - Muestra tiempo para reset si está en 0/5 ("Reset en 8 horas")
+   - Indica si skill Sociabilidad puede aumentar límite
+
+5. **Diferenciación por Tipo de Relación:**
+   - Si relación es romántica, barra cambia a colores púrpura/magenta/rosa
+   - Iconos cambian: 😳 → 💜 → 💕 → 💖 → 💗
+   - Acciones románticas reemplazan algunas de amistad
+   - Título visible si es "Novios", "Pareja" o "Unidos"
+   - Beneficios especiales se muestran en tooltip
+
+6. **Estadísticas Públicas:**
+   - Solo muestra información visible según nivel de relación
+   - Desconocido (0-10): Info básica (nombre, facción, online status)
+   - Conocido (11+): + Corporación, rango
+   - Camarada (26+): + Skills principales, estadísticas básicas
+   - Amigo (51+): + Historial detallado, ubicación exacta
+
+### 14.3.9 Panel de Administración
 
 **Ruta:** `/admin` (Solo accesible para administradores)
 
