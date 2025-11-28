@@ -790,7 +790,7 @@ CREATE TABLE ship_templates (
     slot_config JSONB, -- {"offensive": 1, "defensive": 2, "utility": 3}
 
     -- Fitting resources
-    powergrid_mw INT NOT NULL, -- Megawatts disponibles
+    reactor_energia_mw INT NOT NULL, -- Megawatts disponibles
     cpu_tf INT NOT NULL, -- Teraflops disponibles
     capacitor_gj INT NOT NULL, -- Gigajoules de capacitor
     capacitor_recharge_per_tick INT NOT NULL, -- GJ regenerados por tick
@@ -845,7 +845,7 @@ CREATE TABLE ship_module_templates (
     tier INT NOT NULL DEFAULT 1 CHECK (tier >= 1 AND tier <= 3), -- T1, T2, T3
 
     -- Requisitos de fitting
-    pg_required INT NOT NULL, -- Powergrid requerido en MW
+    re_required INT NOT NULL, -- Reactor de Energía requerido en MW
     cpu_required INT NOT NULL, -- CPU requerido en TF
     capacitor_per_activation INT DEFAULT 0, -- Capacitor consumido por activación (0 si es pasivo)
 
@@ -891,7 +891,7 @@ CREATE TABLE saved_fits (
     ship_template_id BIGINT REFERENCES ship_templates(id),
     modules_config JSONB NOT NULL, -- configuración completa de módulos
     stats_summary JSONB, -- DPS, HP total, etc.
-    is_valid BOOLEAN DEFAULT TRUE, -- si cumple con PG/CPU
+    is_valid BOOLEAN DEFAULT TRUE, -- si cumple con RE/CPU
     is_shared_with_corp BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP,
     updated_at TIMESTAMP

@@ -74,12 +74,60 @@ Especializados en transporte.
 
 ### 7.2.5 Naves Capitales
 
-Las más grandes y poderosas (end-game).
+Las más grandes y poderosas (end-game). Tienen capacidades únicas incluyendo saltos interestelares sin uso de Stargates.
 
 **Tipos:**
-- Portanaves
-- Dreadnoughts
-- Titans
+- **Portanaves:** Naves de soporte que transportan cazas y fragatas
+- **Dreadnoughts:** Naves de asalto pesado con artillería masiva
+- **Titans:** Naves gigantescas, las más poderosas del juego
+
+**Capacidad de Salto Interestelar:**
+
+Las naves capitales pueden realizar saltos FTL directos entre sistemas sin usar Stargates, consumiendo combustible especial.
+
+**Requisitos:**
+- Módulo: Motor de Salto FTL (integrado en todas las naves capitales)
+- Combustible: Reactores de Antimateria (Tier 4)
+- Skill: Navegación Capital Nivel 3+
+
+**Mecánica de Salto:**
+1. Seleccionar sistema destino (debe estar dentro del rango máximo)
+2. Cargar Reactores de Antimateria en bahía de combustible (1 reactor por salto)
+3. Iniciar secuencia de salto (preparación: 15 ticks, cancelable)
+4. Durante preparación: Nave vulnerable, no puede moverse ni atacar
+5. Al completar: Salto instantáneo al sistema destino
+6. Cooldown: 60 minutos antes del próximo salto
+7. Costo: 1 Reactor de Antimateria (50,000₡) por salto
+
+**Rango de Salto por Tipo:**
+- **Portanaves:** 3 sistemas de distancia
+- **Dreadnought:** 4 sistemas de distancia
+- **Titan:** 5 sistemas de distancia
+- Distancia = número de saltos por Stargate necesarios
+
+**Ejemplo:**
+- Sistema A conectado a B, B a C, C a D (A→B→C→D)
+- Dreadnought en A puede saltar directo a D (3 saltos de distancia) o cualquier sistema intermedio
+- No puede saltar a sistema E que está conectado a D (4 saltos desde A)
+
+**Restricciones:**
+- No puede saltar a sistemas IIC 1 (núcleo corporativo, demasiado defendidos)
+- No puede saltar si tiene marca criminal activa
+- No puede saltar dentro del rango de jammers de salto enemigos (módulo de estación)
+- Si es atacado durante preparación, el salto se cancela
+- Consumo de combustible no reembolsable si se cancela
+
+**Ventajas Estratégicas:**
+- Sorprender enemigos en sistemas remotos
+- Evadir bloqueos de Stargates
+- Desplegar rápidamente en territorios disputados
+- Evacuación de emergencia de zonas peligrosas
+
+**Desventajas:**
+- Costo elevado (50K₡ por salto)
+- Cooldown largo (1 hora)
+- Vulnerabilidad durante preparación
+- No funciona en IIC 1 (núcleos corporativos)
 
 ### 7.2.6 Sistema de Tiers de Naves
 
@@ -128,10 +176,10 @@ Las naves tienen recursos limitados que los módulos consumen. El jugador debe b
 
 Cada nave tiene 3 recursos limitados:
 
-**1. Powergrid (PG) - Red de Energía:**
+**1. Reactor de Energía (RE) - Red de Energía:**
 - **Descripción:** Energía total que la nave puede suministrar a los módulos
 - **Unidad:** Megawatts (MW)
-- **Uso:** Módulos activos (armas, escudos, propulsores) consumen PG
+- **Uso:** Módulos activos (armas, escudos, propulsores) consumen RE
 - **Ejemplo:**
   - Excavador MK-I (Fragata T1): 50 MW
   - Crucero T1: 150 MW
@@ -156,8 +204,8 @@ Cada nave tiene 3 recursos limitados:
   - Crucero T1: 2000 GJ, regenera 80 GJ/tick
   - Acorazado T1: 5000 GJ, regenera 150 GJ/tick
 
-**Diferencia PG vs Capacitor:**
-- **PG:** Límite estático de fitting (no puedes equipar más módulos si excedes PG)
+**Diferencia RE vs Capacitor:**
+- **RE:** Límite estático de fitting (no puedes equipar más módulos si excedes RE)
 - **Capacitor:** Recurso dinámico durante operaciones (puedes quedarte sin capacitor en combate)
 
 #### 7.3.2 Consumo de Módulos
@@ -224,7 +272,7 @@ Cada módulo tiene requisitos de fitting.
 #### 7.3.3 Reglas de Fitting
 
 **Restricciones:**
-- No puedes equipar módulos si excedes PG o CPU de la nave
+- No puedes equipar módulos si excedes RE o CPU de la nave
 - Puedes equipar módulos que sumen más capacitor del que tienes, pero no podrás usarlos todos simultáneamente
 - Los módulos Tier 2 requieren skills más altos que Tier 1
 - Los módulos Tier 3 requieren skills nivel 4-5
@@ -253,11 +301,11 @@ efectividad_modulo_N = efectividad_base × (0.87 ^ (N - 1))
 Herramienta in-game donde los jugadores pueden diseñar configuraciones de naves antes de comprar/fabricar módulos.
 
 **Funcionalidades:**
-1. **Vista de Nave:** Muestra la nave seleccionada con sus slots y recursos (PG, CPU, Capacitor)
+1. **Vista de Nave:** Muestra la nave seleccionada con sus slots y recursos (RE, CPU, Capacitor)
 2. **Biblioteca de Módulos:** Lista filtrable de módulos disponibles (por tier, tipo, skill)
 3. **Drag & Drop:** Arrastrar módulos a slots de la nave
 4. **Indicadores en Tiempo Real:**
-   - Barras de PG usado / total (verde si OK, rojo si excede)
+   - Barras de RE usado / total (verde si OK, rojo si excede)
    - Barras de CPU usado / total
    - Capacitor total y tiempo hasta agotamiento si todos los módulos activos están ON
 5. **Estadísticas Calculadas:**
@@ -284,7 +332,7 @@ Herramienta in-game donde los jugadores pueden diseñar configuraciones de naves
 
 **Módulos Pasivos:**
 - Siempre están ON
-- Solo consumen PG y CPU (en el fitting)
+- Solo consumen RE y CPU (en el fitting)
 - No consumen capacitor durante operaciones
 - **Ejemplos:** Placas de Armadura, Expansores de Carga, Refuerzos Estructurales
 
@@ -314,108 +362,125 @@ Todos los módulos existen en 3 tiers con mejoras progresivas.
 ### 7.5.1 Sistemas Ofensivos
 
 **Armas de Proyectiles:**
-- **Tier 1:** Cañón Automático Ligero - 25 DPS, 8 PG, 15 CPU, 20 cap/disparo
-- **Tier 2:** Cañón de Riel - 40 DPS, 15 PG, 25 CPU, 35 cap/disparo (requiere Armas Proyectiles 3)
-- **Tier 3:** Artillería de Neutrones - 70 DPS, 30 PG, 45 CPU, 60 cap/disparo (requiere Armas Proyectiles 4)
+- **Tier 1:** Cañón Automático Ligero - 25 DPS, 8 RE, 15 CPU, 20 cap/disparo
+- **Tier 2:** Cañón de Riel - 40 DPS, 15 RE, 25 CPU, 35 cap/disparo (requiere Armas Proyectiles 3)
+- **Tier 3:** Artillería de Neutrones - 70 DPS, 30 RE, 45 CPU, 60 cap/disparo (requiere Armas Proyectiles 4)
 - **Daño:** Fuerte contra armadura (+50%)
 
 **Armas de Energía:**
-- **Tier 1:** Láser de Pulso - 22 DPS, 10 PG, 20 CPU, 25 cap/disparo
-- **Tier 2:** Láser de Haz - 38 DPS, 18 PG, 35 CPU, 45 cap/disparo (requiere Armas Energía 3)
-- **Tier 3:** Láser de Fase Cuántico - 65 DPS, 35 PG, 50 CPU, 70 cap/disparo (requiere Armas Energía 4)
+- **Tier 1:** Láser de Pulso - 22 DPS, 10 RE, 20 CPU, 25 cap/disparo
+- **Tier 2:** Láser de Haz - 38 DPS, 18 RE, 35 CPU, 45 cap/disparo (requiere Armas Energía 3)
+- **Tier 3:** Láser de Fase Cuántico - 65 DPS, 35 RE, 50 CPU, 70 cap/disparo (requiere Armas Energía 4)
 - **Daño:** Fuerte contra escudos (+50%)
 
 **Armas Híbridas:**
-- **Tier 1:** Blaster Básico - 20 DPS, 9 PG, 18 CPU, 22 cap/disparo
-- **Tier 2:** Cañón de Iones - 35 DPS, 16 PG, 30 CPU, 40 cap/disparo (requiere Armas Híbridas 3)
-- **Tier 3:** Disruptor de Antimateria - 60 DPS, 32 PG, 48 CPU, 65 cap/disparo (requiere Armas Híbridas 4)
+- **Tier 1:** Blaster Básico - 20 DPS, 9 RE, 18 CPU, 22 cap/disparo
+- **Tier 2:** Cañón de Iones - 35 DPS, 16 RE, 30 CPU, 40 cap/disparo (requiere Armas Híbridas 3)
+- **Tier 3:** Disruptor de Antimateria - 60 DPS, 32 RE, 48 CPU, 65 cap/disparo (requiere Armas Híbridas 4)
 - **Daño:** Balanceado (escudos y armadura)
 
 **Misiles:**
-- **Tier 1:** Lanzamisiles Ligero - 30 DPS, 5 PG, 25 CPU, 15 cap/lanzamiento + munición
-- **Tier 2:** Lanzamisiles Pesado - 55 DPS, 12 PG, 40 CPU, 30 cap/lanzamiento + munición (requiere Misiles 3)
-- **Tier 3:** Torpedos de Crucero - 95 DPS, 25 PG, 60 CPU, 50 cap/lanzamiento + munición (requiere Misiles 4)
+- **Tier 1:** Lanzamisiles Ligero - 30 DPS, 5 RE, 25 CPU, 15 cap/lanzamiento + munición
+- **Tier 2:** Lanzamisiles Pesado - 55 DPS, 12 RE, 40 CPU, 30 cap/lanzamiento + munición (requiere Misiles 3)
+- **Tier 3:** Torpedos de Crucero - 95 DPS, 25 RE, 60 CPU, 50 cap/lanzamiento + munición (requiere Misiles 4)
 - **Daño:** Variable según munición (explosivo, cinético, EM, térmico)
 
 ### 7.5.2 Sistemas Defensivos
 
 **Generadores de Escudos:**
-- **Tier 1 Pequeño:** +400 HP escudos, 8 PG, 15 CPU, pasivo
-- **Tier 1 Mediano:** +800 HP escudos, 15 PG, 25 CPU, pasivo
-- **Tier 1 Grande:** +1500 HP escudos, 30 PG, 40 CPU, pasivo (requiere Escudos 2)
-- **Tier 2 Pequeño:** +600 HP escudos, 10 PG, 18 CPU, pasivo (requiere Escudos 3)
-- **Tier 2 Mediano:** +1200 HP escudos, 20 PG, 30 CPU, pasivo (requiere Escudos 3)
-- **Tier 3 Grande:** +2500 HP escudos, 45 PG, 55 CPU, +10% resist todas (requiere Escudos 4)
+- **Tier 1 Pequeño:** +400 HP escudos, 8 RE, 15 CPU, pasivo
+- **Tier 1 Mediano:** +800 HP escudos, 15 RE, 25 CPU, pasivo
+- **Tier 1 Grande:** +1500 HP escudos, 30 RE, 40 CPU, pasivo (requiere Escudos 2)
+- **Tier 2 Pequeño:** +600 HP escudos, 10 RE, 18 CPU, pasivo (requiere Escudos 3)
+- **Tier 2 Mediano:** +1200 HP escudos, 20 RE, 30 CPU, pasivo (requiere Escudos 3)
+- **Tier 3 Grande:** +2500 HP escudos, 45 RE, 55 CPU, +10% resist todas (requiere Escudos 4)
 
 **Recargadores de Escudos:**
-- **Tier 1:** Regen +15 HP/tick, 12 PG, 20 CPU, 40 cap/activación, activo
-- **Tier 2:** Regen +30 HP/tick, 20 PG, 35 CPU, 70 cap/activación, activo (requiere Escudos 3)
-- **Tier 3:** Regen +60 HP/tick, 35 PG, 50 CPU, 120 cap/activación, activo (requiere Escudos 4)
+- **Tier 1:** Regen +15 HP/tick, 12 RE, 20 CPU, 40 cap/activación, activo
+- **Tier 2:** Regen +30 HP/tick, 20 RE, 35 CPU, 70 cap/activación, activo (requiere Escudos 3)
+- **Tier 3:** Regen +60 HP/tick, 35 RE, 50 CPU, 120 cap/activación, activo (requiere Escudos 4)
 
 **Placas de Armadura:**
-- **Tier 1 Pequeña:** +300 HP armadura, 5 PG, 10 CPU, pasivo
-- **Tier 1 Mediana:** +700 HP armadura, 10 PG, 18 CPU, pasivo
-- **Tier 1 Grande:** +1300 HP armadura, 20 PG, 30 CPU, pasivo (requiere Blindaje 2)
-- **Tier 2 Grande:** +2000 HP armadura, 30 PG, 40 CPU, +5% resist explosivo (requiere Blindaje 3)
-- **Tier 3 Grande:** +3500 HP armadura, 50 PG, 60 CPU, +10% resist todos (requiere Blindaje 4)
+- **Tier 1 Pequeña:** +300 HP armadura, 5 RE, 10 CPU, pasivo
+- **Tier 1 Mediana:** +700 HP armadura, 10 RE, 18 CPU, pasivo
+- **Tier 1 Grande:** +1300 HP armadura, 20 RE, 30 CPU, pasivo (requiere Blindaje 2)
+- **Tier 2 Grande:** +2000 HP armadura, 30 RE, 40 CPU, +5% resist explosivo (requiere Blindaje 3)
+- **Tier 3 Grande:** +3500 HP armadura, 50 RE, 60 CPU, +10% resist todos (requiere Blindaje 4)
 
 **Reparadores de Armadura:**
-- **Tier 1:** Repara 20 HP/tick, 15 PG, 25 CPU, 50 cap/activación, activo
-- **Tier 2:** Repara 40 HP/tick, 25 PG, 40 CPU, 90 cap/activación, activo (requiere Blindaje 3)
-- **Tier 3:** Repara 80 HP/tick, 40 PG, 60 CPU, 150 cap/activación, activo (requiere Blindaje 4)
+- **Tier 1:** Repara 20 HP/tick, 15 RE, 25 CPU, 50 cap/activación, activo
+- **Tier 2:** Repara 40 HP/tick, 25 RE, 40 CPU, 90 cap/activación, activo (requiere Blindaje 3)
+- **Tier 3:** Repara 80 HP/tick, 40 RE, 60 CPU, 150 cap/activación, activo (requiere Blindaje 4)
 
 **Refuerzos Estructurales:**
-- **Tier 1:** +200 HP estructura, 3 PG, 8 CPU, pasivo
-- **Tier 2:** +400 HP estructura, 6 PG, 15 CPU, pasivo
-- **Tier 3:** +800 HP estructura, 12 PG, 25 CPU, pasivo
+- **Tier 1:** +200 HP estructura, 3 RE, 8 CPU, pasivo
+- **Tier 2:** +400 HP estructura, 6 RE, 15 CPU, pasivo
+- **Tier 3:** +800 HP estructura, 12 RE, 25 CPU, pasivo
 
 ### 7.5.3 Sistemas de Utilidad
 
 **Minería:**
-- **Tier 1:** Láser de Minería Básico - Reduce 1 tick minería, 10 PG, 20 CPU, 30 cap/ciclo
-- **Tier 2:** Láser de Minería Avanzado - Reduce 2 ticks, +15% yield, 18 PG, 35 CPU, 50 cap/ciclo (requiere Minería 3)
-- **Tier 3:** Dron Minero Automático - Reduce 3 ticks, +30% yield, puede minar múltiples asteroides, 30 PG, 50 CPU, 80 cap/ciclo (requiere Minería 4, Drones 2)
+- **Tier 1:** Láser de Minería Básico - Reduce 1 tick minería, 10 RE, 20 CPU, 30 cap/ciclo
+- **Tier 2:** Láser de Minería Avanzado - Reduce 2 ticks, +15% yield, 18 RE, 35 CPU, 50 cap/ciclo (requiere Minería 3)
+- **Tier 3:** Dron Minero Automático - Reduce 3 ticks, +30% yield, puede minar múltiples asteroides, 30 RE, 50 CPU, 80 cap/ciclo (requiere Minería 4, Drones 2)
 
 **Extracción Especializada:**
-- **Extractor Criogénico T1:** Para hielo Tier 1-2, 12 PG, 25 CPU, 40 cap/ciclo (requiere Extracción Criogénica 1)
-- **Extractor Criogénico T2:** Para hielo Tier 2-3, reduce 1 tick, 20 PG, 40 CPU, 70 cap/ciclo (requiere Extracción Criogénica 3)
-- **Extractor Criogénico T3:** Para hielo Tier 3-4, reduce 2 ticks, +20% yield, 35 PG, 60 CPU, 110 cap/ciclo (requiere Extracción Criogénica 5)
+- **Extractor Criogénico T1:** Para hielo Tier 1-2, 12 RE, 25 CPU, 40 cap/ciclo (requiere Extracción Criogénica 1)
+- **Extractor Criogénico T2:** Para hielo Tier 2-3, reduce 1 tick, 20 RE, 40 CPU, 70 cap/ciclo (requiere Extracción Criogénica 3)
+- **Extractor Criogénico T3:** Para hielo Tier 3-4, reduce 2 ticks, +20% yield, 35 RE, 60 CPU, 110 cap/ciclo (requiere Extracción Criogénica 5)
 
 **Recolectores de Gas:**
-- **Recolector de Gas T1:** Para nebulosas Tier 1-2, 8 PG, 30 CPU, 35 cap/ciclo (requiere Recolección Gas 1)
-- **Recolector de Gas T2:** Para nebulosas Tier 2-3, +25% yield, 15 PG, 45 CPU, 60 cap/ciclo (requiere Recolección Gas 3)
-- **Recolector de Gas T3:** Para nebulosas Tier 3-4, +50% yield, detección previa tormentas, 28 PG, 70 CPU, 100 cap/ciclo (requiere Recolección Gas 5)
+- **Recolector de Gas T1:** Para nebulosas Tier 1-2, 8 RE, 30 CPU, 35 cap/ciclo (requiere Recolección Gas 1)
+- **Recolector de Gas T2:** Para nebulosas Tier 2-3, +25% yield, 15 RE, 45 CPU, 60 cap/ciclo (requiere Recolección Gas 3)
+- **Recolector de Gas T3:** Para nebulosas Tier 3-4, +50% yield, detección previa tormentas, 28 RE, 70 CPU, 100 cap/ciclo (requiere Recolección Gas 5)
 
 **Expansores de Carga:**
-- **Tier 1:** +500 m³, 3 PG, 10 CPU, pasivo
-- **Tier 2:** +1000 m³, 5 PG, 18 CPU, pasivo
-- **Tier 3:** +2000 m³, 10 PG, 30 CPU, pasivo
+- **Tier 1:** +500 m³, 3 RE, 10 CPU, pasivo
+- **Tier 2:** +1000 m³, 5 RE, 18 CPU, pasivo
+- **Tier 3:** +2000 m³, 10 RE, 30 CPU, pasivo
 
 **Propulsores:**
-- **Tier 1 Básico:** +15% velocidad, 8 PG, 15 CPU, 25 cap/activación (10 ticks), activo
-- **Tier 2 Mejorado:** +30% velocidad, 15 PG, 25 CPU, 45 cap/activación (10 ticks), activo (requiere Navegación 2)
-- **Tier 3 Avanzado:** +50% velocidad, reduce tiempo warp 20%, 25 PG, 40 CPU, 75 cap/activación (10 ticks), activo (requiere Navegación 4)
-- **Motor de Salto:** Necesario para usar Stargates, 20 PG, 50 CPU, pasivo (requiere Navegación 3)
+- **Tier 1 Básico:** +15% velocidad, 8 RE, 15 CPU, 25 cap/activación (10 ticks), activo
+- **Tier 2 Mejorado:** +30% velocidad, 15 RE, 25 CPU, 45 cap/activación (10 ticks), activo (requiere Navegación 2)
+- **Tier 3 Avanzado:** +50% velocidad, reduce tiempo warp 20%, 25 RE, 40 CPU, 75 cap/activación (10 ticks), activo (requiere Navegación 4)
+- **Motor de Salto:** Necesario para usar Stargates, 20 RE, 50 CPU, pasivo (requiere Navegación 3)
 
 **Scanners:**
-- **Scanner de Carga T1:** Detecta carga de otras naves, 2 PG, 25 CPU, 50 cap/escaneo
-- **Scanner de Combate T1:** Detecta naves hostiles, 3 PG, 30 CPU, 60 cap/escaneo (requiere Rastreo 1)
-- **Scanner de Anomalías T1:** Detecta sitios temporales, 5 PG, 40 CPU, 80 cap/escaneo (requiere Exploración 1)
-- **Scanner Planetario T1:** Escanea planetas, calidad 5, 3 PG, 40 CPU, 100 cap/escaneo (requiere Escaneo Planetario 1)
-- **Scanner Planetario T2:** Escanea planetas, calidad 10, 6 PG, 60 CPU, 150 cap/escaneo (requiere Escaneo Planetario 3)
-- **Scanner Planetario T3:** Escanea planetas, calidad 15, +20% velocidad escaneo, 12 PG, 90 CPU, 220 cap/escaneo (requiere Escaneo Planetario 5)
+- **Scanner de Carga T1:** Detecta presencia de ítems ilegales, 40% precisión, 1 escaneo por objetivo, 10 ticks duración, 10 RE, 35 CPU, 80 cap/escaneo (requiere Escaneo de Carga 1)
+- **Scanner de Carga T2:** Detecta ítems ilegales, 65% precisión, 2 escaneos por objetivo, 8 ticks duración, 18 RE, 55 CPU, 140 cap/escaneo (requiere Escaneo de Carga 3)
+- **Scanner de Carga T3:** Detecta ítems ilegales + cantidad exacta, 90% precisión, 3 escaneos por objetivo, 6 ticks duración, escaneo penetrante, 30 RE, 80 CPU, 220 cap/escaneo (requiere Escaneo de Carga 5)
+- **Scanner de Combate T1:** Detecta naves hostiles, 3 RE, 30 CPU, 60 cap/escaneo (requiere Rastreo 1)
+- **Scanner de Anomalías T1:** Detecta sitios temporales, 5 RE, 40 CPU, 80 cap/escaneo (requiere Exploración 1)
+- **Scanner Planetario T1:** Escanea planetas, calidad 5, 3 RE, 40 CPU, 100 cap/escaneo (requiere Escaneo Planetario 1)
+- **Scanner Planetario T2:** Escanea planetas, calidad 10, 6 RE, 60 CPU, 150 cap/escaneo (requiere Escaneo Planetario 3)
+- **Scanner Planetario T3:** Escanea planetas, calidad 15, +20% velocidad escaneo, 12 RE, 90 CPU, 220 cap/escaneo (requiere Escaneo Planetario 5)
+
+**Mecánica de Escaneo de Carga (Jugador vs Jugador):**
+- El escáner debe estar dentro del mismo sistema que el objetivo
+- Proceso: Seleccionar nave objetivo → Activar Scanner de Carga → Esperar duración (6-10 ticks)
+- Fórmula de detección:
+
+```
+chance_detectar = precisión_scanner - (evasión_compartimento + evasión_bloqueador + evasión_revestimiento)
+chance_final = max(5%, min(95%, chance_detectar))
+```
+
+- Si detecta: Muestra lista de ítems ilegales + cantidad aproximada (T3 muestra cantidad exacta)
+- Si falla: Muestra "Escaneo incompleto - no se detectaron anomalías"
+- El objetivo recibe notificación "Tu nave está siendo escaneada por [piloto]"
+- El objetivo puede huir durante el escaneo (cancela el proceso)
 
 **Módulos de Sigilo:**
-- **Camuflaje Básico T1:** +15% Sigilo, 10 PG, 20 CPU, 40 cap/activación (dura 5 ticks), activo (requiere Sigilo 1)
-- **Camuflaje Avanzado T2:** +30% Sigilo, 18 PG, 35 CPU, 70 cap/activación (dura 8 ticks), activo (requiere Sigilo 3)
-- **Cloak de Invisibilidad T3:** +60% Sigilo, invisibilidad casi total si no te mueves, 30 PG, 55 CPU, 120 cap/activación (dura 10 ticks), activo (requiere Sigilo 5, solo naves T3)
+- **Camuflaje Básico T1:** +15% Sigilo, 10 RE, 20 CPU, 40 cap/activación (dura 5 ticks), activo (requiere Sigilo 1)
+- **Camuflaje Avanzado T2:** +30% Sigilo, 18 RE, 35 CPU, 70 cap/activación (dura 8 ticks), activo (requiere Sigilo 3)
+- **Cloak de Invisibilidad T3:** +60% Sigilo, invisibilidad casi total si no te mueves, 30 RE, 55 CPU, 120 cap/activación (dura 10 ticks), activo (requiere Sigilo 5, solo naves T3)
 
 **Otros:**
-- **Estabilizador de Salto T1:** Reduce fatiga de salto 15%, 5 PG, 15 CPU, pasivo
-- **Reparador Remoto T1:** Repara nave aliada a distancia, 20 PG, 30 CPU, 80 cap/activación, activo (requiere Logística 2)
-- **Transmisor de Energía T1:** Transfiere capacitor a nave aliada, 15 PG, 25 CPU, 60 cap/activación, activo (requiere Logística 2)
-- **Amplificador de CPU T1:** +10% CPU total nave, 5 PG, 0 CPU (no consume CPU), pasivo (requiere Ingeniería 2)
-- **Relé de Powergrid T1:** +10% PG total nave, 0 PG, 15 CPU, pasivo (requiere Ingeniería 2)
+- **Estabilizador de Salto T1:** Reduce fatiga de salto 15%, 5 RE, 15 CPU, pasivo
+- **Reparador Remoto T1:** Repara nave aliada a distancia, 20 RE, 30 CPU, 80 cap/activación, activo (requiere Logística 2)
+- **Transmisor de Energía T1:** Transfiere capacitor a nave aliada, 15 RE, 25 CPU, 60 cap/activación, activo (requiere Logística 2)
+- **Amplificador de CPU T1:** +10% CPU total nave, 5 RE, 0 CPU (no consume CPU), pasivo (requiere Ingeniería 2)
+- **Relé de Reactor de Energía T1:** +10% RE total nave, 0 RE, 15 CPU, pasivo (requiere Ingeniería 2)
 
 ---
 
@@ -508,15 +573,58 @@ Cuando la estructura de una nave llega a 0:
 
 **Piloto:**
 - Muere si no tiene cápsula de escape
-- Con cápsula: puede huir
-- Si muere: respawnea en último clon
+- Con cápsula: puede huir en pod (nave ligera indefensa)
+- Si el pod también es destruido: el piloto muere y respawnea en último clon
 
-**Sistema de Clones:**
-- Se crean en Laboratorios (ver [PRD-Universe.md](./PRD-Universe.md#6.2.3-laboratorio))
-- Guardan punto de reaparición
-- Al morir: pierdes skills no guardados en clon
-- Clon puede estar en cualquier estación
-- Cooldown de actualización de clon: 144 ticks (~24h)
+**Sistema de Clones (Checkpoints):**
+
+El sistema de clones en VAXAV funciona como puntos de respawn (checkpoints), NO como el sistema de EVE Online.
+
+**Mecánica:**
+- Los clones se crean en Laboratorios de estaciones (ver [PRD-Universe.md](./PRD-Universe.md#6.2.3-laboratorio))
+- Cada clon es un "punto de reaparición" guardado en esa estación
+- Puedes tener múltiples clones activos en diferentes estaciones (límite según nivel de Laboratorio)
+- Al morir: **NO pierdes skills ni experiencia** (diferente a EVE)
+- Respawneas instantáneamente en el último clon activado
+
+**Crear un Clon:**
+1. Visitar un Laboratorio (Nivel 1+)
+2. Seleccionar "Crear Punto de Clonación"
+3. Costo: 25,000₡
+4. Tiempo: Instantáneo
+5. El clon queda guardado en esa estación
+
+**Activar Clon como Respawn Principal:**
+- Puedes cambiar cuál clon es tu "respawn principal" desde cualquier Laboratorio
+- Costo: 5,000₡
+- Cooldown: 24 horas (144 ticks) entre cambios
+- No necesitas estar en la estación del clon para activarlo
+
+**Límites de Clones:**
+- Laboratorio Nivel 1: 1 clon activo
+- Laboratorio Nivel 2: 3 clones activos
+- Laboratorio Nivel 3: 5 clones activos
+- Laboratorio Nivel 4: 10 clones activos
+- Laboratorio Nivel 5: Clones ilimitados
+
+**Ejemplo de Uso:**
+- Piloto tiene clones en: Estación A (minera), Estación B (comercio), Estación C (frontera PvP)
+- Respawn principal: Estación A
+- Piloto muere en combate → Respawnea instantáneamente en Estación A
+- Piloto cambia respawn principal a C (para PvP) → Cooldown 24h
+- Próxima muerte → Respawnea en Estación C
+
+**Pérdidas al Morir:**
+- Nave destruida (se convierte en Wreck saqueab le)
+- Módulos equipados (% quedan en Wreck)
+- Carga de la nave (% queda en Wreck)
+- Implantes (destruidos a menos que tengas seguro de implantes)
+- **NO SE PIERDEN:** Skills, experiencia, items en estaciones, créditos
+
+**Ventaja sobre EVE:**
+- Morir es menos punitivo (no pierdes progreso de skills)
+- Permite juego más agresivo y experimental
+- Clones como herramienta estratégica (respawn cerca de zonas de actividad)
 
 ---
 
@@ -540,8 +648,8 @@ Las modificaciones ilegales son alteraciones permanentes o semi-permanentes de n
 - Perfecta para operaciones encubiertas, emboscadas, evasión
 
 **Consecuencias:**
-- Nave flagged como criminal en sistemas sec 0.5+
-- Albatross ataca a la vista en sec 0.5+ (sin advertencia)
+- Nave flagged como criminal en sistemas IIC 1-2
+- Albatross ataca a la vista en IIC 1-2 (sin advertencia)
 - NO REVERSIBLE (no puede deshacerse)
 - Standing permanente -50 con Confederación si detectada
 
@@ -550,19 +658,19 @@ Las modificaciones ilegales son alteraciones permanentes o semi-permanentes de n
 **Implementación Técnica:**
 - Modificación permanente en tabla `illegal_ship_modifications`
 - Nave invisible en sistema de detección de naves
-- Albatross tiene script especial: si `ship.has_no_transponder AND system.security >= 0.5 THEN attack_immediately()`
+- Albatross tiene script especial: si `ship.has_no_transponder AND system.iic <= 2 THEN attack_immediately()`
 
-#### 9.2.2 Amplificador Ilegal de PG/CPU
+#### 9.2.2 Amplificador Ilegal de RE/CPU
 
-**Descripción:** Bypass de los limitadores de fábrica en powergrid y CPU.
+**Descripción:** Bypass de los limitadores de fábrica en reactor de energía y CPU.
 
 **Beneficios:**
-- +25% Powergrid total
+- +25% Reactor de Energía total
 - +25% CPU total
 - Permite fitting de módulos más poderosos
 
 **Consecuencias:**
-- Nave ilegal, Albatross ataca en sec 0.5+
+- Nave ilegal, Albatross ataca en IIC 1-2
 - Advertencia de 30 segundos antes del ataque (tiempo para huir)
 - Detectable por escaneos profundos (20% chance por escaneo)
 - Standing -10 con Confederación si detectada
@@ -572,7 +680,7 @@ Las modificaciones ilegales son alteraciones permanentes o semi-permanentes de n
 **Reversibilidad:** SÍ (costo 100,000₡ en cualquier estación con Sala de Ingeniería)
 
 **Implementación Técnica:**
-- Modificador en stats de nave: `ship.powergrid *= 1.25; ship.cpu *= 1.25`
+- Modificador en stats de nave: `ship.reactor_energia *= 1.25; ship.cpu *= 1.25`
 - Flag `is_illegal = true`
 - Albatross tiene advertencia de 30 segundos (5 ticks) antes de atacar
 
@@ -611,7 +719,7 @@ Las modificaciones ilegales son alteraciones permanentes o semi-permanentes de n
 
 **Consecuencias:**
 - Nave ilegal permanentemente
-- Albatross ataca en sec 0.5+ (advertencia 10 segundos)
+- Albatross ataca en IIC 1-2 (advertencia 10 segundos)
 - Detectable por escaneos (30% chance)
 - Standing -15 con Confederación
 
@@ -629,13 +737,13 @@ Las modificaciones ilegales son alteraciones permanentes o semi-permanentes de n
 
 ### 9.3 Mecánica de Detección de Albatross
 
-**Sistemas Sec 0.5-1.0:**
+**Sistemas IIC 1-2 (Alta Seguridad):**
 
 1. **Entrada al Sistema:**
    - Albatross escanea todas las naves que entran
    - Detección automática de naves sin transponder (100% detección)
    - Detección probabilística de otras modificaciones:
-     - Amplificador PG/CPU: 20% por escaneo
+     - Amplificador RE/CPU: 20% por escaneo
      - Reactor Black Hole: 10% por escaneo (difícil de detectar externamente)
      - Sistema Puntería: 30% por escaneo
 
@@ -651,12 +759,12 @@ Las modificaciones ilegales son alteraciones permanentes o semi-permanentes de n
    - Re-escaneo cada 10-30 ticks mientras estés en el sistema
    - Cada escaneo tiene probabilidad acumulativa de detectar modificaciones
 
-**Sistemas Sec 0.1-0.4:**
+**Sistemas IIC 3 (Frontera Disputada):**
 - Albatross solo en stargates
 - Escaneo solo al usar stargate (1 vez)
 - 50% menos probabilidad de detección
 
-**Sistemas Sec 0.0:**
+**Sistemas IIC 4-5 (Tierra de Nadie / Espacio Profundo):**
 - Sin Albatross
 - Modificaciones ilegales sin riesgo
 
@@ -667,26 +775,26 @@ Las modificaciones ilegales son alteraciones permanentes o semi-permanentes de n
 | Modificación | Costo | Beneficio | ROI Estimado | Riesgo |
 |--------------|-------|-----------|--------------|--------|
 | Eliminar Transponder | 200K₡ | Stealth total | Alto (PvP, piratería) | Extremo |
-| Amplificador PG/CPU | 350K₡ | +25% fitting | Medio (fittings T3) | Alto |
+| Amplificador RE/CPU | 350K₡ | +25% fitting | Medio (fittings T3) | Alto |
 | Reactor Black Hole | 1M₡ | Cap infinito | Bajo (riesgo explosión) | Muy Alto |
 | Sistema Puntería | 450K₡ | +40% tracking | Alto (PvP) | Alto |
 
 **Casos de Uso Comunes:**
 
-1. **Piratería en Null-Sec:**
+1. **Piratería en Espacio Profundo:**
    - Eliminar Transponder + Sistema Puntería
    - Costo: 650K₡
    - Beneficio: Emboscadas perfectas, alto damage
-   - Riesgo: Solo si entra a sec 0.5+
+   - Riesgo: Solo si entra a Territorio Estable+
 
-2. **Minería en Low-Sec:**
-   - Amplificador PG/CPU
+2. **Minería en Frontera Disputada:**
+   - Amplificador RE/CPU
    - Costo: 350K₡
    - Beneficio: Fitting con más láseres de minería + escudos potentes
-   - Riesgo: Evitar sec 0.5+, minería en 0.1-0.4
+   - Riesgo: Evitar Territorio Estable+, minería en Frontera/Tierra de Nadie
 
 3. **PvP Extremo (Locura):**
-   - Reactor Black Hole + Sistema Puntería + Amplificador PG/CPU
+   - Reactor Black Hole + Sistema Puntería + Amplificador RE/CPU
    - Costo: 1.8M₡
    - Beneficio: Nave imparable (capacitor infinito, damage máximo)
    - Riesgo: 5% muerte cada tick en combate + detección Albatross
@@ -708,8 +816,8 @@ Las modificaciones ilegales son alteraciones permanentes o semi-permanentes de n
 
 **Diseño Intencional:**
 El sistema está diseñado para crear una división clara entre:
-- **Pilotos Lawful:** Operan en sec 0.5+ sin preocupaciones, sacrifican poder
-- **Pilotos Outlaw:** Operan en null-sec con naves modificadas poderosas, evitan sistemas seguros
+- **Pilotos Lawful:** Operan en IIC 1-2 sin preocupaciones, sacrifican poder
+- **Pilotos Outlaw:** Operan en IIC 4-5 con naves modificadas poderosas, evitan sistemas seguros
 
 ---
 

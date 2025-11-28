@@ -132,7 +132,7 @@ Sistema de naves dividido en **5 clases principales** (Fragatas, Cruceros, Acora
 - Slots de armas (High Slots)
 - Slots de defensa (Mid/Low Slots)
 - Rigs y modificadores
-- Límite de CPU y Powergrid
+- Límite de CPU y Reactor de Energía
 
 [**→ Ver documentación completa: PRD-ShipsAndCombat.md**](./PRD-ShipsAndCombat.md)
 

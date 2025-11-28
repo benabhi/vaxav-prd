@@ -355,70 +355,98 @@ Los planetas del universo VAXAV tienen 7 tipos distintos, cada uno con recursos 
 - Distribución típica: 30% Rocosos, 20% Jovianos, 15% Helados, 15% Volcánicos, 10% Oceánicos, 8% Vitales, 2% Fragmentados
 - Los planetas Vitales y Fragmentados son los más raros
 
-### 5.6 Sistema de Seguridad
+### 5.6 Sistema de Seguridad IIC (Índice de Influencia Corporativa)
 
-Cada sistema solar tiene un **nivel de seguridad** decimal de 0.0 a 1.0 que determina la presencia de policía NPC, reglas de combate y recursos disponibles.
+Cada sistema solar tiene un **Índice de Influencia Corporativa (IIC)** que representa el nivel de control territorial y presencia militar de las facciones NPC. Este sistema reemplaza el modelo decimal 0.0-1.0 con 5 categorías narrativas que determinan la presencia de policía, reglas de combate y recursos disponibles.
 
-#### 5.6.1 Niveles de Seguridad
+#### 5.6.1 Categorías IIC
 
-**Nivel 1.0 (Seguridad Máxima)**
-- **Descripción:** Sistemas centrales de facciones principales
+**IIC 1: Núcleo Corporativo**
+- **Descripción:** Corazón de las facciones principales, sistemas capitales y centros económicos
+- **Control:** 100% facción propietaria, múltiples flotas patrullando
 - **Policía NPC:** "Albatross" - Respuesta instantánea (1 tick)
 - **Combate PvP:** Prohibido (atacar resulta en KOS instantáneo + intervención Albatross)
 - **Consecuencias:** -100 standing con facción, pérdida de nave garantizada
 - **Recursos:** Tier 1 únicamente (Ferrita, Cobre Estelar, Hidrógeno, Biomasa básica)
 - **Características:**
-  - Estaciones NPC seguras
-  - Comercio protegido
+  - 5-8 estaciones NPC por sistema
+  - Mercados más activos y seguros
   - Zona de aprendizaje para nuevos pilotos
+  - Stargates siempre funcionales
+  - Infraestructura completa (reparación, fabricación, investigación)
 
-**Nivel 0.5 - 0.9 (Seguridad Alta)**
-- **Descripción:** Sistemas colonizados con presencia militar
-- **Policía NPC:** Respuesta rápida (3-5 ticks)
+**IIC 2: Territorio Estable**
+- **Descripción:** Sistemas colonizados con presencia militar activa pero menor densidad
+- **Control:** 70-90% facción propietaria, patrullas regulares
+- **Policía NPC:** "Albatross" - Respuesta rápida (3-5 ticks)
 - **Combate PvP:** Permitido con penalizaciones severas
   - Atacar: -50 standing con facción
   - Matar: -80 standing + marca criminal temporal (12 horas)
   - Albatross responde y destruye al atacante si continúa en zona
 - **Recursos:** Tier 1-2 (Titanita, Magnetita, Deuterio, Proteínas)
 - **Características:**
+  - 2-4 estaciones NPC por sistema
   - Cinturones de asteroides básicos
   - Algunos cinturones de hielo
-  - Estaciones NPC frecuentes
+  - Infraestructura moderada
+  - Comercio activo pero con algo de competencia
 
-**Nivel 0.1 - 0.4 (Seguridad Baja)**
-- **Descripción:** Sistemas fronterizos, poco patrullados
-- **Policía NPC:** Respuesta lenta (10-15 ticks) solo en estaciones
+**IIC 3: Frontera Disputada**
+- **Descripción:** Sistemas fronterizos donde múltiples facciones compiten por control
+- **Control:** 40-60% facción dominante, presencia de múltiples facciones
+- **Policía NPC:** "Albatross" - Respuesta lenta (10-15 ticks) solo en estaciones
 - **Combate PvP:** Permitido con penalizaciones leves
-  - Atacar: -10 standing
+  - Atacar: -10 standing con facción dominante
   - Matar: -20 standing
-  - Albatross NO interviene en espacio abierto, solo defiende estaciones
+  - Albatross NO interviene en espacio abierto, solo defiende estaciones NPC
 - **Recursos:** Tier 1-3 (Duralinio, Cristales de Zafiro, Plasma, Xenón, Nanobots)
 - **Características:**
+  - 1-2 estaciones NPC, posibles estaciones de jugadores
   - Cinturones de asteroides ricos
   - Cinturones de hielo con recursos raros
   - Nebulosas de gas (Tier 2-3)
-  - Estaciones NPC escasas
+  - Mayor riesgo, mayores recompensas
+  - Zona de conflicto entre facciones
 
-**Nivel 0.0 (Null-Sec / Espacio Nulo)**
-- **Descripción:** Territorio salvaje sin ley
-- **Policía NPC:** Inexistente
-- **Combate PvP:** Sin restricciones ni penalizaciones
-- **Recursos:** Tier 1-4 (Adamantita, Neutronium, Antimateria, Materia Oscura, Genoma Alienígena)
+**IIC 4: Tierra de Nadie**
+- **Descripción:** Sistemas sin control corporativo claro, dominados por piratas y jugadores
+- **Control:** <30% control NPC, principalmente piratas y corporaciones de jugadores
+- **Policía NPC:** Inexistente (solo piratas hostiles)
+- **Combate PvP:** Sin restricciones ni penalizaciones de standing
+- **Recursos:** Tier 2-4 (Adamantita, Neutronium, Antimateria, recursos exóticos)
 - **Características:**
+  - 0-1 estaciones NPC (generalmente piratas)
+  - Estaciones de jugadores frecuentes
   - Cinturones de asteroides exóticos
-  - Cinturones de hielo con Antimateria/Materia Oscura
-  - Nebulosas de gas Tier 4
+  - Cinturones de hielo con recursos Tier 3-4
+  - Nebulosas de gas Tier 3-4
+  - Sitios de exploración frecuentes (T3-T4)
+  - Mercados Negros flotantes aparecen aquí
+  - Control territorial por corporaciones de jugadores
+
+**IIC 5: Espacio Profundo**
+- **Descripción:** Sistemas inexplorados o completamente abandonados, sin presencia civilizada
+- **Control:** 0% control, naturaleza salvaje del espacio
+- **Policía NPC:** Inexistente (posibles NPCs hostiles exóticos)
+- **Combate PvP:** Sin restricciones, ley del más fuerte
+- **Recursos:** Tier 3-4 exclusivamente (Adamantita, Neutronium, Antimateria, Materia Oscura, Genoma Alienígena)
+- **Características:**
+  - 0 estaciones NPC
+  - Solo estaciones de jugadores (si se construyen)
+  - Recursos más raros y valiosos del juego
   - Planetas Fragmentados y Vitales más frecuentes
-  - Estaciones solo de jugadores
-  - Sitios de exploración legendarios
-  - Control territorial por corporaciones
+  - Sitios de exploración legendarios (T4)
+  - Agujeros de gusano más comunes
+  - Fenómenos espaciales únicos (pulsares, agujeros negros)
+  - Posible aparición de NPCs alienígenas desconocidos
+  - Máximo riesgo, máxima recompensa
 
 #### 5.6.2 Fuerza Policial "Albatross"
 
 **Descripción:**
 - Fuerza de seguridad NPC multifacción
-- Opera en sistemas 0.5 - 1.0
-- Naves: Fragatas (sec 0.5-0.7), Cruceros (sec 0.8-0.9), Acorazados (sec 1.0)
+- Opera en sistemas IIC 1, 2 y 3
+- Naves: Fragatas (IIC 3), Cruceros (IIC 2), Acorazados (IIC 1)
 
 **Mecánica de Respuesta:**
 1. **Detección:** Al iniciarse combate no consentido
@@ -427,14 +455,76 @@ Cada sistema solar tiene un **nivel de seguridad** decimal de 0.0 a 1.0 que dete
 4. **Duración:** Hasta destruir al criminal o que escape del sistema
 
 **Poder Relativo:**
-- Sec 1.0: Albatross destruye fragata T1 en 2-3 ticks
-- Sec 0.8: Albatross destruye fragata T1 en 5-7 ticks
-- Sec 0.5: Albatross destruye fragata T1 en 10-12 ticks
+- IIC 1: Albatross destruye fragata T1 en 2-3 ticks
+- IIC 2: Albatross destruye fragata T1 en 5-7 ticks
+- IIC 3: Albatross destruye fragata T1 en 10-12 ticks
 
 **Evasión:**
 - El agresor puede escapar saltando a otro sistema antes de ser destruido
 - Marca criminal persiste entre sesiones
-- Entrar a estación en sistema sec alto con marca criminal = Albatross ataca al desatracar
+- Entrar a estación en sistema IIC alto con marca criminal = Albatross ataca al desatracar
+
+#### 5.6.3 Protocolo de Inspección de Carga Albatross
+
+**Descripción:**
+La fuerza Albatross realiza inspecciones aleatorias de carga en busca de ítems ilegales. Los pilotos pueden usar módulos de contrabando para evadir detección.
+
+**Ubicaciones de Inspección:**
+- **Al atracar en estaciones NPC** en sistemas IIC 1-2: Inspección automática obligatoria
+- **Checkpoints espaciales** en sistemas IIC 2-3: Patrullas Albatross interceptan naves aleatoriamente (15% chance al viajar)
+- **Stargates** en IIC 1-2: 25% chance de inspección al cruzar
+
+**Chance Base de Detección:**
+- **IIC 1 (Núcleo Corporativo):** 70% chance base de detectar contrabando
+- **IIC 2 (Territorio Estable):** 50% chance base
+- **IIC 3 (Frontera Disputada):** 25% chance base
+- **IIC 4-5:** No hay inspecciones
+
+**Fórmula de Detección Final:**
+
+```
+chance_final = max(0%, chance_base_IIC + modificadores)
+
+Modificadores:
+- Compartimento Blindado T1: -15%
+- Compartimento Blindado T2: -35%
+- Compartimento Blindado T3: -60%
+- Bloqueador de Escaneo T1 activo: -20%
+- Bloqueador de Escaneo T2 activo: -45%
+- Bloqueador de Escaneo T3 activo: -70%
+- Revestimiento Anti-Detección: -25%
+- Transponder Falso activo: +15% (sospechoso)
+- Nave con modificaciones ilegales: +30% (escáneres detectan anomalías)
+```
+
+**Ejemplo:**
+- Nave en IIC 1 (70% base) con Compartimento Blindado T3 (-60%) + Bloqueador T2 activo (-45%) + Revestimiento (-25%) = 70 - 60 - 45 - 25 = **-60% → 0% chance de detección**
+
+**Consecuencias de Detección:**
+
+**Contrabando Menor** (drogas, transponders falsos, chips robados):
+- Confiscación de ítems ilegales
+- Multa: 50,000₡ - 200,000₡
+- -25 standing con facción del sistema
+- Marca de "Contrabandista" temporal (24 horas, futuras inspecciones +15% detección)
+
+**Contrabando Mayor** (armas prohibidas, esclavos, genoma alienígena):
+- Confiscación total del cargo
+- Multa: 500,000₡ - 2,000,000₡
+- -80 standing con todas las facciones lawful
+- Marca de "Criminal" permanente hasta pagar multa
+- Albatross ataca si vuelves a entrar en IIC 1-2 con marca activa
+
+**Modificaciones Ilegales de Nave:**
+- Destrucción inmediata de la nave por Albatross
+- -100 standing con todas las facciones lawful
+- Pod del piloto se teletransporta a estación más cercana
+- Multa de 1,000,000₡ para limpiar récord
+
+**Evasión:**
+- Jugador puede huir antes de que termine la inspección (10 ticks de escaneo)
+- Huir = flagged como criminal, Albatross persigue
+- Si escapas del sistema, se emite "Orden de Búsqueda" (bounty de 500K₡ para otros jugadores)
 
 ### 5.7 Cinturones de Asteroides
 
@@ -446,11 +536,11 @@ Los cinturones de asteroides existen en todos los sistemas y contienen recursos 
 - **Asteroides por cinturón:** 50-200 (regeneran cada 48 horas)
 - **Tipos de asteroides:** Según nivel de seguridad del sistema
 
-**Distribución de Recursos por Seguridad:**
-- **Sec 1.0:** Solo Ferrita, Cobre Estelar, Silicatos (Tier 1)
-- **Sec 0.5-0.9:** Tier 1-2 (Titanita, Magnetita Pura)
-- **Sec 0.1-0.4:** Tier 1-3 (Duralinio Espacial, Cristales de Zafiro)
-- **Sec 0.0:** Tier 1-4 (Adamantita, Neutronium)
+**Distribución de Recursos por IIC:**
+- **IIC 1:** Solo Ferrita, Cobre Estelar, Silicatos (Tier 1)
+- **IIC 2:** Tier 1-2 (Titanita, Magnetita Pura)
+- **IIC 3:** Tier 1-3 (Duralinio Espacial, Cristales de Zafiro)
+- **IIC 4-5:** Tier 1-4 (Adamantita, Neutronium)
 
 **Mecánica de Minería:**
 1. Viajar al cinturón (acción de ticks)
@@ -478,13 +568,13 @@ Los cinturones de hielo son zonas especiales con recursos volátiles congelados.
 - **Hielo de Agua** (Tier 1): Agua, Hidrógeno básico
 - **Hielo de Deuterio** (Tier 2): Deuterio, Nitrógeno
 - **Hielo de Plasma** (Tier 3): Plasma congelado, Xenón
-- **Hielo Exótico** (Tier 4): Antimateria, Materia Oscura (solo sec 0.0)
+- **Hielo Exótico** (Tier 4): Antimateria, Materia Oscura (solo IIC 4-5)
 
-**Distribución por Seguridad:**
-- **Sec 1.0:** No existen cinturones de hielo
-- **Sec 0.5-0.9:** Hielo Tier 1-2
-- **Sec 0.1-0.4:** Hielo Tier 2-3
-- **Sec 0.0:** Hielo Tier 3-4
+**Distribución por IIC:**
+- **IIC 1:** No existen cinturones de hielo
+- **IIC 2:** Hielo Tier 1-2
+- **IIC 3:** Hielo Tier 2-3
+- **IIC 4-5:** Hielo Tier 3-4
 
 **Mecánica de Extracción:**
 1. Requiere módulo "Extractor Criogénico" en la nave
@@ -513,11 +603,11 @@ Las nebulosas son nubes de gas cósmico donde se recolectan recursos gaseosos.
 - **Nebulosa de Plasma** (Tier 3): Plasma, Xenón
 - **Nebulosa Oscura** (Tier 4): Antimateria, Materia Oscura
 
-**Distribución por Seguridad:**
-- **Sec 1.0:** No existen nebulosas
-- **Sec 0.5-0.9:** Nebulosas Tier 1-2 (raras)
-- **Sec 0.1-0.4:** Nebulosas Tier 2-3
-- **Sec 0.0:** Nebulosas Tier 3-4
+**Distribución por IIC:**
+- **IIC 1:** No existen nebulosas
+- **IIC 2:** Nebulosas Tier 1-2 (raras)
+- **IIC 3:** Nebulosas Tier 2-3
+- **IIC 4-5:** Nebulosas Tier 3-4
 
 **Mecánica de Recolección:**
 1. Requiere módulo "Recolector de Gas" en la nave
@@ -548,8 +638,53 @@ Las nebulosas son nubes de gas cósmico donde se recolectan recursos gaseosos.
 **Atributos de Estación:**
 
 ```json
-{  "nombre": "Puerto Estelar Génesis",  "descripcion": "La primera y más grande estación del sistema Vaxav...",  "corporacion_id": 1,  "faccion_id": 1,  "sistema_id": 1,  "planeta_id": 1,  "luna_id": 1,  "nivel_acceso": "publico",  "estado": "operacional",  "hangar_capacidad_actual": 45,  "hangar_capacidad_maxima": 100,  "modulos": []}
+{  "nombre": "Puerto Estelar Génesis",  "descripcion": "La primera y más grande estación del sistema Vaxav...",  "corporacion_id": 1,  "faccion_id": 1,  "sistema_id": 1,  "planeta_id": 1,  "luna_id": 1,  "nivel_acceso": "publico",  "estado": "operacional",  "hangar_capacidad_actual": 45,  "hangar_capacidad_maxima": 100,  "modulos": [],  "tamaño": "grande",  "cpu_total": 2500,  "re_total": 1800}
 ```
+
+### 6.1.1 Tamaños de Bases Estelares
+
+Las bases estelares de jugadores vienen en 3 tamaños predefinidos con diferentes capacidades y requisitos de transporte.
+
+**Base Pequeña:**
+- **CPU Total:** 800 Teraflops (TF)
+- **Reactor de Energía Total:** 500 Megawatts (MW)
+- **Volumen:** 50,000 m³
+- **Transporte:** Requiere Carguero T1 (capacidad 60,000+ m³)
+- **Costo Base:** 15,000,000₡
+- **Anclaje:** Solo en lunas
+- **Módulo Integrado:** Puente de Mando Nivel 1 (incluido, no consume CPU/RE)
+- **Uso Típico:** Puesto minero, estación personal, base de exploración
+
+**Base Mediana:**
+- **CPU Total:** 1,500 Teraflops (TF)
+- **Reactor de Energía Total:** 1,000 Megawatts (MW)
+- **Volumen:** 150,000 m³
+- **Transporte:** Requiere Carguero T2 o Freighter T1 (capacidad 200,000+ m³)
+- **Costo Base:** 45,000,000₡
+- **Anclaje:** Solo en lunas
+- **Módulo Integrado:** Puente de Mando Nivel 1 (incluido, no consume CPU/RE)
+- **Uso Típico:** Base corporativa, centro de fabricación, hub comercial
+
+**Base Grande:**
+- **CPU Total:** 2,500 Teraflops (TF)
+- **Reactor de Energía Total:** 1,800 Megawatts (MW)
+- **Volumen:** 350,000 m³
+- **Transporte:** Requiere Freighter T2 o Capital (capacidad 400,000+ m³)
+- **Costo Base:** 120,000,000₡
+- **Anclaje:** Solo en lunas
+- **Módulo Integrado:** Puente de Mando Nivel 1 (incluido, no consume CPU/RE)
+- **Uso Típico:** Fortaleza territorial, centro de investigación avanzado, capital corporativo
+
+**Mecánica de Consumo de Energía:**
+- Cada módulo de estación consume CPU y RE según su nivel
+- El Puente de Mando integrado NO consume recursos (ya incluido en la base)
+- Si instalas más módulos de los que permite el CPU/RE, la estación entra en estado "Sobrecarga"
+- Sobrecarga: -50% eficiencia en todos los módulos hasta resolver
+- Solución a sobrecarga: Desactivar módulos o mejorar Puente de Mando para aumentar capacidad
+
+**Bonificación del Puente de Mando:**
+- Cada nivel del Puente de Mando otorga +5% CPU y +5% RE total de la base
+- Ejemplo: Base Mediana (1500 TF, 1000 MW) con Puente Nivel 5 = 1500×1.25 = 1,875 TF, 1000×1.25 = 1,250 MW
 
 ### 6.2 Módulos de Estación
 
@@ -625,6 +760,7 @@ Centro de investigación, inyección de habilidades y clonación.
 - **Catálogo de Inyectores:** Cada laboratorio tiene un inventario limitado de inyectores según su especialización
 - **Inyección de Habilidades:** Proceso instantáneo que desbloquea una habilidad en nivel 0
 - **Clonación:** Puntos de respawn para cuando el piloto muere
+- **Implantes:** Instalación y extracción de implantes cibernéticos (máximo 3 activos)
 - **Investigación:** Mejora de Blueprints (niveles superiores)
 
 **Nivel 1:**
@@ -687,6 +823,76 @@ Centro de investigación, inyección de habilidades y clonación.
 - Los jugadores deben explorar y encontrar laboratorios especializados
 - Los inyectores también se pueden comprar/vender en el **Mercado** entre jugadores (ver [PRD-Economy.md](./PRD-Economy.md))
 - Algunos inyectores muy raros solo se obtienen como recompensa de misiones especiales
+
+#### 6.2.3.1 Sistema de Implantes
+
+Los implantes son mejoras cibernéticas permanentes que otorgan bonificaciones pasivas al piloto.
+
+**Reglas Generales:**
+- **Máximo 3 implantes activos simultáneamente**
+- Instalación: Requiere Laboratorio Nivel 2+ (costo 10,000₡ + 6 ticks de proceso)
+- Extracción: Requiere Laboratorio Nivel 1+ (costo 5,000₡ + 3 ticks, implante se destruye)
+- Intercambio: Puedes extraer un implante para instalar otro (no acumulan más allá de 3)
+- Los implantes se destruyen si el piloto muere (a menos que tenga seguro de implantes)
+
+**Categorías de Implantes (5 tipos):**
+
+**1. Implantes de Atributos (Básicos)**
+- **Procesador Neural Alfa:** +5% velocidad de entrenamiento de skills
+  - Precio: 150,000₡
+- **Procesador Neural Beta:** +10% velocidad de entrenamiento de skills
+  - Precio: 500,000₡
+- **Procesador Neural Omega:** +15% velocidad de entrenamiento de skills
+  - Precio: 2,000,000₡
+
+**2. Implantes de Combate**
+- **Optimizador de Puntería T1:** +3% tracking de armas
+  - Precio: 300,000₡
+- **Optimizador de Puntería T2:** +5% tracking de armas
+  - Precio: 800,000₡
+- **Reflejos de Combate:** -5% tiempo de activación de módulos
+  - Precio: 600,000₡
+- **Sistemas de Targeting Avanzado:** +1 target máximo
+  - Precio: 1,200,000₡
+
+**3. Implantes de Ingeniería/Fitting**
+- **Amplificador de RE:** +3% Reactor de Energía total de la nave
+  - Precio: 400,000₡
+- **Overclock CPU:** +5% CPU total de la nave
+  - Precio: 400,000₡
+- **Regulador de Capacitor:** +8% capacitor total de la nave
+  - Precio: 500,000₡
+
+**4. Implantes de Navegación**
+- **Propulsión Mejorada:** +5% velocidad de viaje de la nave
+  - Precio: 350,000₡
+- **Estabilizador de Warp:** -10% tiempo de warp
+  - Precio: 700,000₡
+
+**5. Implantes de Industria/Exploración**
+- **Eficiencia Minera:** +8% rendimiento de minería
+  - Precio: 450,000₡
+- **Scanner Mejorado:** +10% precisión de escaneos planetarios
+  - Precio: 600,000₡
+- **Negociador Experto:** -3% impuestos de mercado
+  - Precio: 800,000₡
+
+**Obtención de Implantes:**
+- Compra en Mercados (precio variable según oferta/demanda)
+- Fabricación (requiere Nanobots + Cristales Vivos + Chips de Diseño)
+- Loot de NPCs raros en sitios de exploración T3-T4
+- Recompensa de misiones de alto nivel
+
+**Seguro de Implantes (Opcional):**
+- Costo: 20% del valor total de los implantes equipados
+- Duración: 30 días
+- Beneficio: Si mueres, los implantes NO se destruyen (se conservan)
+- Renovable automáticamente si tienes fondos
+
+**Estrategia:**
+- Jugadores deben elegir 3 implantes que complementen su estilo de juego
+- Ejemplo piloto minero: Procesador Neural Beta + Eficiencia Minera + Scanner Mejorado
+- Ejemplo piloto PvP: Reflejos de Combate + Optimizador Puntería T2 + Regulador de Capacitor
 
 ### 6.2.4 Habitáculos
 
@@ -842,6 +1048,78 @@ Almacenamiento de recursos e items.
 - Capacidad: 50,000,000 m³
 - Refrigeración (items perecederos)
 - Compresión de recursos
+
+### 6.2.9 Nodo de Teletransporte
+
+Permite teletransportar al piloto (sin nave) entre estaciones conectadas. Reemplaza el sistema de "Clone Jump" de EVE Online.
+
+**Mecánica:**
+- Cada Nodo puede enlazar con OTRA estación (una por nivel de módulo)
+- El piloto se teletransporta instantáneamente (deja la nave en la estación origen)
+- Cooldown entre teletransportes: 24 horas (reducible con niveles)
+- Ambas estaciones deben tener Nodo de Teletransporte operacional
+- El enlace es bidireccional (si A enlaza con B, puedes ir de A→B y B→A)
+
+**Consumo de Combustible:**
+- Consume Celdas de Hielo (Tier 1) para teletransportes cortos
+- Consume Bloques de Deuterio (Tier 2) para teletransportes medianos
+- Consume Núcleos de Plasma (Tier 3) para teletransportes largos
+- Distancia corta: mismo sistema (1-5 Celdas de Hielo)
+- Distancia media: sistemas adyacentes (1-3 Bloques de Deuterio)
+- Distancia larga: 3+ saltos de distancia (1 Núcleo de Plasma)
+
+**Nivel 1:**
+- 1 enlace activo
+- Cooldown: 24 horas
+- Distancia máxima: Mismo sistema
+- Costo instalación: 5,000,000₡
+- CPU: 80 TF | RE: 60 MW
+- Consumo energía: 2 Celdas de Hielo/tick cuando activo
+
+**Nivel 2:**
+- 2 enlaces activos
+- Cooldown: 18 horas
+- Distancia máxima: 1 salto (sistemas adyacentes)
+- Costo mejora: 8,000,000₡
+- CPU: 120 TF | RE: 90 MW
+- Consumo energía: 3 Celdas de Hielo/tick cuando activo
+
+**Nivel 3:**
+- 3 enlaces activos
+- Cooldown: 12 horas
+- Distancia máxima: 3 saltos
+- Costo mejora: 15,000,000₡
+- CPU: 180 TF | RE: 130 MW
+- Consumo energía: 1 Bloque de Deuterio/tick cuando activo
+
+**Nivel 4:**
+- 4 enlaces activos
+- Cooldown: 6 horas
+- Distancia máxima: 5 saltos
+- Costo mejora: 30,000,000₡
+- CPU: 250 TF | RE: 180 MW
+- Consumo energía: 2 Bloques de Deuterio/tick cuando activo
+
+**Nivel 5:**
+- 5 enlaces activos
+- Cooldown: 3 horas
+- Distancia máxima: Ilimitada (cualquier sistema del universo)
+- Costo mejora: 60,000,000₡
+- CPU: 350 TF | RE: 250 MW
+- Consumo energía: 1 Núcleo de Plasma/tick cuando activo
+- Bonus: Puede crear "Red de Teletransporte" (saltar a través de nodos intermedios)
+
+**Ejemplo de Uso:**
+- Corporación tiene 5 estaciones: A (HQ), B (minera), C (comercio), D (fabricación), E (frontera)
+- Estación A (Nodo Nivel 5) enlaza con: B, C, D, E, F (6 enlaces pero nivel 5 permite 5, debe elegir)
+- Piloto en A puede teletransportarse a B, C, D o E instantáneamente (paga combustible + cooldown)
+- Si el piloto quiere ir de B→D, debe ir B→A→D (2 saltos, 2 cooldowns) O estación B debe tener enlace directo a D
+
+**Restricciones:**
+- No funciona si la estación está bajo ataque
+- No funciona en sistemas con jammer activo (módulo hostil)
+- El piloto no puede teletransportarse si tiene marca criminal activa
+- Estaciones NPC no tienen Nodo de Teletransporte (solo jugadores)
 
 ---
 
@@ -1006,14 +1284,14 @@ Sitios especiales que aparecen aleatoriamente en sistemas y desaparecen tras cie
 
 **6. Agujeros de Gusano (Wormholes)**
 - **Descripción:** Conexiones temporales a otros sistemas (incluso no descubiertos)
-- **Mecánica:** Al atravesar, te lleva a un sistema aleatorio (puede ser sec 0.0)
+- **Mecánica:** Al atravesar, te lleva a un sistema aleatorio (puede ser IIC 4-5)
 - **Duración:** 1-6 horas, masa de naves limitada antes de colapsar
 - **Peligro:** Puedes quedar atrapado lejos de casa
 - **Detección:** Skill "Exploración" (nivel 4+)
 
 **7. Mercados Negros Flotantes (Black Markets)**
-- **Descripción:** Estaciones piratas temporales que aparecen solo en sistemas de baja seguridad (0.0-0.3)
-- **Ubicación:** Solo sistemas sec 0.0-0.3
+- **Descripción:** Estaciones piratas temporales que aparecen solo en sistemas de baja seguridad
+- **Ubicación:** Solo sistemas IIC 4-5
 - **Duración:** 72-144 ticks (12-24 horas)
 - **Detección:** Skill "Exploración" (nivel 3+) o información de NPCs piratas
 - **Acceso:** Requiere standing neutral/positivo (+5) con facción "Piratas del Cinturón" O pagar entrada de 50,000₡
@@ -1038,7 +1316,7 @@ Sitios especiales que aparecen aleatoriamente en sistemas y desaparecen tras cie
 
 3. **Modificaciones Ilegales de Naves**
    - **Quitar Transponder:** Stealth permanente, nave ilegal (200,000₡, NO reversible)
-   - **Amplificador PG/CPU Ilegal:** +25% PG/CPU, Albatross ataca en sec 0.5+ (350,000₡, reversible 100,000₡)
+   - **Amplificador RE/CPU Ilegal:** +25% RE/CPU, Albatross ataca en IIC 1-2 (350,000₡, reversible 100,000₡)
    - **Reactor Black Hole:** Capacitor infinito, 5% chance explosión/tick en combate (1,000,000₡, reversible 250,000₡)
    - **Sistema Puntería Ilegal:** +40% tracking, +25% optimal range, nave ilegal (450,000₡, NO reversible)
    - Consecuencia: Naves flagged como ilegales, Albatross las ataca en sistemas de alta seguridad
@@ -1051,7 +1329,7 @@ Sitios especiales que aparecen aleatoriamente en sistemas y desaparecen tras cie
 **Riesgos:**
 - **PvP Permitido Dentro:** Otros jugadores pueden atacarte mientras estás en el mercado negro sin consecuencias
 - **Raids de Albatross:** 5% chance por hora de que Albatross raidee el mercado (todos los presentes flagged + combate forzado)
-- **Items Trackeados:** Algunos items ilegales pueden ser "rastreados" por NPCs lawful (confiscación si detectado en sec 0.5+)
+- **Items Trackeados:** Algunos items ilegales pueden ser "rastreados" por NPCs lawful (confiscación si detectado en IIC 1-2)
 - **Standing Negativo:** Comerciar aquí reduce standing con facciones lawful (-1 por transacción)
 
 **Economía:**
@@ -1062,16 +1340,16 @@ Sitios especiales que aparecen aleatoriamente en sistemas y desaparecen tras cie
 #### 14.4.2 Aparición de Sitios Temporales
 
 **Frecuencia General:**
-- Sistemas sec 1.0: 0-1 sitio cada 72 horas (solo T1, NO Sitios Ancestrales ni Mercados Negros)
-- Sistemas sec 0.5-0.9: 1-3 sitios cada 48 horas (T1-T2, incluye Sitios Ancestrales T1-T2)
-- Sistemas sec 0.1-0.4: 2-5 sitios cada 24 horas (T1-T3, incluye Sitios Ancestrales T2-T3)
-- Sistemas sec 0.0: 3-10 sitios cada 12 horas (T1-T4, incluye Sitios Ancestrales T3-T4 + Mercados Negros)
+- Sistemas IIC 1: 0-1 sitio cada 72 horas (solo T1, NO Sitios Ancestrales ni Mercados Negros)
+- Sistemas IIC 2: 1-3 sitios cada 48 horas (T1-T2, incluye Sitios Ancestrales T1-T2)
+- Sistemas IIC 3: 2-5 sitios cada 24 horas (T1-T3, incluye Sitios Ancestrales T2-T3)
+- Sistemas IIC 4-5: 3-10 sitios cada 12 horas (T1-T4, incluye Sitios Ancestrales T3-T4 + Mercados Negros)
 
 **Frecuencia Específica - Sitios Ancestrales:**
-- Sec 1.0: 0 sitios (NO spawneran)
-- Sec 0.5-0.9: 1 sitio cada 96 horas (T1-T2)
-- Sec 0.1-0.4: 2-3 sitios cada 48 horas (T1-T3)
-- Sec 0.0: 3-6 sitios cada 24 horas (T2-T4)
+- IIC 1: 0 sitios (NO spawneran)
+- IIC 2: 1 sitio cada 96 horas (T1-T2)
+- IIC 3: 2-3 sitios cada 48 horas (T1-T3)
+- IIC 4-5: 3-6 sitios cada 24 horas (T2-T4)
 
 **Distribución Aleatoria de Tipos (Sitios Ancestrales):**
 - 30% Complejo Precursor
@@ -1080,7 +1358,7 @@ Sitios especiales que aparecen aleatoriamente en sistemas y desaparecen tras cie
 - 20% Campo de Escombros Alienígena
 
 **Frecuencia Específica - Mercados Negros Flotantes:**
-- Solo aparecen en sistemas sec 0.0-0.3
+- Solo aparecen en sistemas IIC 4-5
 - Frecuencia: 1 mercado cada 72-144 horas en el sistema
 - Duración: 72-144 ticks (12-24 horas)
 - Máximo: 1 mercado negro activo por sistema simultáneamente

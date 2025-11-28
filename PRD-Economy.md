@@ -173,7 +173,60 @@ Creados combinando recursos refinados. Necesarios para fabricación avanzada.
 - **Medkits Avanzados:** Esporas Regenerativas + Nanobots
 - **Sueros de Buff:** Algas + Proteínas
 
-### 9.2.7 Datos de Exploración
+### 9.2.7 Combustibles Procesados
+
+Los combustibles procesados se obtienen de Ice Belts y son esenciales para energizar estaciones espaciales y naves capitales.
+
+**Fuentes:** Ice Belts (Hielo de Agua, Deuterio, Plasma, Exótico)
+
+**Procesamiento:**
+```
+Hielo Crudo → Refinamiento → Combustible Preparado
+```
+
+**Tipos de Combustible:**
+
+**1. Celdas de Hielo (Tier 1)**
+- **Input:** 100 Hielo de Agua
+- **Output:** 75 Celdas de Hielo
+- **Uso:** Energía básica para estaciones pequeñas, naves T1
+- **Consumo estación:** 1-6 celdas/tick (según módulos nivel 1-5)
+- **Precio:** 500₡/unidad
+
+**2. Bloques de Deuterio (Tier 2)**
+- **Input:** 100 Hielo de Deuterio
+- **Output:** 80 Bloques de Deuterio
+- **Uso:** Energía avanzada para estaciones medianas, naves T2
+- **Consumo estación:** 1.5-7.5 bloques/tick (según módulos nivel 1-5)
+- **Precio:** 2,000₡/unidad
+
+**3. Núcleos de Plasma (Tier 3)**
+- **Input:** 50 Hielo de Plasma
+- **Output:** 40 Núcleos de Plasma
+- **Uso:** Energía premium para estaciones grandes, naves capitales
+- **Consumo estación:** 2.5-9 núcleos/tick (según módulos nivel 1-5)
+- **Precio:** 8,000₡/unidad
+
+**4. Reactores de Antimateria (Tier 4)**
+- **Input:** 10 Hielo Exótico + 5 Antimateria
+- **Output:** 8 Reactores de Antimateria
+- **Uso:** Saltos interestelares para naves capitales (sin stargates)
+- **Consumo:** 1 reactor por salto (alcance: 3-5 sistemas)
+- **Precio:** 50,000₡/unidad
+
+**Mecánica de Consumo en Estaciones:**
+- Estaciones sin combustible: Módulos se desactivan progresivamente
+- Prioridad de desactivación: Puente Mando (último) > Hangar > Defensa > Otros
+- Almacenamiento: Depósito de Combustible (módulo de estación opcional)
+- Las bases estelares de jugadores requieren combustible constante para operar
+
+**Mecánica de Consumo en Naves Capitales:**
+- Reactores de Antimateria permiten saltos interestelares sin stargates
+- Alcance: 3-5 sistemas de distancia
+- Cooldown: 30 ticks entre saltos
+- Fatiga acumulativa: cada salto aumenta cooldown +10 ticks
+
+### 9.2.8 Datos de Exploración
 
 Nuevo tipo de recurso comercializable obtenido al explorar planetas y sitios desconocidos.
 
@@ -219,7 +272,7 @@ Nuevo tipo de recurso comercializable obtenido al explorar planetas y sitios des
 - Datos Avanzados planeta Volcánico: ~8,000₡
 - Datos Completos planeta Fragmentado (primer descubridor): ~150,000₡
 
-### 9.2.8 Chips de Diseño (Blueprints)
+### 9.2.9 Chips de Diseño (Blueprints)
 
 Los Chips de Diseño son items que desbloquean blueprints en la Consola de Fabricación (reemplazan el sistema tradicional BPO/BPC).
 
@@ -239,7 +292,7 @@ Los Chips de Diseño son items que desbloquean blueprints en la Consola de Fabri
 - T2: 100,000 - 500,000₡
 - T3: 1,000,000 - 5,000,000₡
 
-### 9.2.9 Items de Exploración Ancestral
+### 9.2.10 Items de Exploración Ancestral
 
 Nuevos items obtenidos en Sitios Ancestrales con mecánicas únicas de blueprint unlock.
 
@@ -311,7 +364,7 @@ Nuevos items obtenidos en Sitios Ancestrales con mecánicas únicas de blueprint
 - **Precio NPC:** 5,000 - 50,000₡
 - **Uso:** Vender a NPCs o coleccionar (logros)
 
-### 9.2.10 Items Ilegales
+### 9.2.11 Items Ilegales
 
 Items prohibidos solo disponibles en Mercados Negros Flotantes.
 
@@ -319,7 +372,7 @@ Items prohibidos solo disponibles en Mercados Negros Flotantes.
 - **Descripción:** Módulos modificados ilegalmente con stats extremos pero durabilidad reducida
 - **Stats:** +50% beneficio principal, -50% durabilidad (se rompen más rápido)
 - **Precio:** 75,000 - 500,000₡ (1.5-3x precio normal)
-- **Consecuencia:** Si Albatross escanea tu nave en sec 0.5+, confiscación (-10 standing)
+- **Consecuencia:** Si Albatross escanea tu nave en IIC 1-2, confiscación (-10 standing)
 - **Ejemplos:**
   - "Láser Overclocked T2" (+50% damage, -50% durabilidad)
   - "Escudo Overclocked T3" (+50% HP, -50% durabilidad)
@@ -353,9 +406,43 @@ Items prohibidos solo disponibles en Mercados Negros Flotantes.
 - **Uso:** Evadir enemigos, infiltración
 - **Consecuencia:** Si Albatross detecta (15% chance/scan), flagged como criminal permanente
 
+**Compartimento Blindado:**
+- **Tier 1:** 15% chance evasión escaneo, 500m³ carga oculta, 15 RE, 25 CPU
+  - **Precio:** 250,000₡
+  - **Uso:** Módulo de nave (slot utilidad)
+- **Tier 2:** 35% chance evasión escaneo, 1000m³ carga oculta, 25 RE, 40 CPU
+  - **Precio:** 600,000₡
+  - **Uso:** Módulo de nave (slot utilidad)
+- **Tier 3:** 60% chance evasión escaneo, 2000m³ carga oculta, 40 RE, 60 CPU
+  - **Precio:** 1,500,000₡
+  - **Uso:** Módulo de nave (slot utilidad)
+- **Disponibilidad:** Solo en Mercados Negros
+- **Función:** Oculta ítems ilegales en compartimento especial, reduce detección en inspecciones
+
+**Bloqueador de Escaneo:**
+- **Tier 1:** +20% resistencia a escaneos, 30 RE, 20 CPU, consume 15 cap/s activo
+  - **Precio:** 180,000₡
+  - **Uso:** Módulo de nave (slot utilidad)
+- **Tier 2:** +45% resistencia a escaneos, 50 RE, 35 CPU, consume 25 cap/s activo
+  - **Precio:** 450,000₡
+  - **Uso:** Módulo de nave (slot utilidad)
+- **Tier 3:** +70% resistencia a escaneos + jammer activo, 75 RE, 55 CPU, consume 40 cap/s activo
+  - **Precio:** 1,200,000₡
+  - **Uso:** Módulo de nave (slot utilidad)
+- **Disponibilidad:** Solo en Mercados Negros
+- **Función:** Interfiere activamente con escáneres de carga, consume capacitor cuando está activado
+
+**Revestimiento Anti-Detección:**
+- **Descripción:** Modificación permanente del casco para evadir escaneos
+- **Efecto:** +25% evasión base contra todos los escaneos de carga
+- **Precio:** 800,000₡
+- **Instalación:** Disponible solo en Mercados Negros
+- **Reversible:** Sí, por 200,000₡
+- **Nota:** No consume slots de módulos, es una modificación estructural
+
 **Modificaciones Ilegales de Naves** (ver PRD-ShipsAndCombat.md para detalles):
 - Eliminar Transponder: 200,000₡
-- Amplificador PG/CPU Ilegal: 350,000₡
+- Amplificador RE/CPU Ilegal: 350,000₡
 - Reactor Black Hole: 1,000,000₡
 - Sistema Puntería Ilegal: 450,000₡
 
