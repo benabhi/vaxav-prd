@@ -576,29 +576,31 @@ Cuando la estructura de una nave llega a 0:
 - Con cápsula: puede huir en pod (nave ligera indefensa)
 - Si el pod también es destruido: el piloto muere y respawnea en último clon
 
-**Sistema de Clones (Checkpoints):**
+**Sistema de Clones (Estilo EVE):**
 
-El sistema de clones en VAXAV funciona como puntos de respawn (checkpoints), NO como el sistema de EVE Online.
+El sistema de clones en VAXAV funciona similar a EVE Online, permitiendo múltiples clones con implantes independientes.
 
 **Mecánica:**
 - Los clones se crean en Laboratorios de estaciones (ver [PRD-Universe.md](./PRD-Universe.md#6.2.3-laboratorio))
-- Cada clon es un "punto de reaparición" guardado en esa estación
-- Puedes tener múltiples clones activos en diferentes estaciones (límite según nivel de Laboratorio)
-- Al morir: **NO pierdes skills ni experiencia** (diferente a EVE)
-- Respawneas instantáneamente en el último clon activado
+- Puedes tener múltiples clones activos en diferentes estaciones (límite según nivel de Laboratorio + skill)
+- Cada clon mantiene sus propios implantes (máximo 5 implantes por clon)
+- Puedes "saltar" entre clones usando la acción "Clone Jump"
+- Al morir: **NO pierdes skills ni experiencia**, respawneas en el clon activo más reciente
+- El clon destruido y sus implantes se pierden (a menos que tengas seguro)
 
 **Crear un Clon:**
 1. Visitar un Laboratorio (Nivel 1+)
-2. Seleccionar "Crear Punto de Clonación"
-3. Costo: 25,000₡
-4. Tiempo: Instantáneo
-5. El clon queda guardado en esa estación
+2. Seleccionar "Crear Nuevo Clon"
+3. Costo: 50,000₡
+4. Tiempo: 12 ticks
+5. El clon queda almacenado en esa estación
 
-**Activar Clon como Respawn Principal:**
-- Puedes cambiar cuál clon es tu "respawn principal" desde cualquier Laboratorio
-- Costo: 5,000₡
-- Cooldown: 24 horas (144 ticks) entre cambios
-- No necesitas estar en la estación del clon para activarlo
+**Saltar entre Clones (Clone Jump):**
+- Requiere estar atracado en un Laboratorio (Nivel 2+)
+- Tu consciencia se transfiere instantáneamente al clon destino
+- El clon anterior queda en su estación con todos sus implantes
+- **Cooldown:** 144 ticks (24 horas), reducido a 72 ticks (12 horas) con Laboratorio Nivel 5
+- **Skill:** Requiere "Gestión de Clones Avanzada" para aumentar límite de clones
 
 **Límites de Clones:**
 - Laboratorio Nivel 1: 1 clon activo
@@ -606,25 +608,27 @@ El sistema de clones en VAXAV funciona como puntos de respawn (checkpoints), NO 
 - Laboratorio Nivel 3: 5 clones activos
 - Laboratorio Nivel 4: 10 clones activos
 - Laboratorio Nivel 5: Clones ilimitados
+- **Skill "Gestión de Clones Avanzada":** +2 clones máximos por nivel
 
 **Ejemplo de Uso:**
-- Piloto tiene clones en: Estación A (minera), Estación B (comercio), Estación C (frontera PvP)
-- Respawn principal: Estación A
-- Piloto muere en combate → Respawnea instantáneamente en Estación A
-- Piloto cambia respawn principal a C (para PvP) → Cooldown 24h
-- Próxima muerte → Respawnea en Estación C
+- Piloto tiene clones en: Estación A (minero, implantes de minería), Estación B (comercial), Estación C (PvP, implantes de combate)
+- Clon activo: Estación A
+- Piloto termina minería → Salta a Clon C (cooldown 144 ticks)
+- Clon A queda en Estación A con sus implantes de minería intactos
+- Piloto ahora está en Clon C con implantes de combate
+- Piloto muere en PvP → Respawnea en Clon A (clon C y sus implantes destruidos)
 
 **Pérdidas al Morir:**
 - Nave destruida (se convierte en Wreck saqueab le)
 - Módulos equipados (% quedan en Wreck)
 - Carga de la nave (% queda en Wreck)
-- Implantes (destruidos a menos que tengas seguro de implantes)
-- **NO SE PIERDEN:** Skills, experiencia, items en estaciones, créditos
+- Clon activo destruido con todos sus implantes (a menos que tengas seguro de implantes)
+- **NO SE PIERDEN:** Skills, experiencia, items en estaciones, créditos, otros clones en otras estaciones
 
 **Ventaja sobre EVE:**
 - Morir es menos punitivo (no pierdes progreso de skills)
 - Permite juego más agresivo y experimental
-- Clones como herramienta estratégica (respawn cerca de zonas de actividad)
+- Clones especializados como herramienta estratégica (clones con diferentes implantes para diferentes actividades)
 
 ---
 

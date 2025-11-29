@@ -759,8 +759,8 @@ Centro de investigación, inyección de habilidades y clonación.
 **Funcionalidades Principales:**
 - **Catálogo de Inyectores:** Cada laboratorio tiene un inventario limitado de inyectores según su especialización
 - **Inyección de Habilidades:** Proceso instantáneo que desbloquea una habilidad en nivel 0
-- **Clonación:** Puntos de respawn para cuando el piloto muere
-- **Implantes:** Instalación y extracción de implantes cibernéticos (máximo 3 activos)
+- **Gestión de Clones:** Creación de clones múltiples, salto entre clones, respawn al morir
+- **Implantes:** Instalación y extracción de implantes cibernéticos (máximo 5 activos)
 - **Investigación:** Mejora de Blueprints (niveles superiores)
 
 **Nivel 1:**
@@ -768,38 +768,51 @@ Centro de investigación, inyección de habilidades y clonación.
 - Ejemplo estación minera: Minería, Refinamiento, Prospección, Pilotaje Fragatas
 - Ejemplo estación militar: Armas Proyectiles, Armas Energía, Blindaje, Pilotaje Fragatas
 - **Precio inyectores:** 100% del costo base
-- 1 punto de clonación activo
+- **Clones:** Puede crear 1 clon activo (respawn al morir)
 - **Descubrimiento:** Visitar el laboratorio descubre todas las habilidades de su catálogo
 
 **Nivel 2:**
 - **Catálogo:** 10-15 inyectores (x1, x2, x3)
 - **Precio inyectores:** 95% del costo base
-- 3 puntos de clonación
+- **Clones:** Puede crear hasta 3 clones activos
+- **Salto de Clones:** Permite saltar entre clones (cooldown 144 ticks / 24 horas)
 - Ver árbol completo de habilidades con progreso
 - Aceleradores de entrenamiento disponibles (+exp a skills)
 
 **Nivel 3:**
 - **Catálogo:** 15-25 inyectores (x1, x2, x3, x4)
 - **Precio inyectores:** 90% del costo base
-- 5 puntos de clonación
-- Investigación de Blueprints (BPO)
+- **Clones:** Puede crear hasta 5 clones activos
+- Descifrado de Núcleos de Datos (12 ticks) para desbloquear recetas aleatorias
 - Atributos de la habilidad visible (bonificadores exactos)
 
 **Nivel 4:**
 - **Catálogo:** 25-40 inyectores (x1, x2, x3, x4, x5)
 - **Precio inyectores:** 85% del costo base
-- 10 puntos de clonación
-- Mejora de Blueprints (BPO → BPC mejorado)
+- **Clones:** Puede crear hasta 10 clones activos
+- Análisis de Prototipos Experimentales (24 ticks) para desbloquear recetas T3 únicas
 - Extracción de experiencia (+10% exp en todas las acciones mientras atracado)
 - "Skill Planner" - Herramienta que muestra camino óptimo para alcanzar habilidad objetivo
 
 **Nivel 5:**
 - **Catálogo:** 40+ inyectores (todas las categorías, incluyendo raras)
 - **Precio inyectores:** 80% del costo base
-- Clonación instantánea (sin cooldown)
-- Investigación avanzada (Blueprints T3)
+- **Clones:** Clones ilimitados
+- **Salto de Clones:** Cooldown reducido a 72 ticks (12 horas)
+- Investigación avanzada de Esquemas Xenotecnología (48 ticks) para recetas exóticas
 - Transferencia de skills limitada (redistribuir exp entre skills similares, con pérdida)
-- "Neural Backup" - Backup automático de skills cada 24h
+- "Neural Backup" - Backup automático de skills cada 144 ticks (24 horas)
+
+**Sistema de Clones Estilo EVE:**
+- Los clones se crean en cualquier Laboratorio Nivel 1+ (costo 50,000₡ + 12 ticks)
+- Puedes "saltar" de un clon a otro usando la acción "Clone Jump" en el Laboratorio
+- Al saltar, tu consciencia se transfiere al clon destino instantáneamente
+- El clon anterior queda en su estación CON todos sus implantes equipados
+- Los implantes NO se transfieren al saltar - cada clon mantiene sus propios implantes
+- **Cooldown:** 144 ticks (24 horas) entre saltos de clones, reducido a 72 ticks (12 horas) con Laboratorio Nivel 5
+- **Skill requerida:** "Gestión de Clones Avanzada" - cada nivel aumenta +2 clones máximos
+- **Al morir:** Respawneas instantáneamente en el clon activo más reciente, pierdes el clon destruido y sus implantes (a menos que tengas seguro)
+- **Estrategia:** Jugadores pueden tener clones especializados (ej: clon minero con implantes de minería, clon PvP con implantes de combate)
 
 **Especialización de Laboratorios por Tipo de Estación:**
 
@@ -829,11 +842,12 @@ Centro de investigación, inyección de habilidades y clonación.
 Los implantes son mejoras cibernéticas permanentes que otorgan bonificaciones pasivas al piloto.
 
 **Reglas Generales:**
-- **Máximo 3 implantes activos simultáneamente**
+- **Máximo 5 implantes activos simultáneamente**
 - Instalación: Requiere Laboratorio Nivel 2+ (costo 10,000₡ + 6 ticks de proceso)
 - Extracción: Requiere Laboratorio Nivel 1+ (costo 5,000₡ + 3 ticks, implante se destruye)
-- Intercambio: Puedes extraer un implante para instalar otro (no acumulan más allá de 3)
-- Los implantes se destruyen si el piloto muere (a menos que tenga seguro de implantes)
+- Intercambio: Puedes extraer un implante para instalar otro (no acumulan más allá de 5)
+- Los implantes permanecen con el clon cuando saltas a otro clon
+- Los implantes se destruyen si el clon muere (a menos que tenga seguro de implantes)
 
 **Categorías de Implantes (5 tipos):**
 
@@ -1048,78 +1062,6 @@ Almacenamiento de recursos e items.
 - Capacidad: 50,000,000 m³
 - Refrigeración (items perecederos)
 - Compresión de recursos
-
-### 6.2.9 Nodo de Teletransporte
-
-Permite teletransportar al piloto (sin nave) entre estaciones conectadas. Reemplaza el sistema de "Clone Jump" de EVE Online.
-
-**Mecánica:**
-- Cada Nodo puede enlazar con OTRA estación (una por nivel de módulo)
-- El piloto se teletransporta instantáneamente (deja la nave en la estación origen)
-- Cooldown entre teletransportes: 24 horas (reducible con niveles)
-- Ambas estaciones deben tener Nodo de Teletransporte operacional
-- El enlace es bidireccional (si A enlaza con B, puedes ir de A→B y B→A)
-
-**Consumo de Combustible:**
-- Consume Celdas de Hielo (Tier 1) para teletransportes cortos
-- Consume Bloques de Deuterio (Tier 2) para teletransportes medianos
-- Consume Núcleos de Plasma (Tier 3) para teletransportes largos
-- Distancia corta: mismo sistema (1-5 Celdas de Hielo)
-- Distancia media: sistemas adyacentes (1-3 Bloques de Deuterio)
-- Distancia larga: 3+ saltos de distancia (1 Núcleo de Plasma)
-
-**Nivel 1:**
-- 1 enlace activo
-- Cooldown: 24 horas
-- Distancia máxima: Mismo sistema
-- Costo instalación: 5,000,000₡
-- CPU: 80 TF | RE: 60 MW
-- Consumo energía: 2 Celdas de Hielo/tick cuando activo
-
-**Nivel 2:**
-- 2 enlaces activos
-- Cooldown: 18 horas
-- Distancia máxima: 1 salto (sistemas adyacentes)
-- Costo mejora: 8,000,000₡
-- CPU: 120 TF | RE: 90 MW
-- Consumo energía: 3 Celdas de Hielo/tick cuando activo
-
-**Nivel 3:**
-- 3 enlaces activos
-- Cooldown: 12 horas
-- Distancia máxima: 3 saltos
-- Costo mejora: 15,000,000₡
-- CPU: 180 TF | RE: 130 MW
-- Consumo energía: 1 Bloque de Deuterio/tick cuando activo
-
-**Nivel 4:**
-- 4 enlaces activos
-- Cooldown: 6 horas
-- Distancia máxima: 5 saltos
-- Costo mejora: 30,000,000₡
-- CPU: 250 TF | RE: 180 MW
-- Consumo energía: 2 Bloques de Deuterio/tick cuando activo
-
-**Nivel 5:**
-- 5 enlaces activos
-- Cooldown: 3 horas
-- Distancia máxima: Ilimitada (cualquier sistema del universo)
-- Costo mejora: 60,000,000₡
-- CPU: 350 TF | RE: 250 MW
-- Consumo energía: 1 Núcleo de Plasma/tick cuando activo
-- Bonus: Puede crear "Red de Teletransporte" (saltar a través de nodos intermedios)
-
-**Ejemplo de Uso:**
-- Corporación tiene 5 estaciones: A (HQ), B (minera), C (comercio), D (fabricación), E (frontera)
-- Estación A (Nodo Nivel 5) enlaza con: B, C, D, E, F (6 enlaces pero nivel 5 permite 5, debe elegir)
-- Piloto en A puede teletransportarse a B, C, D o E instantáneamente (paga combustible + cooldown)
-- Si el piloto quiere ir de B→D, debe ir B→A→D (2 saltos, 2 cooldowns) O estación B debe tener enlace directo a D
-
-**Restricciones:**
-- No funciona si la estación está bajo ataque
-- No funciona en sistemas con jammer activo (módulo hostil)
-- El piloto no puede teletransportarse si tiene marca criminal activa
-- Estaciones NPC no tienen Nodo de Teletransporte (solo jugadores)
 
 ---
 

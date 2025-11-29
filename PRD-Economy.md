@@ -147,31 +147,153 @@ Estación Nivel 2: +10%
 → 94.8 unidades de Ferrita Refinada
 ```
 
+#### 9.2.5.1 Tabla Completa de Recursos Procesados
+
+**RECURSOS METÁLICOS PROCESADOS (8 tipos)**
+
+| Recurso Crudo | Recurso Procesado | Tier | Ratio Base | Skill Req. | Tiempo | Precio NPC Base (procesado) | Volumen |
+|---------------|-------------------|------|------------|------------|--------|----------------------------|---------|
+| Ferrita Cruda | Ferrita Refinada | T1 | 0.75 | Refinamiento Nivel 1 | 1 tick/100u | 12₡/u | 1 m³/u |
+| Cobre Crudo | Cobre Estelar | T1 | 0.75 | Refinamiento Nivel 1 | 1 tick/100u | 15₡/u | 0.5 m³/u |
+| Silicatos Crudos | Silicatos Refinados | T1 | 0.75 | Refinamiento Nivel 1 | 1 tick/100u | 10₡/u | 0.8 m³/u |
+| Titanita Cruda | Titanita Refinada | T2 | 0.70 | Refinamiento Nivel 2 | 2 ticks/100u | 80₡/u | 1.2 m³/u |
+| Magnetita Cruda | Magnetita Pura | T2 | 0.70 | Refinamiento Nivel 2 | 2 ticks/100u | 120₡/u | 1 m³/u |
+| Duralinio Crudo | Duralinio Espacial | T3 | 0.65 | Refinamiento Nivel 3 | 4 ticks/100u | 350₡/u | 0.6 m³/u |
+| Cristales Crudos | Cristales de Zafiro | T3 | 0.65 | Refinamiento Nivel 3 | 4 ticks/100u | 500₡/u | 0.3 m³/u |
+| Adamantita Cruda | Adamantita Refinada | T4 | 0.60 | Refinamiento Nivel 4 | 6 ticks/100u | 2,500₡/u | 0.4 m³/u |
+| Neutronium Crudo | Neutronium Procesado | T4 | 0.60 | Refinamiento Nivel 5 | 8 ticks/100u | 5,000₡/u | 0.2 m³/u |
+
+**RECURSOS GASEOSOS/VOLÁTILES PROCESADOS (8 tipos)**
+
+| Recurso Crudo | Recurso Procesado | Tier | Ratio Base | Skill Req. | Tiempo | Precio NPC Base (procesado) | Volumen |
+|---------------|-------------------|------|------------|------------|--------|----------------------------|---------|
+| Hidrógeno Crudo | Hidrógeno Comprimido | T1 | 0.75 | Refinamiento Nivel 1 | 1 tick/100u | 8₡/u | 2 m³/u |
+| Helio Crudo | Helio Líquido | T1 | 0.75 | Refinamiento Nivel 1 | 1 tick/100u | 10₡/u | 1.5 m³/u |
+| Deuterio Crudo | Deuterio Refinado | T2 | 0.70 | Refinamiento Nivel 2 | 2 ticks/100u | 100₡/u | 1 m³/u |
+| Nitrógeno Crudo | Nitrógeno Criogénico | T2 | 0.70 | Refinamiento Nivel 2 | 2 ticks/100u | 85₡/u | 1.2 m³/u |
+| Plasma Crudo | Plasma Ionizado | T3 | 0.65 | Refinamiento Nivel 3 | 4 ticks/100u | 400₡/u | 0.5 m³/u |
+| Xenón Crudo | Xenón Enriquecido | T3 | 0.65 | Refinamiento Nivel 3 | 4 ticks/100u | 550₡/u | 0.4 m³/u |
+| Antimateria Cruda | Antimateria Estable | T4 | 0.60 | Refinamiento Nivel 4 | 6 ticks/100u | 3,000₡/u | 0.1 m³/u |
+| Materia Oscura Cruda | Materia Oscura Contenida | T4 | 0.60 | Refinamiento Nivel 5 | 8 ticks/100u | 6,000₡/u | 0.1 m³/u |
+
+**RECURSOS ORGÁNICOS/EXÓTICOS PROCESADOS (8 tipos)**
+
+| Recurso Crudo | Recurso Procesado | Tier | Ratio Base | Skill Req. | Tiempo | Precio NPC Base (procesado) | Volumen |
+|---------------|-------------------|------|------------|------------|--------|----------------------------|---------|
+| Biomasa Cruda | Biomasa Refinada | T1 | 0.75 | Refinamiento Nivel 1 | 1 tick/100u | 6₡/u | 3 m³/u |
+| Agua Sucia | Agua Destilada | T1 | 0.75 | Refinamiento Nivel 1 | 1 tick/100u | 5₡/u | 4 m³/u |
+| Proteínas Crudas | Proteínas Sintéticas | T2 | 0.70 | Refinamiento Nivel 2 | 2 ticks/100u | 90₡/u | 2 m³/u |
+| Algas Crudas | Algas Bioluminiscentes | T2 | 0.70 | Refinamiento Nivel 2 | 2 ticks/100u | 110₡/u | 2.5 m³/u |
+| Nanobots Dañados | Nanobots Orgánicos | T3 | 0.65 | Refinamiento Nivel 3 | 4 ticks/100u | 450₡/u | 0.3 m³/u |
+| Cristales Silvestres | Cristales Vivos | T3 | 0.65 | Refinamiento Nivel 3 | 4 ticks/100u | 600₡/u | 0.2 m³/u |
+| Esporas Crudas | Esporas Regenerativas | T4 | 0.60 | Refinamiento Nivel 4 | 6 ticks/100u | 3,500₡/u | 0.2 m³/u |
+| Genoma Salvaje | Genoma Alienígena | T4 | 0.60 | Refinamiento Nivel 5 | 8 ticks/100u | 7,000₡/u | 0.1 m³/u |
+
+**Notas Importantes:**
+- **Ratio Base:** Se multiplica por bonificadores de skill y estación (fórmula arriba)
+- **Skill Refinamiento:** Cada nivel otorga +5% eficiencia
+- **Bonificador Estación:** Sala de Ingeniería Nivel 1-5 otorga 0-25% eficiencia
+- **Tiempo:** Base por 100 unidades, escalable linealmente
+- **Precios NPC:** Valor de venta a NPCs, mercado de jugadores puede variar ±300%
+- **Receta Desbloqueo:** Todos los refinamientos T1-T2 desbloqueados por defecto, T3-T4 requieren pagar créditos (50K₡-500K₡)
+
 ### 9.2.6 Componentes Intermedios
 
 Creados combinando recursos refinados. Necesarios para fabricación avanzada.
 
-**Ejemplos:**
+**Regla Crítica:** NINGÚN producto final se fabrica directamente con recursos crudos. La cadena es siempre: Crudo → Procesado → Componente → Producto Final.
 
-**Electrónica:**
-- **Circuitos Básicos:** Cobre Estelar + Silicatos
-- **Procesadores Avanzados:** Cristales de Zafiro + Cobre Estelar
-- **Chips Cuánticos:** Cristales Vivos + Cristales de Zafiro
+#### 9.2.6.1 Componentes Electrónicos (10 tipos)
 
-**Estructurales:**
-- **Placas de Blindaje:** Ferrita + Titanita
-- **Armadura Reforzada:** Duralinio + Adamantita
-- **Aleaciones Exóticas:** Neutronium + Duralinio
+| Componente | Tier | Materiales Requeridos | Tiempo | Skill Req. | Precio NPC Base | Volumen | Desbloqueo |
+|------------|------|-----------------------|--------|------------|-----------------|---------|------------|
+| Circuitos Básicos | T1 | 20 Cobre Estelar + 10 Silicatos Refinados | 2 ticks | Construcción de Componentes Nivel 1 | 500₡ | 0.1 m³ | Gratis |
+| Condensadores | T1 | 15 Cobre Estelar + 5 Magnetita Pura | 2 ticks | Construcción de Componentes Nivel 1 | 650₡ | 0.1 m³ | Gratis |
+| Procesadores T1 | T1 | 30 Cobre Estelar + 20 Silicatos Refinados | 3 ticks | Construcción de Componentes Nivel 1 | 800₡ | 0.05 m³ | Gratis |
+| Microconductores | T2 | 25 Cobre Estelar + 15 Titanita Refinada | 4 ticks | Construcción de Componentes Nivel 2 | 2,200₡ | 0.08 m³ | 25,000₡ |
+| Procesadores T2 | T2 | 40 Cobre Estelar + 10 Cristales de Zafiro | 5 ticks | Construcción de Componentes Nivel 2 | 3,500₡ | 0.05 m³ | 35,000₡ |
+| Chips Cuánticos T1 | T2 | 20 Cristales de Zafiro + 30 Cobre Estelar | 6 ticks | Construcción de Componentes Nivel 2 | 4,000₡ | 0.03 m³ | 50,000₡ |
+| Procesadores T3 | T3 | 50 Cristales de Zafiro + 20 Duralinio Espacial | 8 ticks | Construcción de Componentes Nivel 3 | 12,000₡ | 0.04 m³ | 100,000₡ |
+| Chips Cuánticos T2 | T3 | 30 Cristales Vivos + 25 Cristales de Zafiro | 10 ticks | Construcción de Componentes Nivel 3 | 18,000₡ | 0.02 m³ | 150,000₡ |
+| Núcleos de IA | T4 | 40 Cristales Vivos + 30 Chips Cuánticos T2 | 12 ticks | Construcción de Componentes Nivel 4 | 55,000₡ | 0.02 m³ | 300,000₡ |
+| Matrices Neuronales | T4 | 50 Genoma Alienígena + 20 Núcleos de IA | 15 ticks | Construcción de Componentes Nivel 5 | 120,000₡ | 0.01 m³ | 500,000₡ |
 
-**Energéticos:**
-- **Celdas de Combustible:** Hidrógeno + Helio
-- **Reactores de Fusión:** Deuterio + Magnetita
-- **Núcleos de Antimateria:** Antimateria + Materia Oscura
+#### 9.2.6.2 Componentes Estructurales (10 tipos)
 
-**Biológicos:**
-- **Raciones de Supervivencia:** Biomasa + Proteínas
-- **Medkits Avanzados:** Esporas Regenerativas + Nanobots
-- **Sueros de Buff:** Algas + Proteínas
+| Componente | Tier | Materiales Requeridos | Tiempo | Skill Req. | Precio NPC Base | Volumen | Desbloqueo |
+|------------|------|-----------------------|--------|------------|-----------------|---------|------------|
+| Barras de Acero | T1 | 50 Ferrita Refinada + 10 Silicatos Refinados | 2 ticks | Construcción de Componentes Nivel 1 | 700₡ | 2 m³ | Gratis |
+| Placas de Blindaje T1 | T1 | 60 Ferrita Refinada + 20 Titanita Refinada | 3 ticks | Construcción de Componentes Nivel 1 | 1,200₡ | 1.5 m³ | Gratis |
+| Vigas Reforzadas | T1 | 40 Ferrita Refinada + 15 Cobre Estelar | 2 ticks | Construcción de Componentes Nivel 1 | 900₡ | 3 m³ | Gratis |
+| Placas de Blindaje T2 | T2 | 50 Titanita Refinada + 30 Duralinio Espacial | 5 ticks | Construcción de Componentes Nivel 2 | 4,500₡ | 1.2 m³ | 30,000₡ |
+| Aleaciones Ligeras | T2 | 40 Titanita Refinada + 20 Magnetita Pura | 4 ticks | Construcción de Componentes Nivel 2 | 3,200₡ | 1 m³ | 25,000₡ |
+| Armaduras Compuestas | T2 | 35 Duralinio Espacial + 15 Cristales de Zafiro | 6 ticks | Construcción de Componentes Nivel 2 | 5,500₡ | 0.8 m³ | 50,000₡ |
+| Placas de Blindaje T3 | T3 | 60 Duralinio Espacial + 40 Adamantita Refinada | 8 ticks | Construcción de Componentes Nivel 3 | 16,000₡ | 1 m³ | 120,000₡ |
+| Armaduras Exóticas | T3 | 50 Adamantita Refinada + 20 Neutronium Procesado | 10 ticks | Construcción de Componentes Nivel 3 | 22,000₡ | 0.7 m³ | 150,000₡ |
+| Aleaciones Neutrónicas | T4 | 70 Neutronium Procesado + 30 Adamantita Refinada | 12 ticks | Construcción de Componentes Nivel 4 | 60,000₡ | 0.5 m³ | 350,000₡ |
+| Materia Exótica Sólida | T4 | 40 Materia Oscura Contenida + 50 Neutronium Procesado | 15 ticks | Construcción de Componentes Nivel 5 | 130,000₡ | 0.3 m³ | 500,000₡ |
+
+#### 9.2.6.3 Componentes Energéticos (10 tipos)
+
+| Componente | Tier | Materiales Requeridos | Tiempo | Skill Req. | Precio NPC Base | Volumen | Desbloqueo |
+|------------|------|-----------------------|--------|------------|-----------------|---------|------------|
+| Celdas de Energía T1 | T1 | 30 Hidrógeno Comprimido + 15 Helio Líquido | 2 ticks | Construcción de Componentes Nivel 1 | 600₡ | 0.5 m³ | Gratis |
+| Superconductores T1 | T1 | 25 Cobre Estelar + 10 Magnetita Pura | 3 ticks | Construcción de Componentes Nivel 1 | 850₡ | 0.2 m³ | Gratis |
+| Baterías Iónicas | T1 | 20 Hidrógeno Comprimido + 10 Algas Bioluminiscentes | 2 ticks | Construcción de Componentes Nivel 1 | 750₡ | 0.4 m³ | Gratis |
+| Celdas de Energía T2 | T2 | 40 Deuterio Refinado + 20 Magnetita Pura | 4 ticks | Construcción de Componentes Nivel 2 | 3,000₡ | 0.4 m³ | 30,000₡ |
+| Reactores de Fusión T1 | T2 | 50 Deuterio Refinado + 30 Superconductores T1 | 6 ticks | Construcción de Componentes Nivel 2 | 5,000₡ | 0.6 m³ | 50,000₡ |
+| Superconductores T2 | T2 | 35 Duralinio Espacial + 25 Magnetita Pura | 5 ticks | Construcción de Componentes Nivel 2 | 4,200₡ | 0.15 m³ | 40,000₡ |
+| Celdas de Energía T3 | T3 | 60 Plasma Ionizado + 30 Xenón Enriquecido | 8 ticks | Construcción de Componentes Nivel 3 | 14,000₡ | 0.3 m³ | 120,000₡ |
+| Reactores de Fusión T2 | T3 | 70 Plasma Ionizado + 40 Superconductores T2 | 10 ticks | Construcción de Componentes Nivel 3 | 20,000₡ | 0.5 m³ | 150,000₡ |
+| Núcleos de Antimateria | T4 | 80 Antimateria Estable + 40 Materia Oscura Contenida | 12 ticks | Construcción de Componentes Nivel 4 | 70,000₡ | 0.2 m³ | 400,000₡ |
+| Singularidades Contenidas | T4 | 100 Materia Oscura Contenida + 50 Núcleos de Antimateria | 18 ticks | Construcción de Componentes Nivel 5 | 180,000₡ | 0.1 m³ | 500,000₡ |
+
+#### 9.2.6.4 Componentes Mecánicos (8 tipos)
+
+| Componente | Tier | Materiales Requeridos | Tiempo | Skill Req. | Precio NPC Base | Volumen | Desbloqueo |
+|------------|------|-----------------------|--------|------------|-----------------|---------|------------|
+| Servomotores T1 | T1 | 20 Ferrita Refinada + 15 Cobre Estelar | 2 ticks | Construcción de Componentes Nivel 1 | 700₡ | 0.3 m³ | Gratis |
+| Actuadores Hidráulicos | T1 | 30 Ferrita Refinada + 10 Agua Destilada | 2 ticks | Construcción de Componentes Nivel 1 | 650₡ | 0.5 m³ | Gratis |
+| Sistemas de Propulsión T1 | T2 | 40 Titanita Refinada + 25 Servomotores T1 | 5 ticks | Construcción de Componentes Nivel 2 | 4,000₡ | 1 m³ | 35,000₡ |
+| Servomotores T2 | T2 | 35 Duralinio Espacial + 20 Microconductores | 4 ticks | Construcción de Componentes Nivel 2 | 3,500₡ | 0.2 m³ | 30,000₡ |
+| Giroscopios Cuánticos | T2 | 30 Magnetita Pura + 15 Chips Cuánticos T1 | 6 ticks | Construcción de Componentes Nivel 2 | 5,500₡ | 0.15 m³ | 50,000₡ |
+| Sistemas de Propulsión T2 | T3 | 60 Duralinio Espacial + 35 Servomotores T2 | 8 ticks | Construcción de Componentes Nivel 3 | 18,000₡ | 0.8 m³ | 120,000₡ |
+| Motores de Warp | T3 | 50 Xenón Enriquecido + 30 Giroscopios Cuánticos | 10 ticks | Construcción de Componentes Nivel 3 | 25,000₡ | 0.6 m³ | 150,000₡ |
+| Propulsores Exóticos | T4 | 70 Materia Oscura Contenida + 40 Motores de Warp | 15 ticks | Construcción de Componentes Nivel 4 | 90,000₡ | 0.4 m³ | 400,000₡ |
+
+#### 9.2.6.5 Componentes Ópticos (6 tipos)
+
+| Componente | Tier | Materiales Requeridos | Tiempo | Skill Req. | Precio NPC Base | Volumen | Desbloqueo |
+|------------|------|-----------------------|--------|------------|-----------------|---------|------------|
+| Lentes Básicas | T1 | 25 Silicatos Refinados + 10 Agua Destilada | 2 ticks | Construcción de Componentes Nivel 1 | 500₡ | 0.1 m³ | Gratis |
+| Cristales de Enfoque T1 | T2 | 30 Cristales de Zafiro + 15 Lentes Básicas | 4 ticks | Construcción de Componentes Nivel 2 | 3,800₡ | 0.08 m³ | 30,000₡ |
+| Sistemas Ópticos T1 | T2 | 35 Cristales de Zafiro + 20 Cobre Estelar | 5 ticks | Construcción de Componentes Nivel 2 | 4,500₡ | 0.12 m³ | 40,000₡ |
+| Cristales de Enfoque T2 | T3 | 50 Cristales Vivos + 30 Cristales de Zafiro | 8 ticks | Construcción de Componentes Nivel 3 | 16,000₡ | 0.06 m³ | 120,000₡ |
+| Sistemas Ópticos T2 | T3 | 60 Cristales Vivos + 40 Procesadores T3 | 10 ticks | Construcción de Componentes Nivel 3 | 22,000₡ | 0.1 m³ | 150,000₡ |
+| Láseres Exóticos | T4 | 80 Genoma Alienígena + 50 Cristales de Enfoque T2 | 14 ticks | Construcción de Componentes Nivel 4 | 95,000₡ | 0.05 m³ | 450,000₡ |
+
+#### 9.2.6.6 Componentes Biológicos (8 tipos)
+
+| Componente | Tier | Materiales Requeridos | Tiempo | Skill Req. | Precio NPC Base | Volumen | Desbloqueo |
+|------------|------|-----------------------|--------|------------|-----------------|---------|------------|
+| Raciones Básicas | T1 | 30 Biomasa Refinada + 20 Agua Destilada | 1 tick | Construcción de Componentes Nivel 1 | 200₡ | 1 m³ | Gratis |
+| Medkits T1 | T1 | 20 Proteínas Sintéticas + 15 Agua Destilada | 2 ticks | Construcción de Componentes Nivel 1 | 600₡ | 0.5 m³ | Gratis |
+| Sueros de Buff T1 | T2 | 30 Algas Bioluminiscentes + 25 Proteínas Sintéticas | 3 ticks | Construcción de Componentes Nivel 2 | 2,500₡ | 0.3 m³ | 25,000₡ |
+| Medkits T2 | T2 | 35 Nanobots Orgánicos + 20 Proteínas Sintéticas | 4 ticks | Construcción de Componentes Nivel 2 | 4,000₡ | 0.4 m³ | 35,000₡ |
+| Cultivos Regenerativos | T3 | 40 Esporas Regenerativas + 30 Nanobots Orgánicos | 6 ticks | Construcción de Componentes Nivel 3 | 14,000₡ | 0.3 m³ | 100,000₡ |
+| Sueros de Buff T2 | T3 | 50 Cristales Vivos + 35 Algas Bioluminiscentes | 8 ticks | Construcción de Componentes Nivel 3 | 18,000₡ | 0.25 m³ | 120,000₡ |
+| Medkits T3 | T4 | 60 Esporas Regenerativas + 40 Cultivos Regenerativos | 10 ticks | Construcción de Componentes Nivel 4 | 60,000₡ | 0.3 m³ | 300,000₡ |
+| Nanomáquinas Alienígenas | T4 | 80 Genoma Alienígena + 50 Nanobots Orgánicos | 15 ticks | Construcción de Componentes Nivel 5 | 140,000₡ | 0.15 m³ | 500,000₡ |
+
+**Total: 52 Componentes Intermedios**
+
+**Notas Importantes:**
+- **Skill "Construcción de Componentes":** Skill nueva (ver PRD-GameDesign.md), cada nivel desbloquea tier superior
+- **Tiempo de Fabricación:** Por unidad individual, se puede fabricar en lotes con tiempo proporcional
+- **Módulo Requerido:** Sala de Ingeniería Nivel 1+ (ver PRD-Universe.md)
+- **Desbloqueo de Recetas:** T1 gratis, T2 requiere pago de créditos, T3+ requiere Chips de Diseño o descifrado en Laboratorio
+- **Volumen:** Importante para planificación de carga y almacenamiento
+- **Precios NPC:** Valor base, mercado de jugadores fluctúa según oferta/demanda
 
 ### 9.2.7 Combustibles Procesados
 
