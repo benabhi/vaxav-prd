@@ -78,23 +78,23 @@ exp_requerida_nivel = base_exp × multiplicador_habilidad × nivel
 
 **Skills de Extracción Especializada:**
 
-- **Extracción Criogénica** (x3): Permite extraer recursos de cinturones de hielo
-  - Nivel 1: Acceso a extracción de hielo básico, +10% eficiencia
-  - Nivel 2: +20% eficiencia, reduce ticks de extracción 10%
-  - Nivel 3: +30% eficiencia, acceso a hielo raro
-  - Nivel 4: +40% eficiencia, reduce ticks de extracción 20%
-  - Nivel 5: +50% eficiencia, acceso a hielo exótico (Antimateria, Materia Oscura)
-  - Dependencia: Minería Nivel 2
-  - Cómo se entrena: Extraer recursos de cinturones de hielo
-
-- **Recolección de Gas** (x3): Permite recolectar gases de nebulosas
-  - Nivel 1: Acceso a recolección de gas básico, +10% eficiencia
-  - Nivel 2: +20% eficiencia, reduce ticks de recolección 10%
-  - Nivel 3: +30% eficiencia, acceso a gases raros
-  - Nivel 4: +40% eficiencia, reduce ticks de recolección 20%
-  - Nivel 5: +50% eficiencia, acceso a gases exóticos (Antimateria, Materia Oscura)
+- **Extracción Atmosférica** (x3): Permite instalar y operar Extractores Atmosféricos en planetas para gases
+  - Nivel 1: Acceso a gases T1 (Hidrógeno Molecular, Helio-3), +10% eficiencia de extracción, instalación en planetas Jovianos/Helados
+  - Nivel 2: Acceso a gases T2 (Deuterio Atmosférico, Nitrógeno Comprimido), +20% eficiencia, reduce tiempo setup 15%
+  - Nivel 3: Acceso a gases T3 (Plasma Atmosférico, Xenón Estratosférico), +30% eficiencia, reduce tiempo setup 30%
+  - Nivel 4: Acceso a gases T4 (Partículas de Antimateria), +40% eficiencia, aumenta capacidad extractores 25%
+  - Nivel 5: Acceso a gases T4 exóticos (Trazas de Materia Oscura), +50% eficiencia, aumenta capacidad extractores 50%, reduce mantenimiento 30%
   - Dependencia: Ninguna
-  - Cómo se entrena: Recolectar gases en nebulosas
+  - Cómo se entrena: Instalar extractores atmosféricos, recolectar gases de planetas
+
+- **Perforación Geológica** (x3): Permite perforación profunda en planetas para agua/recursos subsuperficiales
+  - Nivel 1: Perforación básica en planetas Helados (hielo superficial), +10% eficiencia
+  - Nivel 2: Perforación mejorada, acceso a océanos subsuperficiales, +20% eficiencia
+  - Nivel 3: Perforación avanzada, acceso a depósitos profundos (500m-2km), +30% eficiencia, reduce tiempo setup 20%
+  - Nivel 4: Perforación experta, acceso a recursos del manto (2km-10km), +40% eficiencia, reduce tiempo setup 40%
+  - Nivel 5: Perforación extrema, acceso a núcleo planetario (10km+), +50% eficiencia, desbloquea recursos raros geológicos
+  - Dependencia: Bioprospección Nivel 2
+  - Cómo se entrena: Realizar perforaciones en planetas Helados/Oceánicos, extraer agua planetaria
 
 **Skills de Exploración:**
 
@@ -160,6 +160,53 @@ exp_requerida_nivel = base_exp × multiplicador_habilidad × nivel
   - Nivel 5: Maestro xenotecnólogo, puede reverse engineer tecnología alien completa, +80% probabilidad
   - Dependencia: Arqueología Espacial Nivel 3
   - Cómo se entrena: Analizar fragmentos Xeno, completar Campos de Escombros Alienígenas
+
+**Skills de Fabricación y Producción:**
+
+- **Construcción de Componentes** (x4): Permite fabricar componentes intermedios en Sala de Ingeniería
+  - Nivel 1: Fabricación de componentes T1 (Circuitos Básicos, Placas T1, Celdas T1), +5% eficiencia
+  - Nivel 2: Fabricación de componentes T2 (Microconductores, Placas T2, Celdas T2), +10% eficiencia, reduce tiempo 10%
+  - Nivel 3: Fabricación de componentes T3 (Procesadores T3, Placas T3, Reactores T2), +15% eficiencia, reduce tiempo 20%
+  - Nivel 4: Fabricación de componentes T4 (Núcleos de IA, Aleaciones Neutrónicas), +20% eficiencia, reduce tiempo 30%
+  - Nivel 5: Fabricación de componentes exóticos (Matrices Neuronales, Materia Exótica Sólida), +25% eficiencia, reduce tiempo 40%, reduce fallo crítico 50%
+  - Dependencia: Ingeniería Nivel 1
+  - Cómo se entrena: Fabricar componentes intermedios en estaciones con Sala de Ingeniería
+
+- **Construcción de Naves** (x5): Permite fabricar naves y módulos avanzados en Consola de Construcción
+  - Nivel 1: Fabricación de módulos T1 y fragatas T1, +5% eficiencia materiales
+  - Nivel 2: Fabricación de módulos T2 y fragatas T2, +10% eficiencia materiales, reduce tiempo 10%
+  - Nivel 3: Fabricación de cruceros T1-T2 y módulos T3, +15% eficiencia materiales, reduce tiempo 20%
+  - Nivel 4: Fabricación de cruceros T3 y acorazados T1-T2, +20% eficiencia materiales, reduce tiempo 30%
+  - Nivel 5: Fabricación de capitales y naves T4, +25% eficiencia materiales, reduce tiempo 40%, chance de calidad superior (stats +5%)
+  - Dependencia: Construcción de Componentes Nivel 2
+  - Cómo se entrena: Fabricar naves y módulos en Consola de Construcción
+
+- **Producción en Masa** (x3): Permite fabricar múltiples items simultáneamente con bonos de eficiencia
+  - Nivel 1: Fabricación en lotes de hasta 5 items, +3% eficiencia en lotes
+  - Nivel 2: Fabricación en lotes de hasta 10 items, +6% eficiencia en lotes, reduce tiempo total 10%
+  - Nivel 3: Fabricación en lotes de hasta 25 items, +10% eficiencia en lotes, reduce tiempo total 20%
+  - Nivel 4: Fabricación en lotes de hasta 50 items, +15% eficiencia en lotes, reduce tiempo total 30%
+  - Nivel 5: Fabricación en lotes de hasta 100 items, +20% eficiencia en lotes, reduce tiempo total 40%, auto-reabastecer materiales
+  - Dependencia: Construcción de Componentes Nivel 3
+  - Cómo se entrena: Fabricar items en lotes grandes
+
+- **Refinamiento Avanzado** (x3): Mejora eficiencia de refinamiento de recursos crudos a procesados
+  - Nivel 1: +5% eficiencia refinamiento (se suma al ratio base 0.75), reduce tiempo 5%
+  - Nivel 2: +10% eficiencia refinamiento, reduce tiempo 10%
+  - Nivel 3: +15% eficiencia refinamiento, reduce tiempo 15%, acceso a procesos avanzados
+  - Nivel 4: +20% eficiencia refinamiento, reduce tiempo 20%, chance de output extra (+5%)
+  - Nivel 5: +25% eficiencia refinamiento, reduce tiempo 25%, chance de output extra (+10%), sin desperdicio
+  - Dependencia: Ninguna
+  - Cómo se entrena: Refinar recursos crudos en Sala de Ingeniería
+
+- **Gestión de Clones Avanzada** (x3): Permite gestionar múltiples clones con implantes
+  - Nivel 1: Máximo 3 clones activos, cooldown clone jump 144 ticks (24h)
+  - Nivel 2: Máximo 5 clones activos, cooldown clone jump 120 ticks (20h)
+  - Nivel 3: Máximo 7 clones activos, cooldown clone jump 96 ticks (16h)
+  - Nivel 4: Máximo 9 clones activos, cooldown clone jump 72 ticks (12h)
+  - Nivel 5: Máximo 11 clones activos, cooldown clone jump 48 ticks (8h), puede clonar remotamente (sin visitar Laboratorio)
+  - Dependencia: Ninguna
+  - Cómo se entrena: Crear clones, realizar clone jumps, instalar implantes
 
 **Skills de Combate Avanzado:**
 
