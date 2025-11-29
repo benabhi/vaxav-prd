@@ -2400,7 +2400,334 @@ LEYENDA:
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
-### 15.6 Bibliotecas y Herramientas UI Recomendadas
+### 15.6 Interfaz de Consola de Construcción (Crafting)
+
+La Consola de Construcción es la interfaz principal para fabricación de naves, módulos y componentes en estaciones con módulo de Consola de Construcción.
+
+**Layout Principal:**
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│ CONSOLA DE CONSTRUCCIÓN - Puerto Estelar Génesis                    │
+├──────────────────────────────────────────────────────────────────────┤
+│ [Naves] [Módulos] [Componentes] [Recursos] [Cola de Fabricación]    │
+├─────────────────────────┬────────────────────────────────────────────┤
+│ BLUEPRINTS DISPONIBLES  │ DETALLES: Excavador MK-I (Fragata T1)     │
+│ ────────────────────    │                                            │
+│ NAVES FRAGATA:          │ ┌────────────────────────────────────────┐ │
+│ ✓ Excavador MK-I (T1)   │ │ [RENDERIZADO 3D DE LA NAVE]           │ │
+│ ✓ Depredador (T1)       │ │                                        │ │
+│ ✓ Explorador Vaxav (T1) │ │                                        │ │
+│ ✗ Crucero Vanguardia    │ │                                        │ │
+│   (Req: skill Nivel 3)  │ │                                        │ │
+│                         │ └────────────────────────────────────────┘ │
+│ NAVES CRUCERO:          │                                            │
+│ ✗ Crucero Mercante T1   │ ESPECIFICACIONES:                          │
+│   (Blueprint bloqueado) │ • Escudos: 500 HP                          │
+│   [Desbloquear: 50K₡]   │ • Armadura: 800 HP                         │
+│                         │ • Estructura: 600 HP                       │
+│ [Buscar...]             │ • Reactor Energía: 50 MW                   │
+│                         │ • CPU: 200 GHz                             │
+├─────────────────────────┤ • Cargo: 5,000 m³ (+25% minería)          │
+│ FILTROS:                │ • Slots: 1 Ofensivo, 2 Defensivo, 3 Util  │
+│ □ Solo desbloqueados    │                                            │
+│ □ Tengo materiales      │ BONIFICACIONES ESPECIALES:                 │
+│ □ Puedo fabricar ahora  │ • +15% velocidad minería                   │
+│                         │ • +25% capacidad cargo de minerales        │
+│ Tier: [Todos ▾]         │                                            │
+│ Categoría: [Todas ▾]    │ ────────────────────────────────────────── │
+└─────────────────────────┤ RECETA DE FABRICACIÓN:                     │
+                          │                                            │
+                          │ Componentes Requeridos:                    │
+                          │ ✓ 200 Placas de Blindaje T1    (Tengo 450)│
+                          │ ✓ 120 Servomotores T1          (Tengo 300)│
+                          │ ✓ 80 Circuitos Básicos         (Tengo 150)│
+                          │ ✗ 50 Celdas de Energía T1      (Tengo 20) │
+                          │ ✓ 100 Vigas Reforzadas         (Tengo 100)│
+                          │                                            │
+                          │ Skill Requerida: Construcción Naves Nv1 ✓ │
+                          │ Tiempo de Fabricación: 24 ticks (4 horas)  │
+                          │ Costo Energía: 500 MW                      │
+                          │                                            │
+                          │ [Obtener Materiales Faltantes]             │
+                          │                                            │
+                          │ Cantidad a Fabricar: [1] [5] [10] [Max:3] │
+                          │                                            │
+                          │ ┌────────────────────────────────────────┐ │
+                          │ │  [INICIAR FABRICACIÓN] (24 ticks)      │ │
+                          │ └────────────────────────────────────────┘ │
+                          │                                            │
+                          │ ÁRBOL DE DEPENDENCIAS: [Mostrar ▾]         │
+└────────────────────────────────────────────────────────────────────┘
+```
+
+**Funcionalidades Clave:**
+
+1. **Sistema de Búsqueda y Filtrado:**
+   - Búsqueda por nombre de item
+   - Filtro por tier, categoría, disponibilidad
+   - Indicadores visuales: ✓ Desbloqueado, ✗ Bloqueado
+   - Muestra motivo de bloqueo (skill, blueprint, recursos)
+
+2. **Vista de Detalles del Item:**
+   - Renderizado 3D de nave/módulo (opcional)
+   - Especificaciones completas con stats
+   - Bonificaciones especiales destacadas
+   - Comparación con item actualmente equipado (si aplica)
+
+3. **Receta de Fabricación Interactiva:**
+   - Lista de materiales con cantidades requeridas vs disponibles
+   - Indicadores visuales: ✓ Suficiente, ✗ Insuficiente
+   - Botón "Obtener Materiales Faltantes" → abre mercado filtrado
+   - Muestra skills requeridas para fabricar
+   - Tiempo estimado y costo de energía
+
+4. **Cola de Fabricación:**
+   - Permite encolar múltiples fabricaciones
+   - Muestra progreso actual con barra animada
+   - Estimación de tiempo total
+   - Puede pausar/cancelar trabajos
+
+5. **Árbol de Dependencias (Expandible):**
+   - Muestra cadena completa: Recursos Crudos → Procesados → Componentes → Producto Final
+   - Click en cualquier nodo para ver su receta
+   - Navegación rápida entre dependencias
+
+### 15.7 Sistema de Información de Ítems (Tooltips)
+
+Todos los ítems del juego (naves, módulos, componentes, recursos) deben mostrar información detallada al inspeccionar.
+
+**Formato de Tooltip para Naves:**
+
+```
+┌────────────────────────────────────────────────────────┐
+│ EXCAVADOR MK-I                          [Fragata T1]   │
+├────────────────────────────────────────────────────────┤
+│ "Fragata especializada en minería con sistemas         │
+│  de procesamiento optimizados y cargo expandido."      │
+│                                                        │
+│ ESPECIFICACIONES:                                      │
+│ • Escudos: 500 HP                                      │
+│ • Armadura: 800 HP                                     │
+│ • Estructura: 600 HP                                   │
+│ • Reactor Energía: 50 MW                               │
+│ • CPU: 200 GHz                                         │
+│ • Cargo: 5,000 m³                                      │
+│ • Slots: 1 Ofensivo / 2 Defensivo / 3 Utilidad        │
+│                                                        │
+│ BONIFICACIONES:                                        │
+│ • +15% velocidad de minería                            │
+│ • +25% capacidad de cargo de minerales                 │
+│                                                        │
+│ ─────────────────────────────────────────────────────  │
+│ SKILLS PARA USAR:                                      │
+│ ✓ Pilotaje de Fragatas Nivel 1                        │
+│ ✗ Minería Nivel 2 (Tienes: Nivel 1)                   │
+│                                                        │
+│ SKILLS PARA FABRICAR:                                  │
+│ ✓ Construcción de Naves Nivel 1                       │
+│                                                        │
+│ ─────────────────────────────────────────────────────  │
+│ RECETA DE FABRICACIÓN:                                 │
+│ • 200 Placas de Blindaje T1                            │
+│ • 120 Servomotores T1                                  │
+│ • 80 Circuitos Básicos                                 │
+│ • 50 Celdas de Energía T1                              │
+│ • 100 Vigas Reforzadas                                 │
+│                                                        │
+│ Tiempo: 24 ticks (4 horas)                             │
+│ Energía: 500 MW                                        │
+│                                                        │
+│ BLUEPRINT:                                             │
+│ ✓ Desbloqueado (Gratis - Tier 1)                      │
+│                                                        │
+│ ─────────────────────────────────────────────────────  │
+│ PRECIO NPC BASE: 150,000₡                              │
+│ MERCADO (último precio): 180,000₡ (+20%)               │
+│ VOLUMEN: 15,000 m³                                     │
+│                                                        │
+│ [Ver Árbol de Dependencias] [Ir a Mercado]            │
+└────────────────────────────────────────────────────────┘
+```
+
+**Formato de Tooltip para Módulos:**
+
+```
+┌────────────────────────────────────────────────────────┐
+│ CAÑÓN AUTOMÁTICO LIGERO                    [Módulo T1] │
+├────────────────────────────────────────────────────────┤
+│ "Cañón básico de proyectiles cinéticos para           │
+│  combate a corta-media distancia."                     │
+│                                                        │
+│ STATS:                                                 │
+│ • Daño: 120 HP/disparo                                 │
+│ • Cadencia: 2.5s                                       │
+│ • DPS: 48 HP/s                                         │
+│ • Alcance: 15 km                                       │
+│ • Tracking: 45°/s                                      │
+│ • Consumo Energía: 8 MW                                │
+│ • Consumo CPU: 25 GHz                                  │
+│ • Munición: Rondas Cinéticas Básicas                   │
+│                                                        │
+│ SKILLS PARA USAR:                                      │
+│ ✓ Armas de Proyectiles Nivel 1                        │
+│                                                        │
+│ SKILLS PARA FABRICAR:                                  │
+│ ✓ Construcción de Naves Nivel 1                       │
+│                                                        │
+│ ─────────────────────────────────────────────────────  │
+│ RECETA:                                                │
+│ • 15 Placas de Blindaje T1                             │
+│ • 10 Servomotores T1                                   │
+│ • 8 Circuitos Básicos                                  │
+│                                                        │
+│ Tiempo: 8 ticks | Energía: 50 MW                       │
+│ Blueprint: ✓ Gratis (T1)                               │
+│                                                        │
+│ PRECIO NPC: 25,000₡                                    │
+│ VOLUMEN: 2 m³                                          │
+│                                                        │
+│ [Ver Árbol de Dependencias]                            │
+└────────────────────────────────────────────────────────┘
+```
+
+**Formato de Tooltip para Componentes:**
+
+```
+┌────────────────────────────────────────────────────────┐
+│ CIRCUITOS BÁSICOS                      [Componente T1] │
+├────────────────────────────────────────────────────────┤
+│ "Circuitos electrónicos fundamentales usados en        │
+│  construcción de módulos y naves."                     │
+│                                                        │
+│ SKILLS PARA FABRICAR:                                  │
+│ ✓ Construcción de Componentes Nivel 1                 │
+│                                                        │
+│ RECETA:                                                │
+│ • 20 Cobre Estelar (refinado)                          │
+│ • 10 Silicatos Refinados                               │
+│                                                        │
+│ Tiempo: 2 ticks | Energía: 10 MW                       │
+│ Blueprint: ✓ Gratis (T1)                               │
+│                                                        │
+│ ─────────────────────────────────────────────────────  │
+│ USADO EN FABRICACIÓN DE:                               │
+│ • Cañón Automático Ligero (8 unidades)                 │
+│ • Escudo Adaptativo Básico (15 unidades)               │
+│ • Excavador MK-I (80 unidades)                         │
+│ ... +25 recetas más                                    │
+│                                                        │
+│ [Ver Todas las Recetas que Usan Este Item]            │
+│                                                        │
+│ PRECIO NPC: 500₡/u                                     │
+│ MERCADO: 450₡/u (-10%)                                 │
+│ VOLUMEN: 0.1 m³/u                                      │
+└────────────────────────────────────────────────────────┘
+```
+
+**Formato de Tooltip para Recursos:**
+
+```
+┌────────────────────────────────────────────────────────┐
+│ FERRITA REFINADA                       [Recurso T1]    │
+├────────────────────────────────────────────────────────┤
+│ "Metal refinado obtenido de Ferrita Cruda extraída    │
+│  de asteroides. Base para construcciones metálicas."   │
+│                                                        │
+│ CATEGORÍA: A - Recursos de Asteroides (Metálicos)     │
+│                                                        │
+│ OBTENCIÓN:                                             │
+│ • Refinar Ferrita Cruda en Sala de Ingeniería         │
+│ • Ratio refinamiento: 0.75 base                        │
+│   (mejora con skill Refinamiento Avanzado)             │
+│                                                        │
+│ FUENTE DEL RECURSO CRUDO (Ferrita):                    │
+│ • Cinturón Principal Alfa (70% abundancia)             │
+│ • Cinturón Principal Beta (20% abundancia)             │
+│ • Asteroides en IIC 1-2                                │
+│                                                        │
+│ SKILL PARA EXTRAER: Minería Nivel 1+                   │
+│ SKILL PARA REFINAR: Refinamiento Avanzado (opcional)   │
+│                                                        │
+│ ─────────────────────────────────────────────────────  │
+│ USADO EN FABRICACIÓN DE:                               │
+│ • Barras de Acero (50 unidades)                        │
+│ • Placas de Blindaje T1 (60 unidades)                  │
+│ • Vigas Reforzadas (40 unidades)                       │
+│ • Servomotores T1 (20 unidades)                        │
+│ ... +8 componentes más                                 │
+│                                                        │
+│ [Ver Árbol de Dependencias] [Ver en Mercado]          │
+│                                                        │
+│ PRECIO NPC: 12₡/u                                      │
+│ MERCADO: 15₡/u (+25%)                                  │
+│ VOLUMEN: 1 m³/u                                        │
+└────────────────────────────────────────────────────────┘
+```
+
+**Árbol de Dependencias Interactivo:**
+
+Al hacer click en "Ver Árbol de Dependencias" en cualquier tooltip, se abre un modal con visualización gráfica:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ ÁRBOL DE DEPENDENCIAS: Excavador MK-I                      │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│                    [Excavador MK-I]                         │
+│                           │                                 │
+│        ┌──────────────────┼──────────────────┐              │
+│        │                  │                  │              │
+│   [Placas de        [Servomotores       [Circuitos         │
+│   Blindaje T1]         T1]               Básicos]          │
+│   (200 unidades)    (120 unidades)     (80 unidades)       │
+│        │                  │                  │              │
+│    ┌───┴───┐          ┌───┴───┐          ┌───┴───┐         │
+│    │       │          │       │          │       │         │
+│ [Ferrita  [Titanita  [Ferrita [Cobre   [Cobre  [Silicatos │
+│ Refinada] Refinada]  Refinada] Estelar] Estelar] Refinados]│
+│  (60u)     (20u)      (20u)    (15u)    (20u)    (10u)     │
+│    │         │          │        │        │         │       │
+│ [Ferrita  [Titanita  [Ferrita  [Cobre   [Cobre  [Silicatos│
+│  Cruda]    Cruda]     Cruda]    Crudo]   Crudo]  Crudos]   │
+│  (80u)     (29u)      (27u)     (20u)    (27u)    (13u)    │
+│                                                             │
+│ TOTALES RECURSIVOS:                                         │
+│ • Ferrita Cruda: 134 unidades                               │
+│ • Titanita Cruda: 29 unidades                               │
+│ • Cobre Crudo: 47 unidades                                  │
+│ • Silicatos Crudos: 13 unidades                             │
+│ • ... (mostrando solo primeras 4 capas)                     │
+│                                                             │
+│ Click en cualquier nodo para ver su tooltip                 │
+│                                                             │
+│ [Exportar Lista de Compras] [Cerrar]                        │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Características del Sistema:**
+
+1. **Tooltips Contextuales:**
+   - Aparecen al hacer hover sobre cualquier item en inventario, mercado, o consola
+   - Información adaptada al contexto (muestra más detalle en consola de fabricación)
+   - Indicadores visuales de disponibilidad (✓/✗)
+
+2. **Navegación Integrada:**
+   - Botones de acción directa ("Ir a Mercado", "Ver Árbol")
+   - Links clickeables en listas de materiales
+   - Breadcrumb navigation en árbol de dependencias
+
+3. **Comparación de Precios:**
+   - Muestra precio NPC vs precio de mercado de jugadores
+   - Indicador de variación porcentual
+   - Sugerencia de compra óptima
+
+4. **Exportar Lista de Compras:**
+   - Genera lista de materiales crudos necesarios
+   - Puede compartirse con otros jugadores
+   - Se puede usar como filtro en mercado
+
+### 15.8 Bibliotecas y Herramientas UI Recomendadas
 
 Para implementar la interfaz moderna:
 
