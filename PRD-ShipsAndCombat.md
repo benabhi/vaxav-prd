@@ -1,9 +1,32 @@
 # Naves, Combate y Estados
 
 **Parte del:** PRD - Vaxav
-**Versión:** 1.5
+**Versión:** 2.0
 **Fecha:** 2025-11-28
 **Estado:** Documento Vivo - En Desarrollo
+
+## Changelog
+
+### Versión 2.0 (2025-11-28) - Sistema de Crafting y Clones EVE
+**Agregado:**
+- ✅ Recetas de fabricación completas para 25 módulos T1 (7.5.4)
+- ✅ Recetas de fabricación para 5 naves fragata T1 especializadas (7.6)
+- ✅ Sistema de clones estilo EVE con clone jumping (8.5)
+- ✅ Gestión de múltiples clones con implantes independientes
+- ✅ 5 slots de implantes por clon (aumentado desde 3)
+- ✅ Cooldown de clone jump: 144 ticks (24h), reducible a 72 ticks con Laboratorio Nivel 5
+- ✅ Especificaciones completas de fragatas especializadas (Excavador, Depredador, Explorador, Mercante, Vanguardia)
+- ✅ Árboles de dependencias completos para fabricación
+
+**Modificado:**
+- 🔄 Sección 8.5: Sistema de clonación completamente rediseñado (antes era checkpoint system)
+- 🔄 Implantes: Ahora 5 slots en lugar de 3
+- 🔄 Laboratorio: Enfoque en investigación avanzada (Núcleos de Datos, Prototipos, Xenotecnología)
+
+**Removido:**
+- ❌ Referencias a BPO/BPC físicos (blueprints son desbloqueos en consola)
+
+### Versión 1.5 (2025-11-28) - Expansión de Sistemas de Combate
 
 [Volver al PRD Master](./PRD-Master.md)
 

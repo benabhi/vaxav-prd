@@ -1,9 +1,40 @@
 # Economía, Misiones y Organizaciones
 
 **Parte del:** PRD - Vaxav
-**Versión:** 1.5
+**Versión:** 2.0
 **Fecha:** 2025-11-28
 **Estado:** Documento Vivo - En Desarrollo
+
+## Changelog
+
+### Versión 2.0 (2025-11-28) - MAJOR UPDATE: Sistema de Crafting Completo
+**BREAKING CHANGES:**
+- ✨ REFACTORIZACIÓN COMPLETA del sistema de recursos planetarios vs asteroides
+- ✨ Separación en Categoría A (Asteroides - Metales) y Categoría B (Planetas - Gases/Orgánicos)
+- ✨ Recursos ahora son únicos a su fuente (no overlap entre planetas y asteroides)
+
+**Agregado:**
+- ✅ Tabla completa de 24 recursos procesados con recetas de refinamiento (9.2.5.1)
+- ✅ 52 componentes intermedios en 6 categorías (9.2.6.1-9.2.6.6)
+- ✅ Sistema de extracción planetaria pasiva con instalaciones orbitales/drones
+- ✅ Nuevos nombres únicos para todos los recursos de Categoría B
+- ✅ Skills específicas por categoría (Minería, Extracción Atmosférica, Bioprospección)
+- ✅ Mecánicas diferenciadas: Asteroides (activo, inmediato) vs Planetas (pasivo, AFK-friendly)
+
+**Modificado:**
+- 🔄 Sección 9.2.1: Categorías de recursos completamente rediseñada
+- 🔄 Sección 9.2.2: Recursos de asteroides (solo metálicos, 8 recursos únicos)
+- 🔄 Sección 9.2.3: Recursos planetarios - gases atmosféricos (8 recursos únicos)
+- 🔄 Sección 9.2.4: Recursos planetarios - orgánicos (8 recursos únicos)
+- 🔄 Notas de recursos procesados: Ahora incluyen categorización y skills específicas
+
+**Removido:**
+- ❌ Cinturones de hielo (gases ahora SOLO de planetas)
+- ❌ Nebulosas de gas (gases ahora SOLO de planetas)
+- ❌ Overlap de recursos entre asteroides y planetas
+
+### Versión 1.5 (2025-11-28) - Sistema de Comercios de Jugadores
+- ✅ Agregado sistema completo de comercios de jugadores (Gimnasios, Tabernas, Tiendas, Restaurantes)
 
 [Volver al PRD Master](./PRD-Master.md)
 

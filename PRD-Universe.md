@@ -1,9 +1,42 @@
 # Universo, Navegación y Estaciones
 
 **Parte del:** PRD - Vaxav
-**Versión:** 1.5
+**Versión:** 2.0
 **Fecha:** 2025-11-28
 **Estado:** Documento Vivo - En Desarrollo
+
+## Changelog
+
+### Versión 2.0 (2025-11-28) - MAJOR UPDATE: Refactorización de Recursos y Mapas
+**BREAKING CHANGES:**
+- ✨ Recursos planetarios ahora son EXCLUSIVOS (no comparten con asteroides)
+- ✨ Eliminados cinturones de hielo y nebulosas de gas (gases SOLO de planetas)
+- ✨ Nuevas mecánicas de extracción planetaria pasiva con instalaciones
+
+**Agregado:**
+- ✅ Mapa completo de recursos del Sistema Vaxav (5.2.1)
+- ✅ Distribución de recursos en 8 planetas con categorización A/B
+- ✅ 5 cinturones de asteroides con recursos metálicos únicos
+- ✅ Sistema de extracción atmosférica con Extractores Orbitales
+- ✅ Sistema de extracción biológica con Drones de Bioprospección
+- ✅ Mecánica de Perforación Geológica para recursos subsuperficiales
+- ✅ Recursos ausentes en Vaxav (10 recursos críticos para forzar comercio)
+- ✅ Implicaciones económicas detalladas (autosuficiencia limitada, especialización)
+- ✅ Actualización de 7 tipos de planetas con recursos de Categoría B
+
+**Modificado:**
+- 🔄 Sección 5.2.1: Mapa de Sistema Vaxav completamente rediseñado
+- 🔄 Sección 5.5: Tipos de planetas ahora muestran solo recursos planetarios (Categoría B)
+- 🔄 Sección 6.2.3: Laboratorio enfocado en investigación (sin teletransporte)
+- 🔄 Planetas Rocosos/Volcánicos: Solo gases atmosféricos, sin metales
+- 🔄 Planetas Jovianos: Gases T1-T3 con extracción atmosférica pasiva
+- 🔄 Planetas Oceánicos/Vitales: Orgánicos T1-T4 con drones de bioprospección
+
+**Removido:**
+- ❌ Sección 6.2.9: Nodo de Teletransporte (usuario prefiere sistema de EVE sin teletransporte fácil)
+- ❌ Referencias a extracción de metales desde planetas (metales SOLO de asteroides)
+
+### Versión 1.5 (2025-11-28) - Expansión de Sistemas Estelares
 
 [Volver al PRD Master](./PRD-Master.md)
 
@@ -167,10 +200,30 @@ Los asteroides solo proveen **recursos metálicos únicos** mediante minería ac
 | **Cinturón Disperso** | Entre Vaxav VI y VII | IIC 3 | Duralinio Espacial (60%), Cristales de Zafiro (30%), Adamantita (10%) | 48 ticks | 80 |
 | **Anillo de Escombros** | Alrededor de Vaxav VIII | IIC 4 | Adamantita (50%), Neutronium (30%), Duralinio Espacial (20%) | 72 ticks | 40 |
 
-**NOTA IMPORTANTE sobre Recursos de Gases:**
-- Los cinturones de hielo y nebulosas NO existen en el nuevo sistema de recursos
-- TODOS los gases (hidrógeno, helio, deuterio, nitrógeno, plasma, xenón, antimateria, materia oscura) se extraen **exclusivamente de atmósferas planetarias** mediante Extractores Atmosféricos
-- La mecánica es **pasiva** (instalaciones orbitales), no minería activa
+**Cinturones de Hielo del Sistema Vaxav - CATEGORÍA B (2 totales):**
+
+Los cinturones de hielo proveen **recursos volátiles congelados** mediante minería activa con naves especializadas.
+
+| Cinturón de Hielo | Ubicación | IIC | Recursos Volátiles Disponibles | Regeneración | Bloques |
+|-------------------|-----------|-----|-------------------------------|--------------|---------|
+| **Anillo de Hielo Vaxav V** | Órbita de Vaxav V (Helado) | IIC 2 | Agua Planetaria Congelada (50%), Hidrógeno Molecular Congelado (30%), Deuterio Atmosférico Congelado (15%), Nitrógeno Comprimido Congelado (5%) | 72 ticks | 80 |
+| **Campo de Hielo Exterior** | Más allá de Vaxav VII | IIC 3 | Deuterio Atmosférico Congelado (40%), Nitrógeno Comprimido Congelado (30%), Plasma Atmosférico Congelado (20%), Xenón Estratosférico Congelado (10%) | 96 ticks | 50 |
+
+**Nebulosas de Gas del Sistema Vaxav - CATEGORÍA B (1 total):**
+
+Las nebulosas proveen **gases en estado libre** mediante recolección con naves especializadas.
+
+| Nebulosa | Ubicación | IIC | Recursos Gaseosos Disponibles | Regeneración | Tamaño |
+|----------|-----------|-----|------------------------------|--------------|--------|
+| **Nebulosa de Nitrógeno "Velo Azul"** | Entre Vaxav IV y V | IIC 2 | Nitrógeno Comprimido (60%), Deuterio Atmosférico (30%), Hidrógeno Molecular (10%) | 96 ticks | Mediana (40 km³) |
+
+**NOTA IMPORTANTE sobre Fuentes de Recursos:**
+- **Categoría A (Metales):** SOLO de asteroides (minería activa con láseres)
+- **Categoría B (Gases/Orgánicos):** De múltiples fuentes:
+  - Atmósferas planetarias (Extractores Orbitales - pasivo)
+  - Cinturones de hielo (Minería criogénica - activo)
+  - Nebulosas (Recolección de gas - activo)
+  - Superficie planetaria (Drones de Bioprospección - pasivo)
 
 **Recursos CRUDOS AUSENTES en Sistema Vaxav (requieren comercio o exploración externa):**
 

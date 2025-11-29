@@ -1,9 +1,39 @@
 # Interfaz de Usuario y Navegación
 
 **Parte del:** PRD - Vaxav
-**Versión:** 1.5
+**Versión:** 2.0
 **Fecha:** 2025-11-28
 **Estado:** Documento Vivo - En Desarrollo
+
+## Changelog
+
+### Versión 2.0 (2025-11-28) - Interfaz de Crafting Completa
+**Agregado:**
+- ✅ Sección 15.6: Interfaz de Consola de Construcción completa
+  - Layout principal con búsqueda y filtrado
+  - Vista de detalles con renderizado 3D (opcional)
+  - Receta de fabricación interactiva con materiales requeridos vs disponibles
+  - Cola de fabricación con progreso animado
+  - Árbol de dependencias expandible
+- ✅ Sección 15.7: Sistema de Información de Ítems (Tooltips)
+  - Formato de tooltip para naves (stats completos, skills, recetas)
+  - Formato de tooltip para módulos (stats de combate, recetas)
+  - Formato de tooltip para componentes (receta, usado en X items)
+  - Formato de tooltip para recursos (categoría A/B, fuente, extracción)
+  - Árbol de dependencias interactivo con visualización gráfica
+  - Navegación integrada (Ir a Mercado, Ver Árbol, etc.)
+  - Comparación de precios NPC vs mercado
+  - Exportar lista de compras con materiales crudos
+
+**Características del Sistema:**
+- ✅ Tooltips contextuales que aparecen en hover
+- ✅ Indicadores visuales de disponibilidad (✓/✗)
+- ✅ Links clickeables en listas de materiales
+- ✅ Cálculo recursivo de materiales en árbol de dependencias
+- ✅ Botón "Obtener Materiales Faltantes" → filtro en mercado
+- ✅ Filtros avanzados (tier, categoría, tengo materiales, puedo fabricar)
+
+### Versión 1.5 (2025-11-28) - Interfaz Social y Comercios
 
 [Volver al PRD Master](./PRD-Master.md)
 

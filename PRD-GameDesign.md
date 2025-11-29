@@ -1,9 +1,34 @@
 # Game Design & Mecánicas Core
 
 **Parte del:** PRD - Vaxav
-**Versión:** 1.5
+**Versión:** 2.0
 **Fecha:** 2025-11-28
 **Estado:** Documento Vivo - En Desarrollo
+
+## Changelog
+
+### Versión 2.0 (2025-11-28) - Sistema Completo de Skills de Crafting
+**Agregado:**
+- ✅ Skill: Extracción Atmosférica (x3) - Reemplaza Recolección de Gas, enfoque en instalaciones planetarias
+- ✅ Skill: Perforación Geológica (x3) - Extracción profunda en planetas (océanos subsuperficiales, manto, núcleo)
+- ✅ Skill: Construcción de Componentes (x4) - Fabricación de componentes intermedios T1-T4
+- ✅ Skill: Construcción de Naves (x5) - Fabricación de naves y módulos T1-T4
+- ✅ Skill: Producción en Masa (x3) - Fabricación en lotes con bonos de eficiencia
+- ✅ Skill: Refinamiento Avanzado (x3) - Mejora eficiencia de refinamiento de recursos
+- ✅ Skill: Gestión de Clones Avanzada (x3) - Manejo de múltiples clones con cooldowns reducidos
+- ✅ Progresión completa de niveles 1-5 para todas las skills nuevas
+- ✅ Dependencias y multiplicadores de experiencia definidos
+
+**Modificado:**
+- 🔄 Extracción Atmosférica: Nueva mecánica pasiva con instalaciones (antes era Recolección de Gas activa)
+- 🔄 Bioprospección: Actualizada descripción para reflejar extracción planetaria con drones
+- 🔄 Skills de extracción ahora diferenciadas por Categoría A (Minería) y Categoría B (Atmosférica/Bio)
+
+**Removido:**
+- ❌ Extracción Criogénica (reemplazada por Extracción Atmosférica + Perforación Geológica)
+- ❌ Recolección de Gas (reemplazada por Extracción Atmosférica)
+
+### Versión 1.5 (2025-11-28) - Skills Sociales y de Negocios
 
 [Volver al PRD Master](./PRD-Master.md)
 
@@ -95,6 +120,24 @@ exp_requerida_nivel = base_exp × multiplicador_habilidad × nivel
   - Nivel 5: Perforación extrema, acceso a núcleo planetario (10km+), +50% eficiencia, desbloquea recursos raros geológicos
   - Dependencia: Bioprospección Nivel 2
   - Cómo se entrena: Realizar perforaciones en planetas Helados/Oceánicos, extraer agua planetaria
+
+- **Extracción Criogénica** (x3): Permite extraer recursos volátiles congelados de cinturones de hielo
+  - Nivel 1: Acceso a hielo básico (Agua, Hidrógeno congelados), +10% eficiencia
+  - Nivel 2: +20% eficiencia, reduce ticks de extracción 10%
+  - Nivel 3: Acceso a hielo raro (Deuterio, Nitrógeno congelados), +30% eficiencia
+  - Nivel 4: +40% eficiencia, reduce ticks de extracción 20%
+  - Nivel 5: +50% eficiencia, acceso a hielo exótico (Plasma, Xenón congelados)
+  - Dependencia: Minería Nivel 2
+  - Cómo se entrena: Extraer recursos de cinturones de hielo con naves criogénicas
+
+- **Recolección de Gas** (x3): Permite recolectar gases en estado libre de nebulosas
+  - Nivel 1: Acceso a gases básicos (Hidrógeno, Nitrógeno), +10% eficiencia
+  - Nivel 2: +20% eficiencia, reduce ticks de recolección 10%
+  - Nivel 3: Acceso a gases raros (Deuterio, Plasma), +30% eficiencia
+  - Nivel 4: +40% eficiencia, reduce ticks de recolección 20%
+  - Nivel 5: +50% eficiencia, acceso a gases exóticos (Xenón, trazas de Antimateria)
+  - Dependencia: Ninguna
+  - Cómo se entrena: Recolectar gases en nebulosas con naves recolectoras
 
 **Skills de Exploración:**
 
