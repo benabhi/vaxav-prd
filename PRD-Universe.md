@@ -1474,6 +1474,236 @@ Ubicaciones especiales permanentes o semi-permanentes.
 
 ---
 
+## 15. Sistema de Desarrollo de Sistemas Solares
+
+### 15.1 Concepto: Sistemas Vírgenes vs Sistemas Colonizados
+
+Los sistemas empiezan **vírgenes** (sin estaciones NPC) y avanzan con la actividad de los jugadores.
+
+**Mecánica:**
+- Los jugadores exploran, extraen recursos y construyen estaciones
+- Cuando el sistema alcanza ciertos umbrales de **Índice de Desarrollo (ID)**, las facciones NPC establecen estaciones oficiales
+- Esto crea una ventana temporal donde los jugadores tienen monopolio de recursos antes de que aparezca competencia NPC
+
+### 15.2 Índice de Desarrollo (ID) del Sistema
+
+Cada sistema solar tiene un valor de **Desarrollo** que aumenta con la actividad de los jugadores.
+
+**Estructura SQL:**
+
+```sql
+-- Tabla de desarrollo de sistemas
+CREATE TABLE system_development (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    system_id BIGINT UNSIGNED NOT NULL,
+    development_index INT UNSIGNED DEFAULT 0, -- 0 a 10,000 puntos
+    total_player_stations INT UNSIGNED DEFAULT 0,
+    total_resources_extracted BIGINT UNSIGNED DEFAULT 0,
+    total_trade_volume BIGINT UNSIGNED DEFAULT 0,
+    total_combat_events INT UNSIGNED DEFAULT 0,
+    unique_pilots_visited INT UNSIGNED DEFAULT 0,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (system_id) REFERENCES systems(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_system (system_id)
+);
+
+-- Tabla de hitos de desarrollo alcanzados
+CREATE TABLE system_development_milestones (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    system_id BIGINT UNSIGNED NOT NULL,
+    milestone_type ENUM('npc_station_tier1', 'npc_station_tier2', 'npc_station_tier3', 'faction_presence', 'police_patrol', 'trade_hub') NOT NULL,
+    achieved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    development_index_at_achievement INT UNSIGNED NOT NULL,
+    FOREIGN KEY (system_id) REFERENCES systems(id) ON DELETE CASCADE,
+    INDEX idx_system_milestone (system_id, milestone_type)
+);
+
+-- Tabla de estaciones NPC dinámicas
+CREATE TABLE dynamic_npc_stations (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    system_id BIGINT UNSIGNED NOT NULL,
+    faction_id BIGINT UNSIGNED NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    station_type ENUM('mining_outpost', 'trade_hub', 'military_base', 'research_facility') NOT NULL,
+    tier INT UNSIGNED DEFAULT 1,
+    spawned_at_development_index INT UNSIGNED NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (system_id) REFERENCES systems(id) ON DELETE CASCADE,
+    FOREIGN KEY (faction_id) REFERENCES factions(id) ON DELETE CASCADE
+);
+```
+
+### 15.3 Cómo se Gana Desarrollo
+
+**Tabla de Puntos por Actividad:**
+
+| Actividad | Puntos de Desarrollo | Notas |
+|-----------|---------------------|-------|
+| Ciclo de minería completado | +5 | Por cada 60 ticks de minería |
+| Extracción planetaria | +3 | Por cada recolección de extractor |
+| Combate NPC destruido | +8 | Por nave NPC destruida |
+| Combate PvP | +15 | Por nave jugador destruida |
+| Misión completada | +10 | Varía según nivel de misión |
+| Comercio (por 10,000₡) | +2 | Incentiva comercio |
+| Construcción de estación jugador | +500 | Gran impacto |
+| Primer descubrimiento de sitio temporal | +50 | Exploración recompensada |
+| Visita de nuevo piloto | +3 | Primera vez en el sistema |
+
+**Implementación:**
+
+```php
+// Evento: Jugador completa ciclo de minería
+SystemDevelopment::incrementDevelopment($systemId, [
+    'activity' => 'mining',
+    'points' => 5,
+    'resources_extracted' => 5000 // m³
+]);
+
+// Evento: Jugador construye estación espacial
+SystemDevelopment::incrementDevelopment($systemId, [
+    'activity' => 'station_built',
+    'points' => 500,
+    'player_stations' => 1
+]);
+```
+
+### 15.4 Umbrales de Desarrollo y Aparición de Estaciones NPC
+
+**Sistema Virgen: ID 0-1,000**
+- Sin estaciones NPC
+- Sin patrullas policiales
+- Recursos sin explotar
+- **Ventana de oportunidad** para jugadores early adopters
+
+**Umbral 1 - Puesto Fronterizo: ID 1,000-3,000**
+- **Hito:** Primera estación NPC aparece
+- **Tipo:** Puesto Minero o Comercial Tier 1
+- **Facción:** La dominante en sistemas vecinos
+- **Servicios:** Hangar Nivel 1, Mercado Nivel 1
+- **Impacto:** Los jugadores ahora compiten con NPCs por recursos
+
+**Umbral 2 - Asentamiento Establecido: ID 3,000-6,000**
+- **Hito:** Segunda estación NPC + Patrullas ocasionales
+- **Tipo:** Estación Industrial Tier 2
+- **Servicios:** Hangar Nivel 2, Mercado Nivel 2, Sala de Ingeniería Nivel 1
+- **Patrullas:** Flota Albatross aparece cada 100 ticks (solo en IIC 1-2)
+- **Impacto:** Sistema más seguro, infraestructura mejorada
+
+**Umbral 3 - Hub Regional: ID 6,000-10,000**
+- **Hito:** Tercera estación NPC (Tier 3) + Múltiples corporaciones NPC
+- **Tipo:** Hub Comercial o Base Militar
+- **Servicios:** Todos los módulos disponibles (Astillero, Laboratorio, Mercado Nivel 3-4)
+- **Corporaciones NPC:** 2-3 corporaciones establecen presencia
+- **Tiendas de Lealtad:** Desbloqueadas en las estaciones NPC
+- **Patrullas:** Constantes (cada 20 ticks en IIC 1-2)
+- **Impacto:** Sistema completamente desarrollado
+
+**Umbral 4 - Núcleo Consolidado: ID 10,000+**
+- **Hito:** Sistema se convierte en IIC 1 (si era IIC 2+)
+- **Cambios:** Seguridad máxima, PvP restringido, precios estabilizados
+- **Estaciones NPC:** 4-5 estaciones con todos los servicios
+- **Impacto:** Sistema maduro, ideal para nuevos jugadores
+
+### 15.5 Mecánica de Aparición de Estaciones NPC
+
+```php
+// Sistema de eventos ejecutado por Laravel Scheduler (cada tick)
+// app/Console/Commands/ProcessSystemDevelopment.php
+
+public function handle()
+{
+    $systems = System::with('development')->get();
+
+    foreach ($systems as $system) {
+        $dev = $system->development;
+
+        // Verificar umbral 1 (1,000 puntos)
+        if ($dev->development_index >= 1000 && $dev->development_index < 3000) {
+            if (!$system->hasAchievedMilestone('npc_station_tier1')) {
+                $this->spawnNPCStation($system, 'tier1');
+                $this->notifyPlayers($system, 'Nueva estación NPC en ' . $system->name);
+            }
+        }
+
+        // Verificar umbral 2 (3,000 puntos)
+        if ($dev->development_index >= 3000 && $dev->development_index < 6000) {
+            if (!$system->hasAchievedMilestone('npc_station_tier2')) {
+                $this->spawnNPCStation($system, 'tier2');
+                $this->spawnPolicePatrols($system);
+            }
+        }
+
+        // Verificar umbral 3 (6,000 puntos)
+        if ($dev->development_index >= 6000) {
+            if (!$system->hasAchievedMilestone('npc_station_tier3')) {
+                $this->spawnNPCStation($system, 'tier3');
+                $this->establishCorporations($system);
+            }
+        }
+    }
+}
+```
+
+### 15.6 Ventajas y Desventajas
+
+**Ventajas para Jugadores Early Adopters:**
+- ✅ **Monopolio temporal de recursos** (sin competencia NPC)
+- ✅ **Control de mercado** (pueden establecer precios iniciales)
+- ✅ **Construcción de estaciones sin competencia** (terreno barato)
+- ✅ **Descubrimiento de sitios temporales raros** antes que otros
+
+**Desventajas de Sistemas Vírgenes:**
+- ❌ Sin estaciones NPC = sin servicios (deben construir propios)
+- ❌ Sin patrullas = más peligroso (PvP sin restricciones)
+- ❌ Lejos de hubs comerciales = transporte costoso
+- ❌ Sin tiendas de lealtad NPC = menos acceso a items únicos
+
+**Ventajas de Sistemas Desarrollados:**
+- ✅ Infraestructura completa (servicios NPC disponibles)
+- ✅ Patrullas de seguridad (menos PvP no deseado en IIC 1-2)
+- ✅ Tiendas de lealtad (acceso a items exclusivos)
+- ✅ Corporaciones NPC (misiones disponibles)
+
+**Desventajas de Sistemas Desarrollados:**
+- ❌ Alta competencia por recursos (NPCs + jugadores)
+- ❌ Precios estabilizados (menos oportunidad de arbitraje)
+- ❌ Sitios temporales ya descubiertos
+- ❌ Terreno más caro para estaciones de jugadores
+
+### 15.7 Interfaz de Desarrollo del Sistema
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║ 📊 DESARROLLO DEL SISTEMA: Frontera-7                                ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ ÍNDICE DE DESARROLLO: 4,250 / 10,000 (42%)                          ║
+║                                                                       ║
+║ [████████░░░░░░░░░░░░░░░░░░░░] 4,250 pts                            ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ HITOS ALCANZADOS:                                                     ║
+║ ✅ Puesto Fronterizo (1,000 pts) - Día 82                           ║
+║ ✅ Asentamiento Establecido (3,000 pts) - Día 145                   ║
+║ 🔒 Hub Regional (6,000 pts) - Faltan 1,750 pts (~45 días)           ║
+║ 🔒 Núcleo Consolidado (10,000 pts) - Faltan 5,750 pts (~150 días)   ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ CONTRIBUCIONES POR ACTIVIDAD (últimos 30 días):                     ║
+║ • Minería: 18,450 pts (62%)                                          ║
+║ • Extracción Planetaria: 4,280 pts (15%)                             ║
+║ • Combate: 3,120 pts (11%)                                           ║
+║ • Comercio: 2,150 pts (7%)                                           ║
+║ • Exploración: 1,500 pts (5%)                                        ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ PRÓXIMAS RECOMPENSAS (Hub Regional - 6,000 pts):                    ║
+║ • 1x Estación NPC Tier 3 con Astillero y Laboratorio                ║
+║ • 2-3 Corporaciones NPC establecen presencia                         ║
+║ • Tiendas de Lealtad desbloqueadas                                   ║
+║ • Sistema IIC puede mejorar a 3 (si era 4)                           ║
+║ • Misiones NPC de nivel 3-4 disponibles                              ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
 ## Navegación
 
 - [← Anterior: PRD-GameDesign.md](./PRD-GameDesign.md)

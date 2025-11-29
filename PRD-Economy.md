@@ -809,29 +809,87 @@ Los agentes NPC ofrecen misiones.
 - **Tipo:** Minería, Combate, Transporte, Investigación
 - **Nivel:** 1-5
 
-### 10.2 Nivel de Agente y Acceso
+### 10.2 Sistema de Reputación (Standing)
+
+Cada piloto tiene **Standing** (reputación) con cada facción y con corporaciones NPC individuales.
+
+**Rangos de Standing (-100 a +100):**
+
+```
++100  Legendario      - Acceso total, precios 20% descuento
++90   Héroe           - Misiones nivel 5, precios 15% descuento
++70   Excelente       - Misiones nivel 4-5, precios 10% descuento
++50   Muy Bueno       - Misiones nivel 3-4, precios 5% descuento
++30   Bueno           - Misiones nivel 2-3
++10   Amistoso        - Misiones nivel 1-2
+  0   Neutral         - Acceso básico
+-10   Suspicaz        - Precios 5% incremento
+-30   Malo            - Precios 10% incremento, algunas estaciones cerradas
+-50   Muy Malo        - Precios 20% incremento, mayoría de estaciones cerradas
+-70   Hostil          - NPCs atacan a la vista en IIC 1-2
+-100  Enemigo         - KOS (Kill On Sight) en todos los sistemas de la facción
+```
+
+**Cómo se Gana/Pierde Standing:**
+
+**Ganar Standing (+):**
+- Completar misiones para corporación: +5 a +50 (según nivel)
+- Destruir enemigos de la facción: +1 a +10
+- Donar recursos/créditos a corporación: +1 por cada 10,000₡
+- Completar proyectos de construcción de estaciones: +100 a +500
+
+**Perder Standing (-):**
+- Atacar naves de la facción: -10 a -50
+- Destruir estructuras de la facción: -50 a -200
+- Completar misiones contra la facción: -20 a -100
+- Comerciar con enemigos de la facción: -5 por transacción
+
+### 10.3 Sistema de Puntos de Lealtad (LP)
+
+Además del standing, las corporaciones otorgan **Puntos de Lealtad** al completar misiones.
+
+**Mecánica:**
+```
+Misión completada = Standing + LP
+- Misión Nivel 1: +10 standing, +50 LP
+- Misión Nivel 2: +15 standing, +100 LP
+- Misión Nivel 3: +25 standing, +250 LP
+- Misión Nivel 4: +40 standing, +500 LP
+- Misión Nivel 5: +60 standing, +1,000 LP
+```
+
+**Los LP son específicos por corporación:**
+- Mineros Unidos LP: 4,580 LP
+- Corporación Militar Vaxav LP: 820 LP
+- Sindicato Técnico LP: 12,450 LP
+
+### 10.4 Nivel de Agente y Acceso
 
 **Nivel 1:**
-- Relación requerida: -20 (Neutral bajo)
-- Recompensas bajas
+- Standing requerido: -20 (Neutral bajo)
+- Recompensas: 50-100 LP
 - Misiones sencillas
 
 **Nivel 2:**
-- Relación requerida: +10
-- Recompensas moderadas
+- Standing requerido: +10
+- Recompensas: 100-250 LP
+- Misiones moderadas
 
 **Nivel 3:**
-- Relación requerida: +30
-- Recompensas buenas
+- Standing requerido: +30
+- Recompensas: 250-500 LP
+- Misiones buenas
 
 **Nivel 4:**
-- Relación requerida: +50
-- Recompensas excelentes
+- Standing requerido: +50
+- Recompensas: 500-1,000 LP
+- Misiones excelentes
 
 **Nivel 5:**
-- Relación requerida: +70
-- Recompensas excepcionales
-- Acceso a items raros
+- Standing requerido: +70
+- Recompensas: 1,000-2,500 LP
+- Misiones excepcionales
+- Acceso a items raros en tienda de lealtad
 
 ### 10.3 Tipos de Misiones
 
@@ -877,10 +935,103 @@ Los agentes NPC ofrecen misiones.
 "Escanea X anomalías" o "Recupera datos"
 
 **Recompensas:**
-- Blueprints
+- Chips de Diseño
 - Datos de investigación
-- +Relación
+- +Standing y +LP
 - Experiencia en Exploración
+
+### 10.5 Tiendas de Lealtad (LP Stores)
+
+Cada corporación NPC tiene una **Tienda de Lealtad** donde puedes canjear LP + Créditos por items exclusivos.
+
+**Estructura SQL:**
+
+```sql
+CREATE TABLE loyalty_store_items (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    corporation_id BIGINT UNSIGNED NOT NULL,
+    item_type ENUM('ship', 'module', 'blueprint_chip', 'implant', 'resource', 'special') NOT NULL,
+    item_reference_id BIGINT UNSIGNED NOT NULL,
+    lp_cost INT UNSIGNED NOT NULL,
+    credits_cost BIGINT UNSIGNED DEFAULT 0,
+    required_standing INT DEFAULT 0,
+    stock_quantity INT NULL,
+    is_active BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (corporation_id) REFERENCES npc_corporations(id) ON DELETE CASCADE
+);
+```
+
+**Categorías de Items en Tiendas de Lealtad:**
+
+1. **Naves Especializadas**
+   - Fragatas T2 especializadas (minería, combate, exploración)
+   - Cruceros únicos de facción
+   - Cargueros especiales con bonos
+
+2. **Módulos Avanzados**
+   - Módulos T2-T3 con descuento vs mercado
+   - Módulos únicos de corporación (stats especiales)
+   - Munición especial (penetrante, EMP, etc.)
+
+3. **Chips de Diseño**
+   - Chips T2: 2,500-8,000 LP + 1M-5M₡
+   - Chips T3: 12,000-25,000 LP + 3M-15M₡
+   - Chips únicos de facción (naves/módulos exclusivos)
+
+4. **Implantes**
+   - Implantes de eficiencia (+5% a +15% según actividad)
+   - Implantes de combate (+10% daño, +5% HP, etc.)
+   - Implantes de minería/fabricación
+
+5. **Recursos con Descuento**
+   - Recursos refinados (20-30% descuento vs mercado)
+   - Componentes intermedios raros
+   - Combustibles procesados
+
+6. **Servicios Especiales**
+   - Permisos de minería en cinturones exóticos
+   - Licencias de caza de piratas (+25% bounties)
+   - Descifrado garantizado de Núcleos de Datos
+
+**Ejemplo: Tienda de Lealtad - Corporación Minera Vaxav:**
+
+```
+NAVES:
+• Excavador MK-II (Fragata T2): 2,500 LP + 1,200,000₡ | Req: Standing +30
+• Carguero Minero Gigante: 8,000 LP + 5,000,000₡ | Req: Standing +70
+
+MÓDULOS:
+• Láser de Minería Avanzado T2: 800 LP + 150,000₡ | Req: Standing +10
+• Dron Minero Automático T3: 3,500 LP + 800,000₡ | Req: Standing +50
+
+CHIPS DE DISEÑO:
+• Chip: Excavador MK-III (T3): 12,000 LP + 3,000,000₡ | Req: Standing +90
+• Chip: Refinería Móvil (Único): 5,000 LP + 1,500,000₡ | Req: Standing +60
+
+IMPLANTES:
+• Implante: Eficiencia Minera +5%: 2,000 LP + 500,000₡ | Req: Standing +40
+• Implante: Rendimiento Refinamiento +10%: 4,500 LP + 1,200,000₡ | Req: Standing +60
+
+ESPECIALES:
+• Permiso Minería Cinturón Exótico (30 días): 1,000 LP + 500,000₡ | Req: Standing +50
+```
+
+**Ventajas de Alto Standing con Facciones:**
+
+**Standing +70 con Confederación Vaxav:**
+- Crear estaciones espaciales en sistemas IIC 1-2 (normalmente prohibido)
+- Descuento 10% en tarifas de mercado
+- Acceso a sistemas militares restringidos
+
+**Standing +70 con Colectivo de Frontera:**
+- Permiso para crear estaciones en IIC 3 sin represalias
+- Acceso a mercados negros "legales"
+- Escoltas NPC gratuitos en rutas peligrosas
+
+**Standing +70 con Enclave Independiente:**
+- Permiso de construcción en sistemas IIC 4-5
+- Acceso a Chips de Diseño experimentales únicos en tienda de lealtad
+- Bonos de exploración (+15% yield en sitios temporales)
 
 ---
 
@@ -891,23 +1042,203 @@ Los agentes NPC ofrecen misiones.
 **Creación:**
 - Requiere: 1,000,000 Créditos
 - Nombre único
+- Ticker único (3-5 caracteres, ej: "MINE")
 - Mínimo 5 miembros fundadores
 
-**Características:**
-- Hangar corporativo
-- Almacén compartido
-- Chat corporativo
-- Roles y permisos
-- Impuestos corporativos (% de ingresos de miembros)
+**Estructura SQL:**
 
-**Roles:**
-- **CEO:** Control total
-- **Director:** Gestión de miembros, diplomacia
-- **Gerente:** Gestión de recursos
-- **Reclutador:** Invitar miembros
-- **Miembro:** Acceso básico
+```sql
+CREATE TABLE corporations (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    ticker VARCHAR(5) NOT NULL UNIQUE,
+    description TEXT,
+    ceo_pilot_id BIGINT UNSIGNED NOT NULL,
+    founded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    member_count INT UNSIGNED DEFAULT 1,
+    tax_rate DECIMAL(5,2) DEFAULT 10.00,
+    wallet_balance BIGINT DEFAULT 0,
+    FOREIGN KEY (ceo_pilot_id) REFERENCES pilots(id) ON DELETE CASCADE
+);
 
-### 11.2 Alianzas
+CREATE TABLE corporation_members (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    corporation_id BIGINT UNSIGNED NOT NULL,
+    pilot_id BIGINT UNSIGNED NOT NULL,
+    role ENUM('ceo', 'director', 'manager', 'recruiter', 'member') DEFAULT 'member',
+    joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    shares INT UNSIGNED DEFAULT 0,
+    FOREIGN KEY (corporation_id) REFERENCES corporations(id) ON DELETE CASCADE,
+    FOREIGN KEY (pilot_id) REFERENCES pilots(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_pilot_corp (pilot_id)
+);
+
+CREATE TABLE corporation_assets (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    corporation_id BIGINT UNSIGNED NOT NULL,
+    asset_type ENUM('ship', 'module', 'resource', 'blueprint_unlock', 'item') NOT NULL,
+    asset_reference_id BIGINT UNSIGNED NOT NULL,
+    quantity INT UNSIGNED DEFAULT 1,
+    location_type ENUM('station', 'hangar_corp', 'container') NOT NULL,
+    location_reference_id BIGINT UNSIGNED NOT NULL,
+    FOREIGN KEY (corporation_id) REFERENCES corporations(id) ON DELETE CASCADE
+);
+
+CREATE TABLE corporation_hangars (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    corporation_id BIGINT UNSIGNED NOT NULL,
+    station_id BIGINT UNSIGNED NOT NULL,
+    division_name VARCHAR(50) DEFAULT 'General',
+    access_role ENUM('ceo', 'director', 'manager', 'all_members') DEFAULT 'all_members',
+    capacity_m3 BIGINT UNSIGNED DEFAULT 1000000,
+    FOREIGN KEY (corporation_id) REFERENCES corporations(id) ON DELETE CASCADE,
+    FOREIGN KEY (station_id) REFERENCES stations(id) ON DELETE CASCADE
+);
+
+CREATE TABLE corporation_transactions (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    corporation_id BIGINT UNSIGNED NOT NULL,
+    pilot_id BIGINT UNSIGNED NULL,
+    transaction_type ENUM('tax_collected', 'dividend_paid', 'asset_added', 'asset_removed', 'wallet_deposit', 'wallet_withdrawal') NOT NULL,
+    amount BIGINT DEFAULT 0,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (corporation_id) REFERENCES corporations(id) ON DELETE CASCADE,
+    FOREIGN KEY (pilot_id) REFERENCES pilots(id) ON DELETE SET NULL
+);
+```
+
+**Roles y Permisos:**
+
+- **CEO:**
+  - Control total
+  - Disolver corporación
+  - Cambiar impuestos
+  - Expulsar cualquier miembro
+  - Acceso total a wallet y hangares
+
+- **Director:**
+  - Gestionar miembros (invitar, expulsar members/recruiters)
+  - Acceso total a hangares
+  - Retirar hasta 1,000,000₡/día del wallet
+  - Declarar guerras (con aprobación CEO)
+
+- **Manager:**
+  - Gestionar hangares (mover items)
+  - Acceso a wallet (solo lectura)
+  - Crear flotas corporativas
+
+- **Recruiter:**
+  - Invitar nuevos miembros
+  - Acceso a hangares (solo lectura)
+
+- **Member:**
+  - Acceso básico a hangares según permisos
+  - Unirse a flotas corporativas
+
+**Impuestos Corporativos:**
+
+```php
+// Cuando un piloto completa una misión o vende items
+$pilotEarnings = 100000; // 100K₡
+$corporationTaxRate = 10; // 10%
+
+$taxAmount = $pilotEarnings * ($corporationTaxRate / 100);
+$pilotNetEarnings = $pilotEarnings - $taxAmount;
+
+// Piloto recibe: 90,000₡
+// Corporación recibe: 10,000₡ (va a corporation.wallet_balance)
+```
+
+**Hangares Corporativos:**
+- Divisiones: "General", "Minerales", "Armas", "Naves"
+- Permisos por rol: CEO/Director/Manager/Todos
+- Capacidad: 1,000,000 m³ base (ampliable con módulos de estación)
+
+### 11.2 Sistema de Flotas
+
+**Estructura SQL:**
+
+```sql
+CREATE TABLE fleets (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    fleet_commander_id BIGINT UNSIGNED NOT NULL,
+    corporation_id BIGINT UNSIGNED NULL,
+    is_public BOOLEAN DEFAULT FALSE,
+    max_members INT UNSIGNED DEFAULT 50,
+    current_members INT UNSIGNED DEFAULT 1,
+    objective TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    disbanded_at TIMESTAMP NULL,
+    FOREIGN KEY (fleet_commander_id) REFERENCES pilots(id) ON DELETE CASCADE,
+    FOREIGN KEY (corporation_id) REFERENCES corporations(id) ON DELETE SET NULL
+);
+
+CREATE TABLE fleet_members (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    fleet_id BIGINT UNSIGNED NOT NULL,
+    pilot_id BIGINT UNSIGNED NOT NULL,
+    role ENUM('commander', 'wing_commander', 'squad_commander', 'member') DEFAULT 'member',
+    joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    left_at TIMESTAMP NULL,
+    FOREIGN KEY (fleet_id) REFERENCES fleets(id) ON DELETE CASCADE,
+    FOREIGN KEY (pilot_id) REFERENCES pilots(id) ON DELETE CASCADE
+);
+
+CREATE TABLE fleet_activities (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    fleet_id BIGINT UNSIGNED NOT NULL,
+    activity_type ENUM('combat_won', 'combat_lost', 'member_joined', 'member_left', 'mining_session', 'exploration_site', 'boss_killed') NOT NULL,
+    description TEXT,
+    rewards_distributed BIGINT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (fleet_id) REFERENCES fleets(id) ON DELETE CASCADE
+);
+
+CREATE TABLE fleet_loot (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    fleet_id BIGINT UNSIGNED NOT NULL,
+    item_type ENUM('credits', 'resource', 'module', 'ship', 'blueprint_chip') NOT NULL,
+    item_reference_id BIGINT UNSIGNED NULL,
+    quantity INT UNSIGNED DEFAULT 1,
+    claimed_by BIGINT UNSIGNED NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (fleet_id) REFERENCES fleets(id) ON DELETE CASCADE,
+    FOREIGN KEY (claimed_by) REFERENCES pilots(id) ON DELETE SET NULL
+);
+```
+
+**Creación de Flotas:**
+- Gratis
+- Máximo 50 miembros por flota (ampliable con skills)
+- Tipos: Pública, Corporativa, Privada (solo invitación)
+
+**Bonificadores de Flota:**
+
+```
+Minería en Flota:
+- 2-5 naves minando juntas: +10% eficiencia
+- 6-10 naves: +15% eficiencia
+- 11+ naves: +20% eficiencia
+
+Combate en Flota:
+- 2-3 naves: +5% daño, +5% HP
+- 4-6 naves: +10% daño, +10% HP
+- 7+ naves: +15% daño, +15% HP
+
+Exploración en Flota:
+- Compartir resultados de escaneo
+- +10% probabilidad de encontrar sitios raros
+```
+
+**Distribución de Loot:**
+- Manual - Comandante asigna cada item
+- Equitativo - Dividir créditos/recursos por igual
+- Por contribución - Según daño/minería realizado
+- Need before greed - Miembros "ruedan" por items
+
+### 11.3 Alianzas
 
 Agrupación de múltiples corporaciones.
 
@@ -920,7 +1251,7 @@ Agrupación de múltiples corporaciones.
 - Sistema de defensa mutua
 - Declaraciones de guerra conjuntas
 
-### 11.3 Diplomacia
+### 11.4 Diplomacia
 
 **Estados Diplomáticos:**
 - Guerra

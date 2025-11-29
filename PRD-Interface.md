@@ -1,11 +1,28 @@
 # Interfaz de Usuario y Navegación
 
 **Parte del:** PRD - Vaxav
-**Versión:** 2.0
-**Fecha:** 2025-11-28
+**Versión:** 2.1
+**Fecha:** 2025-11-29
 **Estado:** Documento Vivo - En Desarrollo
 
 ## Changelog
+
+### Versión 2.1 (2025-11-29) - Filosofía AFK-Friendly Integrada
+**Agregado:**
+- ✅ Sección 14: Filosofía de Diseño AFK-Friendly como principio fundamental
+  - Documentación clara del patrón: Iniciar → Esperar AFK → Ver Resumen
+  - Ejemplos de todas las acciones (minería, combate, exploración, misiones, viajes)
+  - Implicaciones para GUI: botones claros, progreso visible, logs detallados
+  - Eliminación de mecánicas de "acercamiento" activo
+- ✅ Sección 14.2.11: Nota AFK-friendly en exploración
+  - Clarificación que puzzles mostrados son narrativos
+  - Implementación real: exploración automática pasiva
+- ✅ Sección 15.2: Filosofía AFK-Friendly como prioridad máxima en principios de diseño
+  - Acciones claras de inicio/fin
+  - Estado visible en HUD
+  - Resúmenes detallados post-acción
+  - No penalización por ausencia
+- ✅ Actualización de botón [Minar] → [Iniciar Minería] con nota explicativa
 
 ### Versión 2.0 (2025-11-28) - Interfaz de Crafting Completa
 **Agregado:**
@@ -41,7 +58,35 @@
 
 ## 14. Sistema de Menús y Navegación
 
-**NOTA IMPORTANTE:**
+**FILOSOFÍA DE DISEÑO: AFK-FRIENDLY**
+
+**VAXAV es un juego ASÍNCRONO diseñado para jugadores que no pueden estar pegados a la pantalla.**
+
+**Principio fundamental:**
+> El jugador INICIA una acción → DEJA el juego AFK → REGRESA para ver el RESUMEN detallado de resultados
+
+**Esto significa que TODAS las acciones en el juego siguen este patrón:**
+
+1. **Minería**: Click "Iniciar Minería" → Esperar 60 ticks → Ver resumen con recursos extraídos, encuentros, eventos
+2. **Combate**: Click "Atacar NPC" → Combate se resuelve automáticamente → Ver resumen detallado (módulos usados, daño, botín)
+3. **Exploración**: Click "Explorar Derelicto" → Exploración automática → Ver resumen de hackeos, loot, peligros
+4. **Misiones**: Click "Aceptar Misión" → Misión se ejecuta automáticamente → Ver resumen de eventos
+5. **Viajes**: Click "Viajar a Sistema X" → Viaje automático en N ticks → Llegar y ver eventos del viaje
+
+**Implicaciones para la GUI:**
+
+- ✅ **SÍ**: Botones claros "Iniciar [Acción]", progreso visible, resúmenes detallados
+- ✅ **SÍ**: Indicadores de "tu nave está minando..." con barra de progreso
+- ✅ **SÍ**: Logs detallados de lo que sucedió mientras estabas AFK
+- ❌ **NO**: Mecánicas de "acercamiento" activo o animado
+- ❌ **NO**: Acciones que requieran atención constante
+- ❌ **NO**: Gameplay que penalice estar ausente
+
+**El HUD muestra claramente el estado actual**: "⚙️ Minando... 5/10" para que el jugador sepa que su personaje está haciendo algo productivo mientras está ausente.
+
+---
+
+**NOTA TÉCNICA:**
 Todos los mockups mostrados en esta sección están en formato ASCII/texto **únicamente con fines ilustrativos** para comunicar la estructura de información, jerarquía de datos y funcionalidades de cada menú.
 
 **La interfaz real será una GUI web moderna** con:
@@ -51,6 +96,7 @@ Todos los mockups mostrados en esta sección están en formato ASCII/texto **ún
 - Gráficos visuales (charts, progress bars, iconos)
 - Responsive design para todos los dispositivos
 - Paleta de colores sci-fi (ver Sección 15)
+- **Énfasis en claridad de estado y progreso AFK-friendly**
 
 Los mockups sirven como wireframes funcionales que el equipo de diseño UI/UX utilizará para crear la interfaz visual real.
 
@@ -1001,6 +1047,8 @@ BANDEJA DE ENTRADA
 ### 14.2.11 Exploración
 
 **Ruta:** `/exploration`
+
+**NOTA AFK-FRIENDLY:** Aunque los mockups muestran puzzles interactivos para comunicar la narrativa, en la implementación real el jugador simplemente hace click en "Explorar Sitio" y la exploración se ejecuta AUTOMÁTICAMENTE durante múltiples ticks. Al finalizar, se muestra un resumen detallado de lo que sucedió (puzzles resueltos, peligros encontrados, loot obtenido). Los puzzles se resuelven usando las habilidades del piloto (Arqueología, Hackeo, etc.) de forma pasiva.
 
 Sistema de exploración con Sitios Ancestrales y Mercados Negros Flotantes.
 
@@ -1988,8 +2036,10 @@ Recursos detectados:
   ⛏️ Pirita (común)
 
 Acciones:
-  [Minar] [Escanear Asteroides] [Ver Naves] [Viajar]
+  [Iniciar Minería] [Escanear Asteroides] [Ver Naves] [Viajar]
 ```
+
+**NOTA AFK:** Al hacer click en [Iniciar Minería], la nave comienza a minar automáticamente durante los ticks configurados (por defecto 60 ticks). El jugador puede dejar el juego AFK y regresar para ver el resumen detallado de recursos extraídos, encuentros con NPCs, y cualquier evento que haya ocurrido durante la minería.
 
 ---
 
@@ -2015,6 +2065,15 @@ Vaxav NO es un juego ASCII ni de terminal. Es un **juego web moderno con una int
 - Interfaces sci-fi modernas (Cyberpunk, Halo, Mass Effect)
 
 ### 15.2 Principios de Diseño
+
+### Filosofía AFK-Friendly (PRIORIDAD MÁXIMA):
+
+- **Acciones claras de inicio/fin:** Cada acción tiene un botón "Iniciar [Acción]" que claramente comunica que el proceso es automático
+- **Estado visible:** El HUD siempre muestra "⚙️ [Acción]... X/Y" para que el jugador sepa que su personaje está haciendo algo productivo
+- **Resúmenes detallados:** Al finalizar cualquier acción, el jugador ve un log completo de lo que sucedió (recursos obtenidos, encuentros, eventos)
+- **No penalización por ausencia:** El juego está diseñado para que dejar la sesión abierta AFK sea la forma ESPERADA de jugar
+- **Progreso pasivo:** Minería, combate, exploración, misiones - todo se ejecuta automáticamente usando las habilidades y módulos del piloto
+- **Claridad en tiempo:** Cada acción muestra "Duración estimada: 60 ticks (~10 horas)" para que el jugador sepa cuándo regresar
 
 ### Diseño Visual:
 
