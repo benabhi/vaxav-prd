@@ -482,6 +482,308 @@ chance_final = max(5%, min(95%, chance_detectar))
 - **Amplificador de CPU T1:** +10% CPU total nave, 5 RE, 0 CPU (no consume CPU), pasivo (requiere Ingeniería 2)
 - **Relé de Reactor de Energía T1:** +10% RE total nave, 0 RE, 15 CPU, pasivo (requiere Ingeniería 2)
 
+### 7.5.4 Recetas de Fabricación de Módulos T1
+
+Todos los módulos se fabrican en Sala de Ingeniería (ver PRD-Universe.md). Ningún módulo se fabrica con recursos crudos - todos requieren componentes intermedios.
+
+**Regla Crítica:** La cadena de fabricación es: Recursos Crudos → Refinamiento → Componentes Intermedios → Módulos → Naves
+
+#### Tabla de Recetas - 25 Módulos T1 Esenciales
+
+| Módulo T1 | Componentes Requeridos | Tiempo | Skill Fabricación | Precio NPC | Volumen | Desbloqueo |
+|-----------|------------------------|--------|-------------------|------------|---------|------------|
+| Cañón Automático Ligero | 15 Placas de Blindaje T1 + 10 Servomotores T1 + 8 Circuitos Básicos | 8 ticks | Construcción de Naves Nivel 1 | 25,000₡ | 2 m³ | Gratis |
+| Láser de Pulso | 12 Lentes Básicas + 15 Celdas de Energía T1 + 10 Circuitos Básicos | 8 ticks | Construcción de Naves Nivel 1 | 28,000₡ | 1.5 m³ | Gratis |
+| Blaster Básico | 10 Superconductores T1 + 12 Circuitos Básicos + 8 Placas de Blindaje T1 | 8 ticks | Construcción de Naves Nivel 1 | 22,000₡ | 1.8 m³ | Gratis |
+| Lanzamisiles Ligero | 20 Barras de Acero + 10 Servomotores T1 + 8 Procesadores T1 | 10 ticks | Construcción de Naves Nivel 1 | 30,000₡ | 3 m³ | Gratis |
+| Generador de Escudos Pequeño | 15 Superconductores T1 + 20 Celdas de Energía T1 + 10 Circuitos Básicos | 6 ticks | Construcción de Naves Nivel 1 | 18,000₡ | 1 m³ | Gratis |
+| Generador de Escudos Mediano | 25 Superconductores T1 + 30 Celdas de Energía T1 + 15 Condensadores | 8 ticks | Construcción de Naves Nivel 1 | 32,000₡ | 1.5 m³ | Gratis |
+| Generador de Escudos Grande | 40 Superconductores T1 + 50 Celdas de Energía T1 + 25 Condensadores | 12 ticks | Construcción de Naves Nivel 1 | 65,000₡ | 2.5 m³ | 10,000₡ |
+| Recargador de Escudos T1 | 20 Celdas de Energía T1 + 15 Superconductores T1 + 12 Procesadores T1 | 7 ticks | Construcción de Naves Nivel 1 | 35,000₡ | 1.2 m³ | Gratis |
+| Placa de Armadura Pequeña | 30 Placas de Blindaje T1 + 10 Barras de Acero | 5 ticks | Construcción de Naves Nivel 1 | 15,000₡ | 2 m³ | Gratis |
+| Placa de Armadura Mediana | 50 Placas de Blindaje T1 + 20 Barras de Acero + 10 Vigas Reforzadas | 7 ticks | Construcción de Naves Nivel 1 | 28,000₡ | 3 m³ | Gratis |
+| Placa de Armadura Grande | 80 Placas de Blindaje T1 + 40 Vigas Reforzadas + 15 Barras de Acero | 10 ticks | Construcción de Naves Nivel 1 | 55,000₡ | 5 m³ | 10,000₡ |
+| Reparador de Armadura T1 | 25 Placas de Blindaje T1 + 15 Servomotores T1 + 20 Celdas de Energía T1 | 8 ticks | Construcción de Naves Nivel 1 | 40,000₡ | 2 m³ | Gratis |
+| Refuerzo Estructural T1 | 40 Barras de Acero + 20 Placas de Blindaje T1 | 4 ticks | Construcción de Naves Nivel 1 | 12,000₡ | 3 m³ | Gratis |
+| Láser de Minería Básico | 10 Lentes Básicas + 12 Celdas de Energía T1 + 8 Servomotores T1 | 6 ticks | Construcción de Naves Nivel 1 | 25,000₡ | 1.5 m³ | Gratis |
+| Extractor Criogénico T1 | 15 Actuadores Hidráulicos + 20 Celdas de Energía T1 + 10 Circuitos Básicos | 7 ticks | Construcción de Naves Nivel 1 | 30,000₡ | 2.5 m³ | Gratis |
+| Recolector de Gas T1 | 12 Baterías Iónicas + 10 Actuadores Hidráulicos + 8 Circuitos Básicos | 6 ticks | Construcción de Naves Nivel 1 | 24,000₡ | 2 m³ | Gratis |
+| Expansor de Carga T1 | 25 Barras de Acero + 15 Vigas Reforzadas | 5 ticks | Construcción de Naves Nivel 1 | 15,000₡ | 4 m³ | Gratis |
+| Propulsor Básico T1 | 18 Sistemas de Propulsión T1 + 25 Celdas de Energía T1 + 10 Servomotores T1 | 8 ticks | Construcción de Naves Nivel 1 | 35,000₡ | 1.8 m³ | Gratis |
+| Motor de Salto | 30 Sistemas de Propulsión T1 + 40 Celdas de Energía T1 + 20 Procesadores T1 | 12 ticks | Construcción de Naves Nivel 1 | 75,000₡ | 3 m³ | 15,000₡ |
+| Scanner de Carga T1 | 15 Lentes Básicas + 20 Procesadores T1 + 12 Circuitos Básicos | 7 ticks | Construcción de Naves Nivel 1 | 40,000₡ | 1 m³ | Gratis |
+| Scanner de Combate T1 | 10 Lentes Básicas + 15 Procesadores T1 + 8 Circuitos Básicos | 5 ticks | Construcción de Naves Nivel 1 | 28,000₡ | 0.8 m³ | Gratis |
+| Scanner de Anomalías T1 | 12 Sistemas Ópticos T1 + 18 Procesadores T1 + 10 Circuitos Básicos | 6 ticks | Construcción de Naves Nivel 1 | 32,000₡ | 1 m³ | Gratis |
+| Scanner Planetario T1 | 15 Sistemas Ópticos T1 + 20 Procesadores T1 + 12 Condensadores | 8 ticks | Construcción de Naves Nivel 1 | 45,000₡ | 1.2 m³ | Gratis |
+| Camuflaje Básico T1 | 12 Procesadores T1 + 15 Superconductores T1 + 20 Celdas de Energía T1 | 9 ticks | Construcción de Naves Nivel 1 | 50,000₡ | 1.5 m³ | 10,000₡ |
+| Amplificador de CPU T1 | 25 Procesadores T1 + 20 Microconductores + 15 Circuitos Básicos | 7 ticks | Construcción de Naves Nivel 1 | 38,000₡ | 0.5 m³ | 10,000₡ |
+
+**Notas Importantes:**
+- **Módulo Requerido:** Sala de Ingeniería Nivel 1+ (ver PRD-Universe.md sección 6.2.7)
+- **Skill "Construcción de Naves":** Skill nueva que se agrega a PRD-GameDesign.md
+  - Nivel 1: Permite fabricar módulos y naves T1
+  - Nivel 2: Reduce tiempo fabricación 5%
+  - Nivel 3: Permite fabricar naves T2
+  - Nivel 4: Reduce tiempo fabricación 10% adicional
+  - Nivel 5: Permite fabricar módulos y naves T3
+- **Tiempo de Fabricación:** Por unidad individual, producción en masa disponible con Sala de Ingeniería Nivel 3+
+- **Desbloqueo de Recetas:**
+  - Módulos básicos (marcados "Gratis"): Desbloqueados por defecto
+  - Módulos avanzados: Requieren pago de créditos (10K-15K₡)
+  - Módulos T2-T3: Requieren Chips de Diseño o descifrado en Laboratorio
+- **Volumen:** Importante para planificar transporte desde estación de fabricación
+- **Precios NPC:** Valor base de venta a NPCs, el mercado de jugadores fluctúa ±200%
+- **Árbol de Dependencias:** Cada módulo muestra sus componentes, que a su vez requieren recursos procesados
+  - Ejemplo: Cañón Automático → Placas de Blindaje T1 → (Ferrita + Titanita) Refinadas → Ferrita + Titanita Crudas
+
+**Ejemplo de Cadena Completa:**
+
+```
+LÁSER DE PULSO (Módulo Final)
+├─> 12× Lentes Básicas (Componente)
+│   ├─> 25 Silicatos Refinados (Recurso Procesado)
+│   │   └─> 33 Silicatos Crudos (Recurso Crudo, ratio 0.75)
+│   └─> 10 Agua Destilada (Recurso Procesado)
+│       └─> 13 Agua Sucia (Recurso Crudo, ratio 0.75)
+├─> 15× Celdas de Energía T1 (Componente)
+│   ├─> 30 Hidrógeno Comprimido (Recurso Procesado)
+│   │   └─> 40 Hidrógeno Crudo (Recurso Crudo, ratio 0.75)
+│   └─> 15 Helio Líquido (Recurso Procesado)
+│       └─> 20 Helio Crudo (Recurso Crudo, ratio 0.75)
+└─> 10× Circuitos Básicos (Componente)
+    ├─> 20 Cobre Estelar (Recurso Procesado)
+    │   └─> 27 Cobre Crudo (Recurso Crudo, ratio 0.75)
+    └─> 10 Silicatos Refinados (Recurso Procesado)
+        └─> 13 Silicatos Crudos (Recurso Crudo, ratio 0.75)
+```
+
+Este árbol de dependencias es visible en la GUI de inspección de ítems (ver PRD-Interface.md).
+
+### 7.6 Recetas de Fabricación de Naves Fragata T1
+
+Todas las naves se fabrican en Astillero de estaciones (ver PRD-Universe.md sección 6.2.6). Como con los módulos, ninguna nave se fabrica directamente con recursos crudos.
+
+**Regla Crítica:** Recursos Crudos → Refinamiento → Componentes Intermedios → Módulos/Submódulos → Naves
+
+#### 7.6.1 Las 5 Fragatas T1 Especializadas
+
+Las fragatas T1 son las naves de entrada al juego. Cada una está especializada en un rol específico.
+
+| Nave Fragata T1 | Especialización | Componentes Requeridos | Tiempo | Skill Fabricación | Precio NPC | Volumen | Desbloqueo |
+|-----------------|-----------------|------------------------|--------|-------------------|------------|---------|------------|
+| Excavador MK-I | Minería Industrial | 200 Placas de Blindaje T1 + 150 Barras de Acero + 100 Sistemas de Propulsión T1 + 80 Celdas de Energía T1 + 60 Procesadores T1 + 40 Actuadores Hidráulicos | 48 ticks | Construcción de Naves Nivel 1 | 800,000₡ | 25,000 m³ | Gratis |
+| Depredador | Combate PvP/PvE | 250 Placas de Blindaje T1 + 120 Barras de Acero + 150 Superconductores T1 + 100 Celdas de Energía T1 + 80 Servomotores T1 + 60 Procesadores T1 | 52 ticks | Construcción de Naves Nivel 1 | 900,000₡ | 22,000 m³ | Gratis |
+| Explorador Vaxav | Exploración y Escaneo | 180 Placas de Blindaje T1 + 100 Barras de Acero + 120 Sistemas de Propulsión T1 + 150 Sistemas Ópticos T1 + 100 Procesadores T1 + 80 Lentes Básicas | 50 ticks | Construcción de Naves Nivel 1 | 850,000₡ | 20,000 m³ | Gratis |
+| Mercante Rápido | Transporte y Comercio | 220 Barras de Acero + 180 Vigas Reforzadas + 100 Sistemas de Propulsión T1 + 80 Celdas de Energía T1 + 60 Procesadores T1 + 40 Superconductores T1 | 46 ticks | Construcción de Naves Nivel 1 | 750,000₡ | 35,000 m³ | Gratis |
+| Vanguardia | Multi-rol Equilibrada | 200 Placas de Blindaje T1 + 130 Barras de Acero + 120 Sistemas de Propulsión T1 + 100 Celdas de Energía T1 + 80 Superconductores T1 + 70 Procesadores T1 | 50 ticks | Construcción de Naves Nivel 1 | 820,000₡ | 23,000 m³ | Gratis |
+
+#### 7.6.2 Especificaciones Completas de las Fragatas T1
+
+**1. Excavador MK-I (Minera)**
+
+```json
+{
+  "nombre": "Excavador MK-I",
+  "clase": "Fragata",
+  "tipo": "Minera",
+  "tier": 1,
+  "escudos": 500,
+  "armadura": 800,
+  "estructura": 600,
+  "carga": 5000,
+  "velocidad": 15,
+  "reactor_energia": 50,
+  "cpu": 200,
+  "capacitor": 500,
+  "capacitor_regen": 25,
+  "slots_ofensivos": 1,
+  "slots_defensivos": 2,
+  "slots_utilidad": 3,
+  "bonos": {
+    "mineria_tick_reduction": 0.15,
+    "carga_minerales": 1.25
+  },
+  "requerimientos": {
+    "pilotaje_fragatas": 1,
+    "mineria": 1
+  }
+}
+```
+
+**2. Depredador (Combate)**
+
+```json
+{
+  "nombre": "Depredador",
+  "clase": "Fragata",
+  "tipo": "Combate",
+  "tier": 1,
+  "escudos": 800,
+  "armadura": 600,
+  "estructura": 500,
+  "carga": 200,
+  "velocidad": 20,
+  "reactor_energia": 60,
+  "cpu": 220,
+  "capacitor": 600,
+  "capacitor_regen": 30,
+  "slots_ofensivos": 3,
+  "slots_defensivos": 2,
+  "slots_utilidad": 2,
+  "bonos": {
+    "danio_proyectiles": 1.10,
+    "rastreo": 1.15
+  },
+  "requerimientos": {
+    "pilotaje_fragatas": 2,
+    "armas_proyectiles": 1
+  }
+}
+```
+
+**3. Explorador Vaxav (Exploración)**
+
+```json
+{
+  "nombre": "Explorador Vaxav",
+  "clase": "Fragata",
+  "tipo": "Exploración",
+  "tier": 1,
+  "escudos": 600,
+  "armadura": 500,
+  "estructura": 550,
+  "carga": 800,
+  "velocidad": 22,
+  "reactor_energia": 55,
+  "cpu": 250,
+  "capacitor": 550,
+  "capacitor_regen": 28,
+  "slots_ofensivos": 1,
+  "slots_defensivos": 2,
+  "slots_utilidad": 4,
+  "bonos": {
+    "escaneo_precision": 1.25,
+    "velocidad_warp": 1.15
+  },
+  "requerimientos": {
+    "pilotaje_fragatas": 2,
+    "exploracion": 1
+  }
+}
+```
+
+**4. Mercante Rápido (Transporte)**
+
+```json
+{
+  "nombre": "Mercante Rápido",
+  "clase": "Fragata",
+  "tipo": "Transporte",
+  "tier": 1,
+  "escudos": 400,
+  "armadura": 700,
+  "estructura": 650,
+  "carga": 10000,
+  "velocidad": 18,
+  "reactor_energia": 45,
+  "cpu": 180,
+  "capacitor": 480,
+  "capacitor_regen": 22,
+  "slots_ofensivos": 0,
+  "slots_defensivos": 3,
+  "slots_utilidad": 3,
+  "bonos": {
+    "carga_bonus": 1.50,
+    "velocidad_alineamiento": 1.20
+  },
+  "requerimientos": {
+    "pilotaje_fragatas": 1
+  }
+}
+```
+
+**5. Vanguardia (Multi-rol)**
+
+```json
+{
+  "nombre": "Vanguardia",
+  "clase": "Fragata",
+  "tipo": "Multi-rol",
+  "tier": 1,
+  "escudos": 700,
+  "armadura": 650,
+  "estructura": 570,
+  "carga": 1500,
+  "velocidad": 18,
+  "reactor_energia": 55,
+  "cpu": 210,
+  "capacitor": 550,
+  "capacitor_regen": 26,
+  "slots_ofensivos": 2,
+  "slots_defensivos": 3,
+  "slots_utilidad": 2,
+  "bonos": {
+    "versatilidad": 1.05
+  },
+  "requerimientos": {
+    "pilotaje_fragatas": 1
+  }
+}
+```
+
+**Notas Importantes:**
+- **Módulo Requerido:** Astillero Nivel 1+ (ver PRD-Universe.md sección 6.2.6)
+- **Skill "Construcción de Naves":** Requerida para fabricar (ver PRD-GameDesign.md)
+  - Nivel 1: Permite fabricar naves T1
+  - Nivel 3: Permite fabricar naves T2
+  - Nivel 5: Permite fabricar naves T3
+- **Tiempo de Fabricación:**
+  - Base: 46-52 ticks por fragata T1
+  - Reducible con skill "Producción en Masa" (-5% a -25%)
+  - Reducible con Astillero de nivel superior (+15% a +75% velocidad)
+- **Desbloqueo de Recetas:**
+  - Todas las fragatas T1: Desbloqueadas por defecto
+  - Fragatas T2: Requieren pago de créditos (500K₡) o Chip de Diseño
+  - Fragatas T3: Requieren Chips de Diseño exclusivamente (no se pueden comprar)
+- **Volumen:** El volumen ensamblado, importante para determinar qué nave puede transportar la base de estación
+- **Precios NPC:** Valor de venta a NPCs, mercado de jugadores puede variar significativamente
+- **Bonos de Nave:**
+  - Excavador: +15% velocidad minería, +25% capacidad de carga de minerales
+  - Depredador: +10% daño proyectiles, +15% tracking
+  - Explorador: +25% precisión escaneo, +15% velocidad warp
+  - Mercante: +50% carga total, +20% velocidad alineamiento
+  - Vanguardia: +5% todas las stats (versátil pero sin especialización)
+
+**Ejemplo de Árbol de Dependencias - Excavador MK-I:**
+
+```
+EXCAVADOR MK-I (Nave Final)
+├─> 200× Placas de Blindaje T1 (Componente)
+│   ├─> 60 Ferrita Refinada × 200 = 12,000 unidades
+│   │   └─> 16,000 Ferrita Cruda (ratio 0.75)
+│   └─> 20 Titanita Refinada × 200 = 4,000 unidades
+│       └─> 5,714 Titanita Cruda (ratio 0.70)
+├─> 150× Barras de Acero (Componente)
+│   ├─> 50 Ferrita Refinada × 150 = 7,500 unidades
+│   └─> 10 Silicatos Refinados × 150 = 1,500 unidades
+├─> 100× Sistemas de Propulsión T1 (Componente)
+│   ├─> 40 Titanita Refinada × 100 = 4,000 unidades
+│   └─> 25 Servomotores T1 × 100 = 2,500 unidades (que a su vez requieren Ferrita + Cobre)
+├─> 80× Celdas de Energía T1 (Componente)
+│   ├─> 30 Hidrógeno Comprimido × 80 = 2,400 unidades
+│   └─> 15 Helio Líquido × 80 = 1,200 unidades
+├─> 60× Procesadores T1 (Componente)
+│   └─> (Cobre Estelar + Silicatos Refinados)
+└─> 40× Actuadores Hidráulicos (Componente)
+    └─> (Ferrita Refinada + Agua Destilada)
+```
+
+**Total aproximado de recursos crudos para 1 Excavador MK-I:**
+- ~40,000 unidades de recursos metálicos crudos
+- ~8,000 unidades de recursos gaseosos/volátiles crudos
+- ~3,000 unidades de recursos orgánicos crudos
+- 48 ticks de fabricación + tiempo de componentes (~200 ticks totales incluyendo refinamiento y fabricación de componentes)
+
 ---
 
 ## 8. Sistema de Combate
