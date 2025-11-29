@@ -32,29 +32,35 @@
 
 VAXAV utiliza un sistema de recursos único organizado en **3 categorías de extracción** con **4 tiers de rareza** cada una.
 
-### 9.2.1 Categorías de Recursos
+### 9.2.1 Categorías de Recursos - Sistema Refactorizado
 
-**Categoría 1: Metálicos**
-- **Fuentes:** Asteroides (belts) y planetas rocosos/volcánicos
-- **Uso Principal:** Construcción de naves, módulos, estructuras
-- **Habilidad:** Minería de Asteroides (x2)
+**IMPORTANTE:** Los recursos se dividen en DOS sistemas completamente separados con mecánicas distintas:
 
-**Categoría 2: Gaseosos y Volátiles**
-- **Fuentes:** Nebulosas de gas y planetas jovianos/helados
-- **Uso Principal:** Combustibles, municiones, armas de energía
-- **Habilidades:** Recolección de Gas (x3), Extracción Criogénica (x3)
+**CATEGORÍA A: RECURSOS DE ASTEROIDES (Minería Espacial)**
+- **Fuentes EXCLUSIVAS:** Cinturones de asteroides, campos de escombros espaciales
+- **Mecánica:** Minería con naves equipadas con láseres mineros (directa, inmediata)
+- **Skill:** Minería (x2)
+- **Tipos:** 8 recursos metálicos únicos (T1-T4)
+- **Uso Principal:** Estructuras metálicas, cascos de naves, blindaje, componentes mecánicos
+- **Características:** Alta densidad (1 m³ = muchas unidades), refinamiento simple (1 paso)
 
-**Categoría 3: Orgánicos y Exóticos**
-- **Fuentes:** Planetas vitales, oceánicos
-- **Uso Principal:** Consumibles, tecnología biológica, items especiales
-- **Habilidad:** Bioprospección (x2)
+**CATEGORÍA B: RECURSOS PLANETARIOS (Extracción Planetaria)**
+- **Fuentes EXCLUSIVAS:** Planetas (superficie, atmósfera, océanos, capas geológicas)
+- **Mecánica:** Instalaciones planetarias + drones de extracción (requiere setup, pasivo)
+- **Skills:** Bioprospección (x2), Extracción Atmosférica (x3), Perforación Geológica (x3)
+- **Tipos:** 16 recursos planetarios únicos (gases, orgánicos, especiales)
+- **Uso Principal:** Combustibles, energía, tecnología avanzada, componentes electrónicos, biológicos
+- **Características:** Baja densidad (grandes volúmenes), procesamiento complejo (múltiples pasos)
 
-### 9.2.2 Recursos Metálicos
+**Regla de Oro:** Un recurso NUNCA aparece en asteroides Y planetas. Son ecosistemas separados.
+
+### 9.2.2 Recursos de Asteroides (CATEGORÍA A - Minería Espacial)
+
+**SOLO disponibles en cinturones de asteroides y campos de escombros. NO en planetas.**
 
 **Tier 1 (Comunes):**
 - **Ferrita** - Metal estructural básico para cascos T1 y estructuras
 - **Cobre Estelar** - Alta conductividad para electrónica y componentes
-- **Silicatos** - Cristales básicos para vidrio, lentes y paneles
 
 **Tier 2 (Poco Comunes):**
 - **Titanita** - Aleación ligera y resistente para armaduras T2
@@ -68,58 +74,111 @@ VAXAV utiliza un sistema de recursos único organizado en **3 categorías de ext
 - **Adamantita** - Material casi indestructible para naves T3 y armaduras exóticas
 - **Neutronium** - Materia ultra-densa para reactores capitales y armas devastadoras
 
-**Fuentes de Extracción:**
-- Belts de Asteroides (comunes, ricos, densos, exóticos)
-- Planetas Rocosos (T1-T2 principalmente)
-- Planetas Volcánicos (T2-T3 principalmente)
-- Planetas Fragmentados (mezcla caótica, T4 muy raro)
+**Total: 8 recursos metálicos**
 
-### 9.2.3 Recursos Gaseosos y Volátiles
+**Fuentes de Extracción EXCLUSIVAS:**
+- Cinturones de Asteroides (5 tipos: comunes, ricos, densos, exóticos, escombros)
+- Campos de Escombros Espaciales (restos de naves antiguas, estaciones destruidas)
+- Anillos planetarios rocosos (solo cinturones orbitales, NO superficie planetaria)
 
-**Tier 1 (Comunes):**
-- **Hidrógeno Comprimido** - Combustible básico para propulsión y energía
-- **Helio Líquido** - Refrigerante para sistemas de enfriamiento
+**Mecánica de Extracción:**
+1. Nave con Láser de Minería se posiciona en asteroide
+2. Activa extracción (consume ticks + capacitor)
+3. Recursos van directamente al cargo de la nave
+4. Asteroide se agota tras X extracciones
+5. Regeneración de asteroides: 48-72 ticks
 
-**Tier 2 (Poco Comunes):**
-- **Deuterio** - Combustible avanzado para reactores de fusión
-- **Nitrógeno Criogénico** - Propelente para torpedos y munición
+**Características Únicas:**
+- **Compactos:** 1 unidad = 0.2-1 m³ (alta densidad)
+- **Refinamiento Simple:** Crudo → Refinado (1 paso, ratio 0.60-0.75)
+- **Almacenamiento:** Fácil de transportar en cargueros
+- **Volatilidad:** Cero (no se degradan con el tiempo)
 
-**Tier 3 (Raros):**
-- **Plasma Ionizado** - Energía contenida para armas de plasma y escudos avanzados
-- **Xenón Enriquecido** - Propulsor de alta eficiencia para motores T3
+### 9.2.3 Recursos Planetarios - Gases Atmosféricos (CATEGORÍA B)
 
-**Tier 4 (Muy Raros):**
-- **Antimateria** - Energía explosiva para armas T3 y bombas
-- **Materia Oscura** - Experimental para tecnología exótica
-
-**Fuentes de Extracción:**
-- Nebulosas de Gas (H2, Deuterio, Iónica, Antimateria)
-- Ice Belts (Agua, Nitrógeno, Xenón)
-- Planetas Jovianos (Hidrógeno, Helio, Deuterio)
-- Planetas Helados (Agua, Nitrógeno, Xenón)
-
-### 9.2.4 Recursos Orgánicos y Exóticos
+**SOLO disponibles en atmósferas planetarias. NO en asteroides ni nebulosas.**
 
 **Tier 1 (Comunes):**
-- **Biomasa** - Materia orgánica para alimentos y compost
-- **Agua Destilada** - Soporte vital, consumible y coolant
+- **Hidrógeno Molecular** - Gas atmosférico básico, combustible para propulsión simple
+- **Helio-3** - Isótopo raro de helio, refrigerante criogénico y combustible fusión
 
 **Tier 2 (Poco Comunes):**
-- **Proteínas Sintéticas** - Nutrición avanzada para buffs y raciones
-- **Algas Bioluminiscentes** - Energía biológica para baterías orgánicas
+- **Deuterio Atmosférico** - Hidrógeno pesado, combustible para reactores de fusión T2
+- **Nitrógeno Comprimido** - Gas inerte para propelentes y sistemas de soporte vital
 
 **Tier 3 (Raros):**
-- **Nanobots Orgánicos** - Tecnología bio para reparación automática
-- **Cristales Vivos** - Computación orgánica para IA y sistemas avanzados
+- **Plasma Atmosférico** - Gas ionizado de tormentas eléctricas, energía para armas plasma
+- **Xenón Estratosférico** - Gas noble pesado, propulsor de alta eficiencia para motores T3
 
 **Tier 4 (Muy Raros):**
-- **Esporas Regenerativas** - Curación avanzada para módulos de auto-reparación T3
-- **Genoma Alienígena** - Muestras únicas para investigación y tecnología exótica
+- **Partículas de Antimateria** - Capturadas de cinturones de radiación planetarios
+- **Trazas de Materia Oscura** - Detectable solo en planetas con anomalías gravitatorias
 
-**Fuentes de Extracción:**
-- Planetas Vitales (Biomasa, Proteínas, Nanobots, Cristales Vivos, Esporas)
-- Planetas Oceánicos (Agua, Biomasa, Proteínas, Algas)
-- Planetas Fragmentados (mezcla caótica, extremadamente raro)
+**Total: 8 recursos gaseosos**
+
+**Fuentes de Extracción EXCLUSIVAS:**
+- Planetas Jovianos (atmósfera profunda): Hidrógeno, Helio, Deuterio, Antimateria
+- Planetas Helados (atmósfera tenue): Nitrógeno, Helio, trazas de Xenón
+- Planetas con Tormenta Permanente: Plasma Atmosférico
+- Planetas Anómalos (IIC 4-5): Materia Oscura
+
+**Mecánica de Extracción Planetaria (NUEVA):**
+1. **Setup Inicial:** Instalar Extractor Atmosférico en órbita del planeta (costo 500K₡, 24 ticks setup)
+2. **Configuración:** Seleccionar recurso objetivo y profundidad atmosférica
+3. **Extracción Pasiva:** El extractor recolecta automáticamente cada tick (sin nave presente)
+4. **Recolección:** Nave con cargo debe visitar extractor y recoger recursos acumulados
+5. **Capacidad:** Extractor almacena hasta 50,000 m³ antes de llenarse
+6. **Mantenimiento:** Requiere reabastecimiento de energía cada 144 ticks (1 Celda de Energía T2)
+
+**Características Únicas:**
+- **Baja Densidad:** 1 unidad = 2-4 m³ (gases comprimidos)
+- **Procesamiento Complejo:** Crudo → Comprimido → Refinado (2 pasos)
+- **Extracción Pasiva:** No requiere piloto activo (AFK-friendly)
+- **Riesgo:** Extractores en IIC 3+ pueden ser atacados/robados por otros jugadores
+
+### 9.2.4 Recursos Planetarios - Orgánicos y Biológicos (CATEGORÍA B)
+
+**SOLO disponibles en biosfer as planetarias (superficie, océanos, ecosistemas). NO en asteroides.**
+
+**Tier 1 (Comunes):**
+- **Biomasa Cruda** - Materia orgánica de ecosistemas planetarios, base para consumibles
+- **Agua Planetaria** - H2O líquida de océanos/ríos, soporte vital y refrigerante
+
+**Tier 2 (Poco Comunes):**
+- **Proteínas Nativas** - Cadenas proteicas de flora/fauna planetaria, nutrición avanzada
+- **Algas Fotosintéticas** - Organismos unicelulares, baterías biológicas y oxígeno
+
+**Tier 3 (Raros):**
+- **Colonias de Nanobots Simbióticos** - Microbios tecnológicos, reparación automática
+- **Cristales Bioconductores** - Formaciones minerales vivas, computación orgánica
+
+**Tier 4 (Muy Raros):**
+- **Esporas Xenorregenerativas** - Hongos alienígenas con propiedades curativas extremas
+- **Secuencias de ADN Xenomorfo** - Genoma de vida inteligente extinta, investigación prohibida
+
+**Total: 8 recursos orgánicos**
+
+**Fuentes de Extracción EXCLUSIVAS:**
+- Planetas Vitales (ecosistemas complejos): Todos los tiers
+- Planetas Oceánicos (biomas marinos): Agua, Biomasa, Proteínas, Algas, Cristales
+- Planetas Fragmentados (vida extremófila): Nanobots, Esporas (muy raro)
+- Ruinas Alienígenas: ADN Xenomorfo (requiere Arqueología Espacial 5)
+
+**Mecánica de Extracción Planetaria (NUEVA):**
+1. **Setup Inicial:** Desplegar Drones de Bioprospección en superficie (costo 300K₡, 18 ticks setup)
+2. **Exploración:** Los drones escanean biomas y establecen zonas de cosecha óptimas
+3. **Cosecha Pasiva:** Drones recolectan biomasa/agua automáticamente cada 2 ticks
+4. **Recolección:** Nave debe aterrizar/orbitar y cargar recursos de drones
+5. **Capacidad:** Cada drone almacena hasta 20,000 m³ antes de llenarse
+6. **Degradación:** Recursos orgánicos crudos se degradan 5%/tick si no se procesan (requiere refrigeración)
+7. **Mantenimiento:** Drones requieren reparación cada 72 ticks (10K₡ + componentes)
+
+**Características Únicas:**
+- **Muy Baja Densidad:** 1 unidad = 3-5 m³ (materia orgánica húmeda)
+- **Procesamiento Muy Complejo:** Crudo → Purificado → Sintetizado → Refinado (3 pasos)
+- **Degradación:** Se pudren con el tiempo si no se refrigeran
+- **Valor Agregado:** Productos finales valen 10x más que el crudo
+- **Exclusividad:** Recursos T4 solo en 2-3 planetas del universo conocido
 
 ### 9.2.5 Refinamiento y Procesamiento
 
@@ -163,35 +222,42 @@ Estación Nivel 2: +10%
 | Adamantita Cruda | Adamantita Refinada | T4 | 0.60 | Refinamiento Nivel 4 | 6 ticks/100u | 2,500₡/u | 0.4 m³/u |
 | Neutronium Crudo | Neutronium Procesado | T4 | 0.60 | Refinamiento Nivel 5 | 8 ticks/100u | 5,000₡/u | 0.2 m³/u |
 
-**RECURSOS GASEOSOS/VOLÁTILES PROCESADOS (8 tipos)**
+**RECURSOS GASEOSOS ATMOSFÉRICOS PROCESADOS - CATEGORÍA B (8 tipos)**
 
-| Recurso Crudo | Recurso Procesado | Tier | Ratio Base | Skill Req. | Tiempo | Precio NPC Base (procesado) | Volumen |
-|---------------|-------------------|------|------------|------------|--------|----------------------------|---------|
-| Hidrógeno Crudo | Hidrógeno Comprimido | T1 | 0.75 | Refinamiento Nivel 1 | 1 tick/100u | 8₡/u | 2 m³/u |
-| Helio Crudo | Helio Líquido | T1 | 0.75 | Refinamiento Nivel 1 | 1 tick/100u | 10₡/u | 1.5 m³/u |
-| Deuterio Crudo | Deuterio Refinado | T2 | 0.70 | Refinamiento Nivel 2 | 2 ticks/100u | 100₡/u | 1 m³/u |
-| Nitrógeno Crudo | Nitrógeno Criogénico | T2 | 0.70 | Refinamiento Nivel 2 | 2 ticks/100u | 85₡/u | 1.2 m³/u |
-| Plasma Crudo | Plasma Ionizado | T3 | 0.65 | Refinamiento Nivel 3 | 4 ticks/100u | 400₡/u | 0.5 m³/u |
-| Xenón Crudo | Xenón Enriquecido | T3 | 0.65 | Refinamiento Nivel 3 | 4 ticks/100u | 550₡/u | 0.4 m³/u |
-| Antimateria Cruda | Antimateria Estable | T4 | 0.60 | Refinamiento Nivel 4 | 6 ticks/100u | 3,000₡/u | 0.1 m³/u |
-| Materia Oscura Cruda | Materia Oscura Contenida | T4 | 0.60 | Refinamiento Nivel 5 | 8 ticks/100u | 6,000₡/u | 0.1 m³/u |
+| Recurso Crudo Planetario | Recurso Procesado | Tier | Ratio Base | Skill Req. | Tiempo | Precio NPC Base (procesado) | Volumen |
+|--------------------------|-------------------|------|------------|------------|--------|----------------------------|---------|
+| Hidrógeno Molecular (crudo) | Hidrógeno Comprimido | T1 | 0.75 | Extracción Atmosférica Nivel 1 | 1 tick/100u | 8₡/u | 2 m³/u |
+| Helio-3 (crudo) | Helio-3 Líquido | T1 | 0.75 | Extracción Atmosférica Nivel 1 | 1 tick/100u | 10₡/u | 1.5 m³/u |
+| Deuterio Atmosférico (crudo) | Deuterio Refinado | T2 | 0.70 | Extracción Atmosférica Nivel 2 | 2 ticks/100u | 100₡/u | 1 m³/u |
+| Nitrógeno Comprimido (crudo) | Nitrógeno Criogénico | T2 | 0.70 | Extracción Atmosférica Nivel 2 | 2 ticks/100u | 85₡/u | 1.2 m³/u |
+| Plasma Atmosférico (crudo) | Plasma Ionizado | T3 | 0.65 | Extracción Atmosférica Nivel 3 | 4 ticks/100u | 400₡/u | 0.5 m³/u |
+| Xenón Estratosférico (crudo) | Xenón Enriquecido | T3 | 0.65 | Extracción Atmosférica Nivel 3 | 4 ticks/100u | 550₡/u | 0.4 m³/u |
+| Partículas de Antimateria (crudas) | Antimateria Estable | T4 | 0.60 | Extracción Atmosférica Nivel 4 | 6 ticks/100u | 3,000₡/u | 0.1 m³/u |
+| Trazas de Materia Oscura (crudas) | Materia Oscura Contenida | T4 | 0.60 | Extracción Atmosférica Nivel 5 | 8 ticks/100u | 6,000₡/u | 0.1 m³/u |
 
-**RECURSOS ORGÁNICOS/EXÓTICOS PROCESADOS (8 tipos)**
+**RECURSOS ORGÁNICOS/BIOLÓGICOS PROCESADOS - CATEGORÍA B (8 tipos)**
 
-| Recurso Crudo | Recurso Procesado | Tier | Ratio Base | Skill Req. | Tiempo | Precio NPC Base (procesado) | Volumen |
-|---------------|-------------------|------|------------|------------|--------|----------------------------|---------|
-| Biomasa Cruda | Biomasa Refinada | T1 | 0.75 | Refinamiento Nivel 1 | 1 tick/100u | 6₡/u | 3 m³/u |
-| Agua Sucia | Agua Destilada | T1 | 0.75 | Refinamiento Nivel 1 | 1 tick/100u | 5₡/u | 4 m³/u |
-| Proteínas Crudas | Proteínas Sintéticas | T2 | 0.70 | Refinamiento Nivel 2 | 2 ticks/100u | 90₡/u | 2 m³/u |
-| Algas Crudas | Algas Bioluminiscentes | T2 | 0.70 | Refinamiento Nivel 2 | 2 ticks/100u | 110₡/u | 2.5 m³/u |
-| Nanobots Dañados | Nanobots Orgánicos | T3 | 0.65 | Refinamiento Nivel 3 | 4 ticks/100u | 450₡/u | 0.3 m³/u |
-| Cristales Silvestres | Cristales Vivos | T3 | 0.65 | Refinamiento Nivel 3 | 4 ticks/100u | 600₡/u | 0.2 m³/u |
-| Esporas Crudas | Esporas Regenerativas | T4 | 0.60 | Refinamiento Nivel 4 | 6 ticks/100u | 3,500₡/u | 0.2 m³/u |
-| Genoma Salvaje | Genoma Alienígena | T4 | 0.60 | Refinamiento Nivel 5 | 8 ticks/100u | 7,000₡/u | 0.1 m³/u |
+| Recurso Crudo Planetario | Recurso Procesado | Tier | Ratio Base | Skill Req. | Tiempo | Precio NPC Base (procesado) | Volumen |
+|--------------------------|-------------------|------|------------|------------|--------|----------------------------|---------|
+| Biomasa Cruda | Biomasa Refinada | T1 | 0.75 | Bioprospección Nivel 1 | 1 tick/100u | 6₡/u | 3 m³/u |
+| Agua Planetaria (cruda) | Agua Destilada | T1 | 0.75 | Bioprospección Nivel 1 | 1 tick/100u | 5₡/u | 4 m³/u |
+| Proteínas Nativas (crudas) | Proteínas Sintéticas | T2 | 0.70 | Bioprospección Nivel 2 | 2 ticks/100u | 90₡/u | 2 m³/u |
+| Algas Fotosintéticas (crudas) | Algas Bioluminiscentes | T2 | 0.70 | Bioprospección Nivel 2 | 2 ticks/100u | 110₡/u | 2.5 m³/u |
+| Colonias de Nanobots Simbióticos (crudas) | Nanobots Orgánicos | T3 | 0.65 | Bioprospección Nivel 3 | 4 ticks/100u | 450₡/u | 0.3 m³/u |
+| Cristales Bioconductores (crudos) | Cristales Vivos | T3 | 0.65 | Bioprospección Nivel 3 | 4 ticks/100u | 600₡/u | 0.2 m³/u |
+| Esporas Xenorregenerativas (crudas) | Esporas Regenerativas | T4 | 0.60 | Bioprospección Nivel 4 | 6 ticks/100u | 3,500₡/u | 0.2 m³/u |
+| Secuencias de ADN Xenomorfo (crudas) | Genoma Alienígena | T4 | 0.60 | Bioprospección Nivel 5 | 8 ticks/100u | 7,000₡/u | 0.1 m³/u |
 
 **Notas Importantes:**
+- **Categorías Separadas:**
+  - **CATEGORÍA A (Asteroides):** 8 recursos metálicos, skill "Minería", refinamiento simple
+  - **CATEGORÍA B (Planetas):** 16 recursos (8 gases + 8 orgánicos), skills "Extracción Atmosférica" y "Bioprospección", procesamiento complejo
 - **Ratio Base:** Se multiplica por bonificadores de skill y estación (fórmula arriba)
-- **Skill Refinamiento:** Cada nivel otorga +5% eficiencia
+- **Skills Específicas:**
+  - **Minería (x2):** Para extracción de asteroides (Categoría A)
+  - **Extracción Atmosférica (x3):** Para gases planetarios (Categoría B)
+  - **Bioprospección (x2):** Para orgánicos planetarios (Categoría B)
+  - Cada nivel otorga +5% eficiencia en refinamiento
 - **Bonificador Estación:** Sala de Ingeniería Nivel 1-5 otorga 0-25% eficiencia
 - **Tiempo:** Base por 100 unidades, escalable linealmente
 - **Precios NPC:** Valor de venta a NPCs, mercado de jugadores puede variar ±300%

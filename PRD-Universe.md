@@ -130,6 +130,113 @@ Estación: Vaxav I - Luna 1 - [Nombre Estación]
 Ejemplo: Vaxav I - Luna 1 - Puerto Estelar Génesis
 ```
 
+#### 5.2.1 Mapa de Recursos del Sistema Vaxav (Primera Versión)
+
+El Sistema Vaxav es el sistema inicial del juego, diseñado específicamente para ser **rico en metales y pobre en gases/orgánicos**. Esto fuerza el comercio temprano entre jugadores y hace que ciertos recursos sean muy valiosos.
+
+**Filosofía de Diseño:**
+- **Abundantes:** Recursos metálicos T1-T2 (Ferrita, Cobre, Titanita, Magnetita)
+- **Escasos:** Recursos gaseosos T2+ (Deuterio, Plasma, Xenón)
+- **Muy Escasos:** Recursos orgánicos T2+ (Proteínas, Algas, Nanobots)
+- **Inexistentes:** 9 recursos críticos solo disponibles mediante comercio o exploración fuera del sistema
+
+**Tabla de Distribución de Recursos PLANETARIOS (CATEGORÍA B):**
+
+Los planetas solo proveen **recursos planetarios únicos** (gases atmosféricos y orgánicos) mediante extracción pasiva con instalaciones.
+
+| Planeta | Tipo | IIC | Recursos Planetarios Disponibles (Tier) | Abundancia | Lunas | Estaciones NPC |
+|---------|------|-----|----------------------------------------|------------|-------|----------------|
+| **Vaxav I** | Rocoso Árido | IIC 1 | Ninguno (sin atmósfera, sin vida) | N/A | 2 | 3 |
+| **Vaxav II** | Volcánico | IIC 1 | Plasma Atmosférico (T3, trazas en erupciones) | Muy Baja | 3 | 2 |
+| **Vaxav III** | Rocoso | IIC 2 | Ninguno (atmósfera tenue, no viable) | N/A | 4 | 2 |
+| **Vaxav IV** | Joviano | IIC 2 | Hidrógeno Molecular (T1), Helio-3 (T1), Nitrógeno Comprimido (T2) | Media | 6 | 1 |
+| **Vaxav V** | Helado | IIC 2 | Agua Planetaria (T1), Hidrógeno Molecular (T1, trazas), Deuterio Atmosférico (T2, trazas) | Media | 2 | 1 |
+| **Vaxav VI** | Oceánico | IIC 3 | Biomasa Cruda (T1), Agua Planetaria (T1), Proteínas Nativas (T2), Algas Fotosintéticas (T2) | Alta | 1 | 0 |
+| **Vaxav VII** | Rocoso Denso | IIC 3 | Ninguno (cuerpo rocoso sin atmósfera) | N/A | 3 | 0 |
+| **Vaxav VIII** | Fragmentado | IIC 4 | Ninguno (fragmentos rocosos sin atmósfera) | N/A | 0 | 0 |
+
+**Cinturones de Asteroides del Sistema Vaxav - CATEGORÍA A (5 totales):**
+
+Los asteroides solo proveen **recursos metálicos únicos** mediante minería activa con láseres de nave.
+
+| Cinturón | Ubicación (UA) | IIC | Recursos Metálicos Disponibles | Regeneración | Asteroides |
+|----------|---------------|-----|-------------------------------|--------------|------------|
+| **Cinturón Principal Alfa** | Entre Vaxav II y III | IIC 1 | Ferrita (70%), Cobre Estelar (25%), Titanita (5%) | 48 ticks | 200 |
+| **Cinturón Principal Beta** | Entre Vaxav III y IV | IIC 2 | Titanita (50%), Magnetita Pura (30%), Ferrita (20%) | 48 ticks | 150 |
+| **Cinturón Exterior** | Entre Vaxav V y VI | IIC 2 | Titanita (45%), Magnetita Pura (40%), Cristales de Zafiro (15%) | 48 ticks | 120 |
+| **Cinturón Disperso** | Entre Vaxav VI y VII | IIC 3 | Duralinio Espacial (60%), Cristales de Zafiro (30%), Adamantita (10%) | 48 ticks | 80 |
+| **Anillo de Escombros** | Alrededor de Vaxav VIII | IIC 4 | Adamantita (50%), Neutronium (30%), Duralinio Espacial (20%) | 72 ticks | 40 |
+
+**NOTA IMPORTANTE sobre Recursos de Gases:**
+- Los cinturones de hielo y nebulosas NO existen en el nuevo sistema de recursos
+- TODOS los gases (hidrógeno, helio, deuterio, nitrógeno, plasma, xenón, antimateria, materia oscura) se extraen **exclusivamente de atmósferas planetarias** mediante Extractores Atmosféricos
+- La mecánica es **pasiva** (instalaciones orbitales), no minería activa
+
+**Recursos CRUDOS AUSENTES en Sistema Vaxav (requieren comercio o exploración externa):**
+
+Estos 10 recursos CRUDOS NO existen en el Sistema Vaxav inicial, forzando el comercio:
+
+**Gases Atmosféricos Ausentes (Categoría B):**
+1. **Plasma Atmosférico (T3, crudo)** - Solo trazas en Vaxav II (erupciones volcánicas), crítico para reactores T3
+2. **Xenón Estratosférico (T3, crudo)** - Inexistente, crítico para motores avanzados
+3. **Partículas de Antimateria (T4, crudas)** - Inexistente, crítico para capitales
+4. **Trazas de Materia Oscura (T4, crudas)** - Inexistente, crítico para T4
+
+**Recursos Orgánicos Ausentes (Categoría B):**
+5. **Algas Fotosintéticas (T2, crudas)** - Disponible solo en Vaxav VI (abundancia Alta)
+6. **Colonias de Nanobots Simbióticos (T3, crudas)** - Inexistente
+7. **Cristales Bioconductores (T3, crudos)** - Inexistente
+8. **Esporas Xenorregenerativas (T4, crudas)** - Inexistente
+9. **Secuencias de ADN Xenomorfo (T4, crudas)** - Inexistente
+
+**Metales Raros Limitados (Categoría A):**
+10. **Neutronium (T4, crudo)** - Solo en Anillo de Escombros de Vaxav VIII (30%), extremadamente peligroso (IIC 4)
+
+**Implicaciones Económicas:**
+
+1. **Autosuficiencia Limitada:**
+   - **Categoría A (Metales):** Vaxav es RICO en metales T1-T3, casi autosuficiente para estructuras
+   - **Categoría B (Gases):** Solo T1-T2 disponibles (Hidrógeno, Helio, Nitrógeno, Deuterio), T3-T4 requieren importación
+   - **Categoría B (Orgánicos):** Solo T1-T2 disponibles (Biomasa, Agua, Proteínas, Algas), T3-T4 inexistentes
+   - **Fabricación:** Naves/módulos T1-T2 viables localmente, T3+ requieren importar componentes orgánicos/gasesosos avanzados
+
+2. **Especialización del Sistema Vaxav:**
+   - **Exportaciones:** Metales refinados (Ferrita, Titanita, Magnetita, Duralinio) a sistemas pobres en metales
+   - **Importaciones Críticas:** Plasma Atmosférico, Xenón Estratosférico, Nanobots Simbióticos, Cristales Bioconductores
+   - **Ventaja Competitiva:** Fabricación de cascos/armaduras T1-T3 (abundancia de metales)
+   - **Desventaja:** Dependencia total de otros sistemas para electrónica/energética T3+
+
+3. **Rutas Comerciales Tempranas:**
+   - Jugadores con acceso a sistemas ricos en gases/orgánicos T3+ pueden dominar el mercado de Vaxav
+   - Vaxav se convierte en hub de fabricación de estructuras metálicas y naves T1-T2
+   - Los orgánicos T3-T4 se convierten en commodities de lujo (inexistentes localmente)
+
+4. **Progresión del Sistema:**
+   - Al desbloquear Stargates (ver sección 5.3), los jugadores acceden a sistemas con recursos faltantes
+   - El primer Stargate (1,000 puntos progreso) da acceso a sistema con Plasma/Xenón
+   - Recursos T4 (Antimateria, Materia Oscura, Esporas Xenorregenerativas, ADN Xenomorfo) solo en sistemas IIC 4-5
+
+5. **Importancia de Instalaciones Planetarias:**
+   - Jugadores que instalen Extractores Atmosféricos en Vaxav IV (Joviano) y V (Helado) controlan suministro local de gases T1-T2
+   - Extractores en Vaxav VI (Oceánico) controlan orgánicos T1-T2 (único planeta con vida)
+   - Fragatas Mercante Rápido críticas para transportar grandes volúmenes de gases/orgánicos (baja densidad)
+
+**Estaciones NPC Iniciales (Total: 9)**
+
+| Estación | Planeta-Luna | IIC | Facción | Tipo | Servicios |
+|----------|--------------|-----|---------|------|-----------|
+| **Puerto Estelar Génesis** | Vaxav I - Luna 1 | 1 | Confederación Vaxav | Hub Central | Todos (Hangar 5, Mercado 4, Astillero 3, Laboratorio 4) |
+| **Estación Minera Titán** | Vaxav II - Luna 2 | 1 | Confederación Vaxav | Minera | Hangar 3, Mercado 2, Sala Ingeniería 4 |
+| **Puesto Comercial Libre** | Vaxav I - Luna 2 | 1 | Liga Libre | Comercio | Hangar 2, Mercado 5, Bodegas 4 |
+| **Outpost Industrial Delta** | Vaxav II - Luna 1 | 1 | Sindicato Técnico | Industrial | Hangar 2, Sala Ingeniería 5, Astillero 2 |
+| **Base Comercial Neptuno** | Vaxav III - Luna 3 | 2 | Liga Libre | Comercio | Mercado 3, Bodegas 3, Habitáculos 2 |
+| **Refinería Orbital Helios** | Vaxav II - Luna 3 | 1 | Confederación Vaxav | Refinería | Sala Ingeniería 4, Bodegas 4 |
+| **Plataforma de Gas Vaxav IV-A** | Vaxav IV - Luna 4 | 2 | Flota Nómada | Recolección | Hangar 1, Bodegas 3, Mercado 1 |
+| **Colonia Acuática Poseidón** | Vaxav VI - Luna 1 | 3 | Sindicato Técnico | Bio-investigación | Laboratorio 3, Sala Ingeniería 2, Habitáculos 3 |
+| **Estación Frontera VII** | Vaxav VII - Luna 2 | 3 | Flota Nómada | Frontera | Hangar 2, Mercado 1, Habitáculos 1 |
+
+**Nota:** Las estaciones de jugadores pueden anclar en cualquier luna del sistema (total: 21 lunas disponibles).
+
 ### 5.3 Progreso de Sistema
 
 Barra de progreso que desbloquea contenido nuevo.
@@ -180,45 +287,36 @@ Los planetas del universo VAXAV tienen 7 tipos distintos, cada uno con recursos 
 - **Gravedad:** Media (0.8-1.2G)
 - **Temperatura:** Extrema (según distancia estrella)
 
-**Recursos Primarios:**
-- Ferrita (abundante)
-- Cobre Estelar (abundante)
-- Silicatos (abundante)
-- Titanita (común)
-- Magnetita Pura (poco común)
+**Recursos Planetarios (CATEGORÍA B):**
+- **Gases:** Ninguno (sin atmósfera viable)
+- **Orgánicos:** Ninguno (sin vida, árido)
+- **Agua Planetaria:** Escasa, solo si hay hielo en polos (requiere Drones de Bioprospección)
 
-**Recursos Secundarios:**
-- Duralinio Espacial (raro en zonas específicas)
-- Agua (escasa, hielo en polos)
+**NOTA:** Los planetas rocosos NO proveen metales. Los metales se extraen de **asteroides** (Categoría A).
 
 **Método Extracción:**
-- Escaneo planetario + instalación de extractores
-- Skill requerida: Minería, Escaneo Planetario
+- Drones de Bioprospección en superficie para hielo/agua (si existe)
+- Skill requerida: Bioprospección Nivel 1
 
-**Ejemplo:** Planetas similares a Mercurio, Marte
+**Ejemplo:** Planetas similares a Mercurio, Marte, Luna
 
 #### 5.5.2 Planeta Volcánico
 
 **Características:**
 - **Superficie:** Lagos de lava, montañas volcánicas, cenizas
-- **Atmósfera:** Tóxica (SO₂, CO₂)
+- **Atmósfera:** Tóxica (SO₂, CO₂, nubes de azufre)
 - **Gravedad:** Media-Alta (1.0-1.5G)
 - **Temperatura:** Muy alta
 
-**Recursos Primarios:**
-- Titanita (abundante)
-- Magnetita Pura (abundante)
-- Duralinio Espacial (común)
-- Cristales de Zafiro (poco común, en cámaras magmáticas)
+**Recursos Planetarios (CATEGORÍA B):**
+- **Gases:** Plasma Atmosférico (T3, trazas en tormentas volcánicas), CO₂, SO₂
+- **Orgánicos:** Ninguno (demasiado caliente para vida)
 
-**Recursos Secundarios:**
-- Ferrita (común)
-- Silicatos (abundante)
-- Adamantita (muy raro, núcleo profundo)
+**NOTA:** Los planetas volcánicos NO proveen metales. Los metales se extraen de **asteroides** (Categoría A).
 
 **Método Extracción:**
-- Requiere extractores resistentes al calor
-- Skill requerida: Minería, Escaneo Planetario (nivel 2+)
+- Extractores Atmosféricos orbitales resistentes al calor para gases
+- Skill requerida: Extracción Atmosférica Nivel 2+
 
 **Ejemplo:** Io (luna de Júpiter), Venus
 
@@ -230,19 +328,15 @@ Los planetas del universo VAXAV tienen 7 tipos distintos, cada uno con recursos 
 - **Gravedad:** Muy alta (2.0-3.0G en capas altas)
 - **Temperatura:** Fría en capas altas, muy caliente en profundidad
 
-**Recursos Primarios:**
-- Hidrógeno (abundante)
-- Helio (abundante)
-- Deuterio (común)
-- Nitrógeno (poco común)
-
-**Recursos Secundarios:**
-- Plasma (raro, en tormentas eléctricas)
-- Xenón (muy raro, capas profundas)
+**Recursos Planetarios (CATEGORÍA B):**
+- **Gases Primarios:** Hidrógeno Molecular (T1, abundante), Helio-3 (T1, abundante)
+- **Gases Secundarios:** Deuterio Atmosférico (T2, común), Nitrógeno Comprimido (T2, poco común)
+- **Gases Raros:** Plasma Atmosférico (T3, en tormentas eléctricas), Xenón Estratosférico (T3, capas profundas)
+- **Orgánicos:** Ninguno
 
 **Método Extracción:**
-- Recolección atmosférica con naves especializadas
-- Skill requerida: Recolección de Gas (nivel 1+)
+- Extractores Atmosféricos orbitales con sondas de profundidad
+- Skill requerida: Extracción Atmosférica Nivel 1-3 (según profundidad)
 
 **Ejemplo:** Júpiter, Saturno, Urano
 
@@ -254,20 +348,15 @@ Los planetas del universo VAXAV tienen 7 tipos distintos, cada uno con recursos 
 - **Gravedad:** Baja-Media (0.3-0.9G)
 - **Temperatura:** Muy baja (-150°C a -220°C)
 
-**Recursos Primarios:**
-- Agua (abundante, en forma de hielo)
-- Hidrógeno (común, hielo de hidrógeno)
-- Nitrógeno (abundante)
-- Deuterio (poco común, hielo deuterado)
-
-**Recursos Secundarios:**
-- Biomasa (raro, si hay océanos subsuperficiales)
-- Proteínas (muy raro, vida microbiana)
-- Antimateria (trazas, en depósitos antiguos)
+**Recursos Planetarios (CATEGORÍA B):**
+- **Gases:** Hidrógeno Molecular (T1, trazas en atmósfera), Nitrógeno Comprimido (T2, abundante en atmósfera), Deuterio Atmosférico (T2, poco común)
+- **Orgánicos Primarios:** Agua Planetaria (T1, abundante en hielo superficial)
+- **Orgánicos Secundarios:** Biomasa Cruda (T1, raro en océanos subsuperficiales), Proteínas Nativas (T2, muy raro si hay vida microbiana)
 
 **Método Extracción:**
-- Perforación de hielo con extractores criogénicos
-- Skill requerida: Extracción Criogénica (nivel 1+), Escaneo Planetario
+- **Gases:** Extractores Atmosféricos orbitales (atmósfera tenue)
+- **Orgánicos:** Drones de Bioprospección con perforación criogénica (superficie/subsuelo)
+- Skills requeridas: Extracción Atmosférica Nivel 1+, Bioprospección Nivel 1+, Perforación Geológica Nivel 1+
 
 **Ejemplo:** Europa, Encélado, Plutón
 
@@ -279,22 +368,17 @@ Los planetas del universo VAXAV tienen 7 tipos distintos, cada uno con recursos 
 - **Gravedad:** Media (0.9-1.1G)
 - **Temperatura:** Templada (+5°C a +40°C)
 
-**Recursos Primarios:**
-- Agua (abundante)
-- Biomasa (abundante, algas y plancton)
-- Proteínas (abundante, vida marina)
-- Algas (abundante)
-
-**Recursos Secundarios:**
-- Nanobots (poco común, si hay civilizaciones antiguas sumergidas)
-- Cristales Vivos (raro, formaciones biológicas)
-- Silicatos (común, en fondo marino)
+**Recursos Planetarios (CATEGORÍA B):**
+- **Gases:** Nitrógeno Comprimido (T2, atmósfera), Hidrógeno Molecular (T1, trazas)
+- **Orgánicos Primarios:** Agua Planetaria (T1, abundante en océanos), Biomasa Cruda (T1, abundante - plancton/algas), Algas Fotosintéticas (T2, abundante)
+- **Orgánicos Secundarios:** Proteínas Nativas (T2, abundante - vida marina), Colonias de Nanobots Simbióticos (T3, poco común en ruinas sumergidas), Cristales Bioconductores (T3, raro en formaciones coralinas bioluminiscentes)
 
 **Método Extracción:**
-- Extracción submarina, cultivo de algas
-- Skill requerida: Bioprospección (nivel 1+), Escaneo Planetario
+- **Gases:** Extractores Atmosféricos orbitales
+- **Orgánicos:** Drones de Bioprospección submarina + cultivo de algas
+- Skills requeridas: Extracción Atmosférica Nivel 1+, Bioprospección Nivel 1-3
 
-**Ejemplo:** Planetas hipotéticos tipo "mundo océano"
+**Ejemplo:** Planetas hipotéticos tipo "mundo océano" (GJ 1214 b si fuera habitable)
 
 #### 5.5.6 Planeta Vital (Terrestre)
 
@@ -304,51 +388,41 @@ Los planetas del universo VAXAV tienen 7 tipos distintos, cada uno con recursos 
 - **Gravedad:** Media (0.8-1.2G)
 - **Temperatura:** Templada (-10°C a +35°C)
 
-**Recursos Primarios:**
-- Biomasa (abundante)
-- Agua (abundante)
-- Proteínas (abundante)
-- Algas (abundante)
-- Nanobots (poco común, si hay civilizaciones)
+**Recursos Planetarios (CATEGORÍA B):**
+- **Gases:** Nitrógeno Comprimido (T2, abundante en atmósfera), Hidrógeno Molecular (T1, trazas)
+- **Orgánicos T1-T2:** Biomasa Cruda (T1, abundante), Agua Planetaria (T1, abundante), Proteínas Nativas (T2, abundante), Algas Fotosintéticas (T2, abundante)
+- **Orgánicos T3:** Colonias de Nanobots Simbióticos (T3, poco común en ruinas de civilizaciones), Cristales Bioconductores (T3, poco común en bosques cristalinos)
+- **Orgánicos T4:** Esporas Xenorregenerativas (T4, raro en hongos especiales), Secuencias de ADN Xenomorfo (T4, muy raro - restos de vida inteligente extinta)
 
-**Recursos Secundarios:**
-- Cristales Vivos (poco común, bosques cristalinos)
-- Esporas (raro, hongos especiales)
-- Genoma Alienígena (muy raro, vida inteligente extinta)
-- Silicatos (común)
-- Ferrita (poco común)
+**NOTA:** Este es el ÚNICO tipo de planeta donde aparecen recursos orgánicos T4 naturalmente.
 
 **Método Extracción:**
-- Extracción superficial, agricultura espacial, bioprospección
-- Skill requerida: Bioprospección (nivel 2+), Escaneo Planetario
+- **Gases:** Extractores Atmosféricos orbitales
+- **Orgánicos:** Drones de Bioprospección superficial, agricultura espacial, excavaciones arqueológicas
+- Skills requeridas: Extracción Atmosférica Nivel 1+, Bioprospección Nivel 1-4, Perforación Geológica Nivel 2+
 
-**Ejemplo:** Tierra, planetas tipo "segunda Tierra"
+**Ejemplo:** Tierra, planetas tipo "segunda Tierra" (exoplanetas en zona habitable)
 
 #### 5.5.7 Planeta Fragmentado (Restos Planetarios)
 
 **Características:**
 - **Superficie:** Fragmentos planetarios, núcleo expuesto
-- **Atmósfera:** Inexistente
+- **Atmósfera:** Inexistente (destruida)
 - **Gravedad:** Baja (0.1-0.5G)
 - **Temperatura:** Extrema
 
-**Recursos Primarios:**
-- Adamantita (común, núcleo expuesto)
-- Neutronium (poco común, fragmentos del núcleo)
-- Duralinio Espacial (abundante)
-- Cristales de Zafiro (común)
+**Recursos Planetarios (CATEGORÍA B):**
+- **Gases:** Partículas de Antimateria (T4, raro en remanentes del evento destructivo), Trazas de Materia Oscura (T4, muy raro - origen del cataclismo)
+- **Orgánicos:** Ninguno (toda vida destruida)
 
-**Recursos Secundarios:**
-- Magnetita Pura (abundante)
-- Titanita (abundante)
-- Antimateria (raro, remanente de evento destructivo)
-- Materia Oscura (muy raro, origen del evento)
+**NOTA IMPORTANTE:** Aunque es técnicamente un "planeta", sus fragmentos se comportan como **asteroides** para minería de metales. Los fragmentos contienen metales del núcleo expuesto (Adamantita, Neutronium, Duralinio) y se minan con Categoría A.
 
 **Método Extracción:**
-- Minería de fragmentos flotantes
-- Skill requerida: Minería (nivel 3+), Escaneo Planetario (nivel 3+)
+- **Gases exóticos:** Extractores Atmosféricos especializados (capturan partículas residuales del evento)
+- **Metales (fragmentos):** Minería estándar de asteroides (Categoría A)
+- Skills requeridas: Extracción Atmosférica Nivel 4+ (gases T4), Minería Nivel 3+ (fragmentos metálicos)
 
-**Ejemplo:** Cinturón de asteroides (si fuera un planeta destruido), Faetón
+**Ejemplo:** Cinturón de asteroides (hipótesis de Faetón), planetas destruidos por supernovas cercanas
 
 **Distribución de Planetas en Sistemas:**
 - Cada sistema tiene 3-12 planetas
